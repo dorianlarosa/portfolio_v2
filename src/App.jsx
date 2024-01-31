@@ -9,6 +9,8 @@ import {
 import  { Header } from './components';
 
 import About from './pages/About';
+import NotFound from './pages/NotFound';
+
 import Home from './Home'; 
 
 
@@ -20,9 +22,11 @@ class App extends Component {
 
       <>
         <Header/>
+        
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/a-propos" element={<About />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </>
 
