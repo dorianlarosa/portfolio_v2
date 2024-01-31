@@ -1,16 +1,12 @@
+@import 'variables';
+
 // ========== Variables ==========
 
-// colors
-$white: white;
-$black: black;
-
-// sizing
-$xs-sizing: 8px;
-$s-sizing: 16px;
-$m-sizing: 24px;
-$l-sizing: 32px;
-$xl-sizing: 64px;
-$xxl-sizing: 120px;
+:root{
+    --white-color: #{$white};
+    --black-color: #{$black};
+    --grey-color : #{$grey};
+}
 
 // ========== Font face ==========
 
@@ -27,15 +23,14 @@ $xxl-sizing: 120px;
 
 // ========== Reset ==========
 
-:root{
-    --white-color: #{$white};
-    --black-color: #{$black};
-}
-
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
 }
 
 // ========== Global ==========
@@ -49,4 +44,9 @@ body{
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Ginger", serif;
+}
+
+.container {
+    padding-left: 3vw;
+    padding-right: 3vw;
 }

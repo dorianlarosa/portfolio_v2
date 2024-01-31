@@ -1,0 +1,45 @@
+#header {
+    mix-blend-mode: difference;
+    padding-top: 3vw;
+    padding-bottom: 3vw;
+    display: flex;
+    justify-content: space-between;
+
+    #logo {
+        stroke: var(--white-color);
+        ;
+        height: 70px;
+
+        .st0 {
+            fill: none;
+            stroke-width: 11;
+            stroke-miterlimit: 10;
+        }
+
+        .st1 {
+            fill: none;
+            stroke-width: 7;
+            stroke-miterlimit: 10;
+        }
+    }
+
+    nav {
+        .nav-link {
+            font-size: 1rem;
+            text-transform: uppercase;
+            margin-left: 1rem;
+            color: var(--grey-color);
+            transition: all .1s;
+
+            &.active {
+                color: var(--white-color);
+            }
+
+            @media (hover: hover) {
+                &:hover {
+                    color: var(--white-color);
+                }
+            }
+        }
+    }
+}
