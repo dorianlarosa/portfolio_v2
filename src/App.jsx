@@ -1,4 +1,3 @@
-import './Library.scss';
 import React, { Component } from "react";
 
 import {
@@ -8,10 +7,10 @@ import {
 
 import  { Header } from './components';
 
+import Home from './Home';  
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 
-import Home from './Home'; 
 
 
 class App extends Component {
