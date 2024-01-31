@@ -18,7 +18,7 @@ class Header extends Component {
                         x="0px"
                         y="0px"
                         viewBox="0 0 340 484"
-                        style={{ enableBackground: 'new 0 0 1645.8 484' }}
+                        style={{ enableBackground: 'new 0 0 340 484' }}
                         xmlSpace="preserve"
                     >
                         <g>
