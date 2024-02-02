@@ -1,0 +1,41 @@
+.section {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+    overflow: hidden;
+    //TEMP
+    height: 1500px;
+
+    .svg-flower {
+        transform: rotate(calc(var(--progress) * 100deg));
+        height: 100px;
+        width: auto;
+        margin-left: auto;
+        display: block;
+
+    }
+
+    .wrapper-h2 {
+        display: flex;
+        justify-content: center;
+    }
+
+    h2 {
+        // Redéfinir pregress par rapport au centre de l'écran
+        --progress-origin-center: calc(var(--progress) - .5);
+
+        font-size: 10vw;
+        transform:  translate3d(calc((-50vw * var(--progress-origin-center) )), 0, 0);
+        white-space: nowrap;
+        position: relative;
+
+
+        span {
+            margin-left: 1rem;
+            margin-right: 1rem;
+
+            &.text-grey {
+                opacity: .1;
+            }
+        }
+    }
+}

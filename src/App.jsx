@@ -5,13 +5,14 @@ import {
   Route,
 } from "react-router-dom";
 
+import luge from '@waaark/luge';
+import '@waaark/luge/dist/css/luge.css';
+
 import  { Header } from './components';
 
 import Home from './Home';  
 import About from './pages/About';
 import NotFound from './pages/NotFound';
-
-
 
 class App extends Component {
 

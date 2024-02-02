@@ -4,6 +4,10 @@
     padding-bottom: 3vw;
     display: flex;
     justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 
     #logo {
         stroke: var(--white-color);
