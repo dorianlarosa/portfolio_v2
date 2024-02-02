@@ -16,6 +16,14 @@ import NotFound from './pages/NotFound';
 
 class App extends Component {
 
+  componentDidMount() {
+    luge.settings({
+      smooth: { // smooth géré par lenis
+        disabled: true
+      }
+    })
+  }
+
   render() {
 
     return (
