@@ -2,9 +2,12 @@
     height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--grey-color);
+
     h1 {
         text-align: center;
-        font-size: 13vw;
+        font-size: min(13vw, 13rem);
 
         span {
             display: block;
@@ -15,6 +18,17 @@
                 font-weight: 300;
                 margin-bottom: 2rem;
             }
+        }
+    }
+
+    .wrapper-scroll-info {
+        position: absolute;
+        bottom: 3vw;
+        left: 3vw;
+
+        .svg-flower {
+            width: 100px;
+            height: auto;;
         }
     }
 }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Home.scss";
 
 import {
-  Section
+  Section, SvgFlower
 } from "./components";
 
 class Home extends Component {
@@ -17,9 +17,16 @@ class Home extends Component {
               Dorian LA ROSA
             </span>
             <span>
-              Développeur Front-End
+              Développeur
+            </span>
+            <span>
+              Front-End
             </span>
           </h1>
+
+          <div className="wrapper-scroll-info">
+            <SvgFlower></SvgFlower>
+          </div>
         </section>
 
 
