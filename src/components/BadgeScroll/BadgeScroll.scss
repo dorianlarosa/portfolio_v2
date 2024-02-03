@@ -1,0 +1,26 @@
+.badge-scroll {
+    animation: rotating 15s linear infinite;
+    text {
+        fill:white;
+        text-transform: uppercase;
+        font-size: .75rem;
+    }
+
+    .svg-flower {
+        position: absolute;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%, -50%);
+        width: 35px;
+        height: auto;
+    }
+}
+
+@keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Home.scss";
 
 import {
-  Section, SvgFlower
+  Section, SvgFlower, BadgeScroll
 } from "./components";
 
 class Home extends Component {
@@ -25,7 +25,7 @@ class Home extends Component {
           </h1>
 
           <div className="wrapper-scroll-info">
-            <SvgFlower></SvgFlower>
+            <BadgeScroll></BadgeScroll>
           </div>
         </section>
 
