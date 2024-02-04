@@ -26,11 +26,12 @@ class BadgeScroll extends Component {
                     text="Scroll - Scroll - Scroll - "
                     textProps={null}
                     textPathProps={null}
-                    tspanProps={{"dy": "-25"}}
+                    tspanProps={{ "dy": "-25" }}
                     ellipseProps={null}
                     svgProps={null}
                 />
 
+            
                 <SvgFlower></SvgFlower>
             </div>
 

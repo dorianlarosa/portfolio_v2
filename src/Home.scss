@@ -5,9 +5,13 @@
     justify-content: center;
     border-bottom: 1px solid var(--grey-color);
 
+    @media (max-width: 767.98px) {
+        height: 70vh;
+    }
+
     h1 {
         text-align: center;
-        font-size: min(13vw, 13rem);
+        font-size: min(10vw, 13rem);
 
         span {
             display: block;
