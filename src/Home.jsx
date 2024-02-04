@@ -15,42 +15,15 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      containerImagesHeight: 0,
       projets: []
     };
-    this.containerImagesRef = React.createRef(); // Créer une référence pour le conteneur des images
   }
 
-  // Définir la hauteur du container images après le chargement des images
-  handleImageLoaded = () => {
-    this.updatecontainerImagesHeight();
-  };
-
-  updatecontainerImagesHeight = () => {
-    const containerImages = this.containerImagesRef.current;
-    if (containerImages) {
-      let maxHeight = 0;
-
-      // Obtenir tous les éléments enfants avec la classe image
-      Array.from(containerImages.getElementsByClassName('image')).forEach(img => {
-        const imgBottom = img.offsetTop + img.offsetHeight;
-        if (imgBottom > maxHeight) {
-          maxHeight = imgBottom;
-        }
-      });
-
-      // Mettre à jour la valeur du parent par rapport à la taille des 3 images
-      this.setState({ containerImagesHeight: maxHeight });
-
-    }
-  };
-
   componentDidMount() {
-    // Resize image container
-    window.addEventListener('resize', this.updatecontainerImagesHeight);
 
     // Get projects
     this.fetchProjets();
+
   }
 
   fetchProjets = () => {
@@ -59,18 +32,26 @@ class Home extends Component {
       .then(data => {
         console.log(data.data);
         this.setState({ projets: data.data }); // Assurez-vous que cela correspond au format de votre réponse
+        luge.lifecycle.refresh()
+
       })
       .catch(error => console.error("Erreur lors de la récupération des projets:", error));
   }
 
   componentWillUnmount() {
-    // Nettoyer l'écouteur lors du démontage
-    window.removeEventListener('resize', this.updatecontainerImagesHeight);
   }
 
   render() {
 
     const { projets } = this.state;
+
+    // Define parallax project
+    const projectsParallax = {
+      1: .3,
+      2: .5,
+      3: .5,
+      4: .3
+    };
 
     return (
       <>
@@ -103,7 +84,7 @@ class Home extends Component {
               <Button></Button>
             </div>
 
-            <div className="right" ref={this.containerImagesRef} style={{ height: this.state.containerImagesHeight }}>
+            <div className="right">
 
               <img
                 className="image image-1"
@@ -148,7 +129,15 @@ class Home extends Component {
           <div className="list-projects">
             {projets.map((projet) => (
 
-              <a className={`project project-${projet.id}`} key={projet.id} href="#">
+              <a
+                className={`project project-${projet.id}`}
+                key={projet.id}
+                href="#"
+                data-lg-parallax
+                data-lg-parallax-amplitude={projectsParallax[projet.id]}
+                data-lg-parallax-inertia="1"
+                data-lg-parallax-anchor="center"
+              >
                 <img src={"http://localhost:1337" + projet.attributes.image.data.attributes.url} alt="" />
                 <h3 className="name">{projet.attributes.nom}</h3>
                 {/* <p>{projet.attributes.description}</p> */}

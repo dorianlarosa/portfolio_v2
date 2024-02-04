@@ -71,11 +71,13 @@
         .right {
             width: 45%;
             padding-left: 2rem;
+            height: 38vw;
             position: relative;
 
             @media (max-width: 991.98px) {
                 width: 100%;
                 margin-top: var(--xl-sizing);
+                height: 87vw;
             }
 
             img {
@@ -157,7 +159,7 @@
         }
 
         .project {
-           
+           display: block;
         }
        
 
