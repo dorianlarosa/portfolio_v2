@@ -1,8 +1,8 @@
 #header {
     mix-blend-mode: difference;
-    padding-top: 3vw;
-    padding-bottom: 3vw;
     display: flex;
+    padding-bottom: max(20px, 3vw);
+    padding-top: max(20px, 3vw);
     justify-content: space-between;
     position: fixed;
     top: 0;
@@ -61,7 +61,6 @@
     // ========== Burger ==========
 
     .hamburger {
-        padding: 15px 15px;
         display: inline-block;
         cursor: pointer;
         transition-property: opacity, filter;
