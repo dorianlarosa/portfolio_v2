@@ -20,9 +20,9 @@ class Section extends Component {
                 <div className="wrapper-h2">
 
                     <h2 data-lg-scroll data-lg-scroll-trigger="50% 50%" data-text={title} className="my-element">
-                    <span aria-hidden="true" className="text-grey">{title}</span>
+                        <span aria-hidden="true" className="text-grey">{title}</span>
 
-                    <span aria-hidden="true" className="text-grey">{title}</span>
+                        <span aria-hidden="true" className="text-grey">{title}</span>
 
                         <span>{title}</span>
                         <span aria-hidden="true" className="text-grey">{title}</span>
@@ -32,7 +32,11 @@ class Section extends Component {
                     </h2>
                 </div>
 
-                {children}
+                <div className="content-section">
+
+                    {children}
+
+                </div>
             </section>
         );
     }

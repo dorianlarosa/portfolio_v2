@@ -33,9 +33,9 @@ class Header extends Component {
                     </svg>
                 </Link>
 
-                <div class="hamburger hamburger--spin">
-                    <div class="hamburger-box">
-                        <div class="hamburger-inner"></div>
+                <div className="hamburger hamburger--spin">
+                    <div className="hamburger-box">
+                        <div className="hamburger-inner"></div>
                     </div>
                 </div>
 

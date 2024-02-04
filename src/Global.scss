@@ -6,6 +6,13 @@
     --white-color: #{$white};
     --black-color: #{$black};
     --grey-color : #{$grey};
+
+    --xs-sizing : #{$xs-sizing};
+    --s-sizing : #{$s-sizing};
+    --m-sizing : #{$m-sizing};
+    --l-sizing : #{$l-sizing};
+    --xl-sizing : #{$xl-sizing};
+    --xxl-sizing : #{$xxl-sizing};
 }
 
 // ========== Font face ==========
@@ -33,6 +40,11 @@ a {
     text-decoration: none;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 // ========== Global ==========
 
 body{
@@ -46,6 +58,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Ginger", serif;
     font-weight: 400;
 }
+
 
 .container {
     padding-left: max(20px, 3vw);
