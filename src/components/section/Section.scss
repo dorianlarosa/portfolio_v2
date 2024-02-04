@@ -31,7 +31,7 @@
         // Redéfinir pregress par rapport au centre de l'écran
         --progress-origin-center: calc(var(--progress) - .5);
 
-        font-size: 10vw;
+        font-size: max(3.5rem, 10vw);
         transform:  translate3d(calc((-30vw * var(--progress-origin-center) )), 0, 0);
         white-space: nowrap;
         position: relative;

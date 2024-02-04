@@ -29,9 +29,7 @@
         svg {
             width: 1.6rem;
             height: auto;
-            path {
-                fill: var(--white-color);
-            }
+            stroke: var(--white-color);
         }
     }
 }
