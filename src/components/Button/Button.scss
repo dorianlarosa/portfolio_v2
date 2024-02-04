@@ -1,0 +1,37 @@
+.button {
+    background-color: var(--white-color);
+    padding: .5rem .5rem .5rem 1.25rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    margin-top: var(--l-sizing);
+
+    .text {
+        color: var(--black-color);
+        font-size: 1.25rem;
+        display: inline-block;
+    }
+
+    .icon {
+        background-color: var(--black-color);
+        margin-left: 1rem;
+        border-radius: 2rem;
+        height: 2rem;
+        width: 2rem;
+        display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        svg {
+            width: 1.6rem;
+            height: auto;
+            path {
+                fill: var(--white-color);
+            }
+        }
+    }
+}

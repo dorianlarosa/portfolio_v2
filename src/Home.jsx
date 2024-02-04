@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Home.scss";
 
 import {
-  Section, SvgFlower, BadgeScroll
+  Section, BadgeScroll, Button
 } from "./components";
 
 import imageConstruction1 from './assets/images/construction-1.jpg';
@@ -83,6 +83,7 @@ class Home extends Component {
             <div className="left">
               <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!</p>
+              <Button></Button>
             </div>
 
             <div className="right" ref={this.containerImagesRef} style={{ height: this.state.containerImagesHeight }}>
