@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Home.scss";
 
 import {
-  Section, BadgeScroll, Button
+  Section, BadgeScroll, Button, Tag
 } from "./components";
 
 import imageConstruction1 from './assets/images/construction-1.jpg';
@@ -16,6 +16,7 @@ class Home extends Component {
     super(props);
     this.state = {
       containerImagesHeight: 0,
+      projets: []
     };
     this.containerImagesRef = React.createRef(); // Créer une référence pour le conteneur des images
   }
@@ -45,7 +46,21 @@ class Home extends Component {
   };
 
   componentDidMount() {
+    // Resize image container
     window.addEventListener('resize', this.updatecontainerImagesHeight);
+
+    // Get projects
+    this.fetchProjets();
+  }
+
+  fetchProjets = () => {
+    fetch('http://localhost:1337/api/projets?fields[0]=nom&fields[1]=description&populate[0]=image&populate[1]=tags')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.data);
+        this.setState({ projets: data.data }); // Assurez-vous que cela correspond au format de votre réponse
+      })
+      .catch(error => console.error("Erreur lors de la récupération des projets:", error));
   }
 
   componentWillUnmount() {
@@ -54,6 +69,8 @@ class Home extends Component {
   }
 
   render() {
+
+    const { projets } = this.state;
 
     return (
       <>
@@ -127,7 +144,25 @@ class Home extends Component {
         </Section>
 
         <Section title="Réalisation" id="projects">
-          <p>Contenu de la section Projets...</p>
+
+          <div className="list-projects">
+            {projets.map((projet) => (
+
+              <a className={`project project-${projet.id}`} key={projet.id} href="#">
+                <img src={"http://localhost:1337" + projet.attributes.image.data.attributes.url} alt="" />
+                <h3 className="name">{projet.attributes.nom}</h3>
+                {/* <p>{projet.attributes.description}</p> */}
+                <ul className="list-tag">
+                  {projet.attributes.tags.data.map((tag) => (
+                    <li key={projet.id + "-" + tag.id}>
+                      <Tag title={tag.attributes.nom}></Tag>
+                    </li>
+                  ))}
+                </ul>
+              </a>
+            ))}
+          </div>
+
         </Section>
 
         <Section title="Services" id="projects">

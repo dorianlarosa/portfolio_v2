@@ -1,3 +1,5 @@
+// ========== Section Hero ==========
+
 #section-hero {
     height: 100vh;
     display: flex;
@@ -32,6 +34,8 @@
     }
 }
 
+// ========== Section about ==========
+
 #about {
     .row {
         display: flex;
@@ -50,16 +54,16 @@
             }
 
             .intro {
-                font-size:  2.2vw;
+                font-size: 2.2vw;
                 font-weight: 200;
                 margin-bottom: var(--l-sizing);
 
                 @media (max-width: 991.98px) {
-                    font-size:  2rem;
+                    font-size: 2rem;
                 }
 
                 @media (max-width: 575.98px) {
-                    font-size:  1.5rem;
+                    font-size: 1.5rem;
                 }
             }
         }
@@ -100,6 +104,78 @@
                 @media (max-width: 991.98px) {
                     top: 37vw;
                 }
+            }
+        }
+    }
+}
+
+// ========== Section project ==========
+
+#projects {
+    .list-projects {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+
+        .project-1 {
+            width: 50%;
+
+            @media (max-width: 991.98px) {
+                width: 100%;
+            }
+        }
+
+        .project-2 {
+            width: 40%;
+
+            @media (max-width: 991.98px) {
+                width: 100%;
+                margin-top: var(--xxl-sizing);
+            }
+        }
+
+        .project-3 {
+            width: 40%;
+            margin-top: var(--xxl-sizing);
+
+            @media (max-width: 991.98px) {
+                width: 100%;
+                margin-top: var(--xxl-sizing);
+            }
+
+        }
+
+        .project-4 {
+            width: 50%;
+            margin-top: var(--xxl-sizing);
+
+            @media (max-width: 991.98px) {
+                width: 100%;
+                margin-top: var(--xxl-sizing);
+            }
+        }
+
+        .project {
+           
+        }
+       
+
+        .name {
+            font-family: var(--font-text);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-top: var(--s-sizing);
+            color: var(--white-color);
+        }
+
+        .list-tag {
+            margin: -5px;
+            margin-top: var(--s-sizing);
+        
+            li {
+                display: inline-block;
+                margin: 5px;
             }
         }
     }

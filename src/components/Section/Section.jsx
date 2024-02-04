@@ -4,7 +4,7 @@ import "./Section.scss";
 
 import {
     SvgFlower
-} from "../";
+} from "..";
 
 class Section extends Component {
 

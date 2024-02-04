@@ -13,6 +13,9 @@
     --l-sizing : #{$l-sizing};
     --xl-sizing : #{$xl-sizing};
     --xxl-sizing : #{$xxl-sizing};
+
+    --font-title : "Ginger", serif;
+    --font-text : "DM Sans", sans-serif;
 }
 
 // ========== Font face ==========
@@ -48,14 +51,13 @@ img {
 // ========== Global ==========
 
 body{
-    font-family: Arial, Helvetica, sans-serif;
     background-color: var(--black-color);
     color: var(--white-color);
-    font-family: "DM Sans", sans-serif;
+    font-family: var(--font-text);
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Ginger", serif;
+    font-family: var(--font-title);
     font-weight: 400;
 }
 
