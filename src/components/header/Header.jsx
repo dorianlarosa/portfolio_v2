@@ -33,6 +33,12 @@ class Header extends Component {
                     </svg>
                 </Link>
 
+                <div class="hamburger hamburger--spin">
+                    <div class="hamburger-box">
+                        <div class="hamburger-inner"></div>
+                    </div>
+                </div>
+
                 <nav>
                     <NavLink className="nav-link" to="/">
                         Accueil
