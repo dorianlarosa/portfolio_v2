@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Home.scss";
 
 import {
-  Section, BadgeScroll, Button, Tag
+  Section, BadgeScroll, Button, Tag, WaveEffectImage
 } from "./components";
 
 import imageConstruction1 from './assets/images/construction-1.jpg';
@@ -27,7 +27,7 @@ class Home extends Component {
   }
 
   fetchProjets = () => {
-    fetch('http://localhost:1337/api/projets?fields[0]=nom&fields[1]=description&populate[0]=image&populate[1]=tags')
+    fetch('http://localhost:1337/api/projets?fields[0]=nom&fields[1]=description&fields[2]=slug&populate[0]=image&populate[1]=tags')
       .then(response => response.json())
       .then(data => {
         console.log(data.data);
@@ -47,10 +47,10 @@ class Home extends Component {
 
     // Define parallax project
     const projectsParallax = {
-      1: .3,
-      2: .5,
-      3: .5,
-      4: .3
+      1: .2,
+      2: .4,
+      3: .4,
+      4: .2
     };
 
     return (
@@ -129,16 +129,17 @@ class Home extends Component {
           <div className="list-projects">
             {projets.map((projet) => (
 
-              <a
+              <div
                 className={`project project-${projet.id}`}
                 key={projet.id}
-                href="#"
+                href={`projets/${projet.attributes.slug}`}
                 data-lg-parallax
                 data-lg-parallax-amplitude={projectsParallax[projet.id]}
                 data-lg-parallax-inertia="1"
                 data-lg-parallax-anchor="center"
               >
-                <img src={"http://localhost:1337" + projet.attributes.image.data.attributes.url} alt="" />
+                {/* <img src={"http://localhost:1337" + projet.attributes.image.data.attributes.url} alt="" /> */}
+                <WaveEffectImage imageUrl={"http://localhost:1337" + projet.attributes.image.data.attributes.url} />
                 <h3 className="name">{projet.attributes.nom}</h3>
                 {/* <p>{projet.attributes.description}</p> */}
                 <ul className="list-tag">
@@ -148,7 +149,7 @@ class Home extends Component {
                     </li>
                   ))}
                 </ul>
-              </a>
+              </div>
             ))}
           </div>
 

@@ -5,5 +5,6 @@ export { default as SvgFlower } from "./SvgFlower";
 export { default as BadgeScroll } from "./BadgeScroll/BadgeScroll";
 export { default as Button } from "./Button/Button";
 export { default as Tag } from "./Tag/Tag";
+export { default as WaveEffectImage } from "./WaveEffectImage/WaveEffectImage";
 
 
