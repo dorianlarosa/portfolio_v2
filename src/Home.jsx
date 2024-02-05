@@ -6,6 +6,7 @@ import {
 } from "./components";
 
 
+
 import imageConstruction1 from './assets/images/construction-1.jpg';
 import imageConstruction2 from './assets/images/construction-2.jpg';
 import imageConstruction3 from './assets/images/construction-3.jpg';
@@ -34,9 +35,7 @@ class Home extends Component {
       .then(data => {
         console.log(data.data);
         this.setState({ projets: data.data }); // Assurez-vous que cela correspond au format de votre réponse
-        // luge.emitter.emit('update');
-
-
+      
       })
       .catch(error => console.error("Erreur lors de la récupération des projets:", error));
   }
