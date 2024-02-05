@@ -13,6 +13,8 @@
     --l-sizing : #{$l-sizing};
     --xl-sizing : #{$xl-sizing};
     --xxl-sizing : #{$xxl-sizing};
+    --xxxl-sizing : #{$xxxl-sizing};
+
 
     --font-title : "Ginger", serif;
     --font-text : "DM Sans", sans-serif;
@@ -61,8 +63,8 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
 }
 
-
 .container {
     padding-left: max(20px, 3vw);
     padding-right: max(20px, 3vw);
 }
+

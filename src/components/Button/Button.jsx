@@ -5,11 +5,10 @@ import "./Button.scss";
 class Button extends Component {
 
     render() {
-
-
+        const { link, children } = this.props;
         return (
-            <a className="button">
-                <div className="text">Qui suis-je ?</div>
+            <a className="button" href={link} target="_blank">
+                <div className="text">{children}</div>
                 <div className="icon">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

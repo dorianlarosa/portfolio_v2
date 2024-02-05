@@ -4,5 +4,12 @@ import glsl from 'vite-plugin-glsl';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), glsl()],
+  plugins: [
+    react(), 
+    glsl(),
+  ],
+  server: {
+    host: '0.0.0.0', // Écoute sur toutes les adresses IP
+    port: 5173, // Le port peut être spécifié ici
+  },
 })

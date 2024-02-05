@@ -1,0 +1,73 @@
+#section-hero-project {
+    padding-top: var(--xxxl-sizing);
+    padding-bottom: var(--xxxl-sizing);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--grey-color);
+    position: relative;
+ 
+
+    .left,
+    .right {
+        width: 50%;
+
+        @media (max-width: 991.98px) {
+            width: 100%;
+        }
+    }
+
+    .left {
+        padding-right: 6rem;
+
+        @media (max-width: 991.98px) {
+            padding-right: 0;
+        }
+        
+        h1 {
+            font-size: 4vw;
+
+            @media (max-width: 991.98px) {
+                font-size: 10vw;
+            }
+        }
+
+        .list-tag {
+            display: flex;
+            margin-top: var(--s-sizing);
+        }
+
+        p {
+            margin-top: var(--l-sizing);
+        }
+
+        .button {
+            margin-top: var(--l-sizing);
+        }
+    }
+
+    .right {
+        @media (max-width: 991.98px) {
+            margin-top: var(--xl-sizing);
+
+        }
+    }
+}
+
+
+#list-images {
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: 1200px;
+
+        &:not(:first-of-type) {
+            margin-top: var(--s-sizing);
+        }
+    }
+
+}

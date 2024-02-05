@@ -1,35 +1,41 @@
-.badge-scroll {
-  animation: rotating 15s linear infinite;
-  width: 130px;
-  height: 130px;
+.wrapper-scroll-info {
+  position: absolute;
+  bottom: 3vw;
+  left: 3vw;
 
-  @media (max-width: 767.98px) {
-    display: none;
+  .badge-scroll {
+    animation: rotating 15s linear infinite;
+    width: 130px;
+    height: 130px;
+
+    @media (max-width: 767.98px) {
+      display: none;
+    }
+
+    text {
+      fill: white;
+      text-transform: uppercase;
+      font-size: .75rem;
+      font-weight: 300;
+    }
+
+    .svg-flower {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 35px;
+      height: auto;
+    }
   }
 
-  text {
-    fill: white;
-    text-transform: uppercase;
-    font-size: .75rem;
-    font-weight: 300;
-  }
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
 
-  .svg-flower {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 35px;
-    height: auto;
-  }
-}
-
-@keyframes rotating {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
+    to {
+      transform: rotate(360deg);
+    }
   }
 }

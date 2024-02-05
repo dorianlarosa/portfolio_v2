@@ -12,6 +12,7 @@ class BadgeScroll extends Component {
 
 
         return (
+            <div className="wrapper-scroll-info">
             <div className="badge-scroll">
 
                 <ReactCurvedText
@@ -34,7 +35,7 @@ class BadgeScroll extends Component {
             
                 <SvgFlower></SvgFlower>
             </div>
-
+            </div>
         );
     }
 }

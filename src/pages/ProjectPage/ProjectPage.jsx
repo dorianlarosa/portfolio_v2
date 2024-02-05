@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import NotFound from '../NotFound';
 
+import {
+  BadgeScroll, Button, ListTag
+} from "../../components";
+
 import "./ProjectPage.scss";
 
 
@@ -14,15 +18,16 @@ class ProjectPage extends Component {
   }
 
   componentDidMount() {
-
+    
     const { slug } = this.props.params;
 
+
     // Imaginons que vous fassiez une requête à une API pour récupérer le projet
-    fetch(`http://localhost:1337/api/projets?filters%5Bslug%5D%5B%24eq%5D=${slug}`)
+    fetch(`http://localhost:1337/api/projets?filters%5Bslug%5D%5B%24eq%5D=${slug}&populate[0]=image&populate[1]=tags&populate[2]=gallerie`)
       .then(response => response.json())
       .then(data => {
         if (data.data.length > 0) {
-          this.setState({ project: data.data[0], projectFound: true });
+          this.setState({ project: data.data[0].attributes, projectFound: true });
         } else {
           this.setState({ projectFound: false });
         }
@@ -43,9 +48,37 @@ class ProjectPage extends Component {
 
     // Affichez le projet si trouvé
     return (
-      <div>
-        {console.log(project)}
-      </div>
+      <>
+        {project ? (
+          <>
+            <section id="section-hero-project" className="container">
+              <div className="left">
+                <h1>{project.nom}</h1>
+                <ListTag tags={project.tags.data}></ListTag>
+                <p>{project.description}</p>
+                <Button link={project.url}>Voir le site web</Button>
+              </div>
+
+
+              <div className="right">
+                <img src={"http://localhost:1337" + project.image.data.attributes.url} alt="" />
+              </div>
+
+              <BadgeScroll></BadgeScroll>
+            </section>
+
+            <section id="list-images" className="section container">
+              {console.log(project)}
+
+              {project.gallerie.data.map((image) => (
+                <img key={image.id} src={"http://localhost:1337" + image.attributes.url} alt="" />
+              ))}
+            </section>
+          </>
+        ) : (
+          <div>Chargement...</div>
+        )}
+      </>
     );
   }
 }

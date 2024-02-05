@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Home.scss";
 
 import {
-  Section, BadgeScroll, Button, Tag, WaveEffectImage
+  Section, BadgeScroll, Button, ListTag, WaveEffectImage
 } from "./components";
 
 import imageConstruction1 from './assets/images/construction-1.jpg';
@@ -20,10 +20,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
-
     // Get projects
     this.fetchProjets();
+  }
 
+  handleImageLoaded = (e) => {
+    
   }
 
   fetchProjets = () => {
@@ -32,13 +34,13 @@ class Home extends Component {
       .then(data => {
         console.log(data.data);
         this.setState({ projets: data.data }); // Assurez-vous que cela correspond au format de votre réponse
-        luge.lifecycle.refresh()
-
+        luge.emitter.emit('update');
       })
       .catch(error => console.error("Erreur lors de la récupération des projets:", error));
   }
 
   componentWillUnmount() {
+    
   }
 
   render() {
@@ -47,8 +49,8 @@ class Home extends Component {
 
     // Define parallax project
     const projectsParallax = {
-      1: .2,
-      2: .4,
+      1: .1,
+      2: .3,
       3: .4,
       4: .2
     };
@@ -68,9 +70,9 @@ class Home extends Component {
             </span>
           </h1>
 
-          <div className="wrapper-scroll-info">
-            <BadgeScroll></BadgeScroll>
-          </div>
+
+          <BadgeScroll></BadgeScroll>
+
         </section>
 
 
@@ -81,7 +83,7 @@ class Home extends Component {
             <div className="left">
               <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!</p>
-              <Button></Button>
+              <Button>Qui suis-je ?</Button>
             </div>
 
             <div className="right">
@@ -129,7 +131,7 @@ class Home extends Component {
           <div className="list-projects">
             {projets.map((projet) => (
 
-              <div
+              <a
                 className={`project project-${projet.id}`}
                 key={projet.id}
                 href={`projets/${projet.attributes.slug}`}
@@ -138,18 +140,15 @@ class Home extends Component {
                 data-lg-parallax-inertia="1"
                 data-lg-parallax-anchor="center"
               >
-                {/* <img src={"http://localhost:1337" + projet.attributes.image.data.attributes.url} alt="" /> */}
+
                 <WaveEffectImage imageUrl={"http://localhost:1337" + projet.attributes.image.data.attributes.url} />
                 <h3 className="name">{projet.attributes.nom}</h3>
                 {/* <p>{projet.attributes.description}</p> */}
-                <ul className="list-tag">
-                  {projet.attributes.tags.data.map((tag) => (
-                    <li key={projet.id + "-" + tag.id}>
-                      <Tag title={tag.attributes.nom}></Tag>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+
+                <ListTag tags={projet.attributes.tags.data}></ListTag>
+
+
+              </a>
             ))}
           </div>
 
