@@ -3,6 +3,7 @@ precision mediump float;
 varying vec2 vUv;
 varying float vWave;
 uniform float uTime;
+uniform float uProg;
 
 //
 // Description : Array and textureless GLSL 2D/3D/4D simplex
@@ -111,9 +112,8 @@ void main() {
 
   vec3 pos = position;
   float noiseFreq = 3.5;  // Réduire la fréquence du bruit
-  float noiseAmp = 0.05;  // Réduire l'amplitude du bruit
   vec3 noisePos = vec3(pos.x * noiseFreq + uTime, pos.y, pos.z);
-  pos.z += snoise(noisePos) * noiseAmp;
+  pos.z += snoise(noisePos) * uProg;
   vWave = pos.z;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import gsap from 'gsap';
 
 import vertexShader from "./glsl/vertex.glsl";
 import fragmentShader from "./glsl/fragment.glsl";
@@ -49,6 +49,7 @@ class WaveEffectImage extends Component {
       fragmentShader,
       uniforms: {
         uTime: { value: 0.0 },
+        uProg: { value: 0 },
         uTexture: { value: new THREE.TextureLoader().load(this.props.imageUrl) }
       },
       side: THREE.DoubleSide
@@ -98,10 +99,21 @@ class WaveEffectImage extends Component {
 
   onMouseEnter = () => {
     this.setState({ isHovered: true });
+    gsap.to(this.material.uniforms.uProg, {
+        duration: .5, // Durée de l'animation en secondes
+        value: .05,    // Valeur à atteindre (0)
+        ease: 'power.inOut', // Facilité d'animation (facultatif)
+      });
+
   };
 
   onMouseLeave = () => {
     this.setState({ isHovered: false });
+    gsap.to(this.material.uniforms.uProg, {
+        duration: .5, // Durée de l'animation en secondes
+        value: .0,    // Valeur à atteindre (0)
+        ease: 'power.inOut', // Facilité d'animation (facultatif)
+      });
   };
 
   render() {
