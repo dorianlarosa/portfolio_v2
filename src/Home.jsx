@@ -5,6 +5,7 @@ import {
   Section, BadgeScroll, Button, ListTag, WaveEffectImage
 } from "./components";
 
+
 import imageConstruction1 from './assets/images/construction-1.jpg';
 import imageConstruction2 from './assets/images/construction-2.jpg';
 import imageConstruction3 from './assets/images/construction-3.jpg';
@@ -20,13 +21,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
+
     // Get projects
     this.fetchProjets();
-  }
-
-  handleImageLoaded = (e) => {
     
   }
+
 
   fetchProjets = () => {
     fetch('http://localhost:1337/api/projets?fields[0]=nom&fields[1]=description&fields[2]=slug&populate[0]=image&populate[1]=tags')
@@ -34,13 +34,15 @@ class Home extends Component {
       .then(data => {
         console.log(data.data);
         this.setState({ projets: data.data }); // Assurez-vous que cela correspond au format de votre réponse
-        luge.emitter.emit('update');
+        // luge.emitter.emit('update');
+
+
       })
       .catch(error => console.error("Erreur lors de la récupération des projets:", error));
   }
 
   componentWillUnmount() {
-    
+
   }
 
   render() {
@@ -87,13 +89,9 @@ class Home extends Component {
             </div>
 
             <div className="right">
-
               <img
                 className="image image-1"
-                data-lg-parallax
-                data-lg-parallax-amplitude="0.4"
-                data-lg-parallax-inertia="1"
-                data-lg-parallax-anchor="center"
+                data-scroll data-scroll-speed="0.1"
                 src={imageConstruction1}
                 alt=""
                 onLoad={this.handleImageLoaded}
@@ -101,10 +99,7 @@ class Home extends Component {
 
               <img
                 className="image image-2"
-                data-lg-parallax
-                data-lg-parallax-amplitude="0.5"
-                data-lg-parallax-anchor="center"
-                data-lg-parallax-inertia="1"
+                data-scroll data-scroll-speed="0.12"
                 src={imageConstruction2}
                 alt=""
                 onLoad={this.handleImageLoaded}
@@ -112,10 +107,7 @@ class Home extends Component {
 
               <img
                 className="image image-3"
-                data-lg-parallax
-                data-lg-parallax-amplitude="0.6"
-                data-lg-parallax-anchor="center"
-                data-lg-parallax-inertia="1"
+                data-scroll data-scroll-speed="0.14"
                 src={imageConstruction3}
                 alt=""
                 onLoad={this.handleImageLoaded}
@@ -135,10 +127,8 @@ class Home extends Component {
                 className={`project project-${projet.id}`}
                 key={projet.id}
                 href={`projets/${projet.attributes.slug}`}
-                data-lg-parallax
-                data-lg-parallax-amplitude={projectsParallax[projet.id]}
-                data-lg-parallax-inertia="1"
-                data-lg-parallax-anchor="center"
+                data-scroll
+                data-scroll-speed={projectsParallax[projet.id]}
               >
 
                 <WaveEffectImage imageUrl={"http://localhost:1337" + projet.attributes.image.data.attributes.url} />

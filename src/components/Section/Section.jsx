@@ -19,7 +19,7 @@ class Section extends Component {
 
                 <div className="wrapper-h2">
 
-                    <h2 data-lg-scroll data-lg-scroll-trigger="50% 50%" data-text={title} className="my-element">
+                    <h2 data-scroll data-scroll-css-progress data-text={title} className="my-element">
                         <span aria-hidden="true" className="text-grey">{title}</span>
 
                         <span aria-hidden="true" className="text-grey">{title}</span>

@@ -6,7 +6,7 @@ class SvgFlower extends Component {
     render() {
 
         return (
-            <svg className="svg-flower" data-lg-scroll xmlns="http://www.w3.org/2000/svg"
+            <svg className="svg-flower" data-scroll data-scroll-css-progress xmlns="http://www.w3.org/2000/svg"
                 width="200"
                 height="200"
                 fill="none"
