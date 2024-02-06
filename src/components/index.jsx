@@ -6,3 +6,4 @@ export { default as BadgeScroll } from "./BadgeScroll/BadgeScroll";
 export { default as Button } from "./Button/Button";
 export { default as ListTag } from "./ListTags/ListTags";
 export { default as WaveEffectImage } from "./WaveEffectImage/WaveEffectImage";
+export { default as Blob } from "./Blob/Blob";
