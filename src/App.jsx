@@ -5,7 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import { Header } from './components';
+import { Header, Footer } from './components';
 
 import Home from './Home';
 import About from './pages/About';
@@ -30,6 +30,8 @@ class App extends Component {
           <Route path="/projets/:slug" element={<WrapperProjectPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
+
       </>
     )
   }

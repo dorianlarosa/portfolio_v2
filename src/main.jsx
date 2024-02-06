@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 const optionsLenis = {
   duration: 2, // Durée du défilement en secondes
-  // wheelMultiplier: .7
+  wheelMultiplier: .9
 };
 
 

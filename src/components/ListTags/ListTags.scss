@@ -1,12 +1,11 @@
 .list-tag {
-    margin: -5px;
-    margin-top: var(--s-sizing);
+    margin: -.2rem;
     display: flex;
     flex-wrap: wrap;
 
     li {
         display: inline-block;
-        margin: 5px;
+        margin: .2rem;
 
         .tag {
             color: var(--white-color);
@@ -14,6 +13,7 @@
             padding: .5rem 1rem;
             display: inline-block;
             border-radius: 2rem;
+            font-size: 1rem;
         }
 
     }

@@ -2,12 +2,16 @@
     padding-top: var(--xxxl-sizing);
     padding-bottom: var(--xxxl-sizing);
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid var(--grey-color);
     position: relative;
- 
+
+    @media (max-width: 991.98px) {
+        padding-top: var(--xxl-sizing);
+        padding-bottom: var(--xl-sizing);
+    }
 
     .left,
     .right {
@@ -23,8 +27,10 @@
 
         @media (max-width: 991.98px) {
             padding-right: 0;
+            margin-top: var(--l-sizing);
+
         }
-        
+
         h1 {
             font-size: 4vw;
 
@@ -49,7 +55,7 @@
 
     .right {
         @media (max-width: 991.98px) {
-            margin-top: var(--xl-sizing);
+            // margin-top: var(--xl-sizing);
 
         }
     }

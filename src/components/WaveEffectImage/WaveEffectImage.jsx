@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
-import gsap from 'gsap';
 
 import vertexShader from "./glsl/vertex.glsl";
 import fragmentShader from "./glsl/fragment.glsl";
@@ -35,7 +34,8 @@ class WaveEffectImage extends Component {
 
     this.createMesh();
     this.addEvents();
-    this.run();
+
+    this.start();
   };
 
   createMesh = () => {
@@ -59,7 +59,7 @@ class WaveEffectImage extends Component {
   };
 
   addEvents = () => {
-    window.requestAnimationFrame(this.run.bind(this));
+    window.requestAnimationFrame(this.animate.bind(this));
     window.addEventListener('resize', this.onResize, false);
 
     // Ajout des gestionnaires d'événements pour le survol
@@ -67,15 +67,43 @@ class WaveEffectImage extends Component {
     this.mount.addEventListener('mouseleave', this.onMouseLeave);
   };
 
-  run = () => {
-    this.requestID = requestAnimationFrame(this.run);
+  start = () => {
+    if (!this.frameId) {
+      this.frameId = requestAnimationFrame(this.animate);
+    }
+  };
+
+  animate = () => {
+    this.frameId = requestAnimationFrame(this.animate);
     this.renderScene();
   };
 
+  animateProperty = (startValue, endValue, duration) => {
+    let startTime;
+  
+    const animate = (time) => {
+      if (!startTime) startTime = time;
+      const timeElapsed = time - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+  
+      // Calculer la valeur actuelle de l'animation
+      const currentValue = startValue + (endValue - startValue) * progress;
+  
+      // Appliquer la valeur animée
+      this.material.uniforms.uProg.value = currentValue;
+  
+      // Continuer l'animation jusqu'à ce que le temps écoulé dépasse la durée
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animate);
+      }
+    };
+  
+    requestAnimationFrame(animate);
+  };
+
   renderScene = () => {
-    if (this.state.isHovered) {
-      this.material.uniforms.uTime.value = this.clock.getElapsedTime();
-    }
+    this.material.uniforms.uTime.value = this.clock.getElapsedTime();
+    
     this.renderer.render(this.scene, this.camera);
   };
 
@@ -90,34 +118,25 @@ class WaveEffectImage extends Component {
     const w = this.mount.parentElement.clientWidth;
     const aspectRatio = 1920 / 1310;
     const h = w / aspectRatio;
-
+    this.renderer.setSize(w, h);
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
 
-    this.renderer.setSize(w, h);
   };
 
   onMouseEnter = () => {
     this.setState({ isHovered: true });
-    gsap.to(this.material.uniforms.uProg, {
-        duration: .5, // Durée de l'animation en secondes
-        value: .05,    // Valeur à atteindre (0)
-        ease: 'power.inOut', // Facilité d'animation (facultatif)
-      });
-
+    this.animateProperty(0, 0.05, 500); // Commencer à 0, aller à 0.05 en 500 ms
   };
 
   onMouseLeave = () => {
     this.setState({ isHovered: false });
-    gsap.to(this.material.uniforms.uProg, {
-        duration: .5, // Durée de l'animation en secondes
-        value: .0,    // Valeur à atteindre (0)
-        ease: 'power.inOut', // Facilité d'animation (facultatif)
-      });
+    this.animateProperty(0.05, 0, 500); // Revenir à 0 en 500 ms
+
   };
 
   render() {
-    return <canvas ref={ref => (this.mount = ref)} style={{ width: '100%'}} />;
+    return <canvas ref={ref => (this.mount = ref)} style={{ width: '100%' }} />;
   }
 }
 

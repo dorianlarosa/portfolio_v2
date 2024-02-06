@@ -4,7 +4,7 @@
   left: 3vw;
 
   .badge-scroll {
-    animation: rotating 15s linear infinite;
+    animation: rotatingFlower 15s linear infinite;
     width: 130px;
     height: 130px;
 
@@ -26,16 +26,6 @@
       transform: translate(-50%, -50%);
       width: 35px;
       height: auto;
-    }
-  }
-
-  @keyframes rotating {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(360deg);
     }
   }
 }

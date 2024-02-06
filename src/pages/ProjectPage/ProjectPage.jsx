@@ -68,7 +68,6 @@ class ProjectPage extends Component {
             </section>
 
             <section id="list-images" className="section container">
-              {console.log(project)}
 
               {project.gallerie.data.map((image) => (
                 <img key={image.id} src={"http://localhost:1337" + image.attributes.url} alt="" />

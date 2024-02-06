@@ -1,0 +1,44 @@
+#footer {
+
+    .content-footer {
+        height: 80vh;
+        border-top: 1px solid var(--grey-color);
+        border-bottom: 1px solid var(--grey-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        @media (max-width: 767.98px) {
+            height: 50vh;
+        }
+
+        .title {
+            .svg-flower {
+                width: 30px;
+                height: auto;
+                animation: rotatingFlower 15s linear infinite;
+
+            }
+
+            h2 {
+                font-family: var(--font-text);
+            }
+        }
+
+        .mail {
+            margin-top: var(--xl-sizing);
+            font-family: var(--font-title);
+            color: var(--white);
+            font-size: 7vw;
+        }
+    }
+
+    .credits {
+        text-align: center;
+        padding: 2rem 0;
+        font-weight: 400;
+        text-transform: uppercase;
+    }
+}

@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@studio-freight/react-lenis": "^0.0.36",
-    "gsap": "^3.12.5",
     "react": "^18.2.0",
     "react-curved-text": "^3.0.0",
     "react-dom": "^18.2.0",
