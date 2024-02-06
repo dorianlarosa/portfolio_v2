@@ -3,7 +3,7 @@ import "./Home.scss";
 import { ParallaxBanner, Parallax } from 'react-scroll-parallax';
 
 // Assurez-vous que les composants suivants sont correctement importés.
-import { Section, BadgeScroll, Button, ListTag, WaveEffectImage, Blob } from "./components";
+import { Section, BadgeScroll, Button, ListTag, WaveEffectImage, Blob, BlobWithBackground } from "./components";
 
 import imageConstruction1 from './assets/images/construction-1.jpg';
 import imageConstruction2 from './assets/images/construction-2.jpg';
@@ -73,7 +73,8 @@ class Home extends Component {
     return (
       <>
         <section id="section-hero">
-          <Blob/>
+          {/* <Blob/> */}
+          <BlobWithBackground/>
           <h1>
             <span className="name">
               Dorian LA ROSA
@@ -88,6 +89,10 @@ class Home extends Component {
 
 
           <BadgeScroll></BadgeScroll>
+
+          {/* <div className="divider-gradient"/> */}
+
+        
 
         </section>
 
