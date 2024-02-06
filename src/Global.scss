@@ -2,7 +2,7 @@
 
 // ========== Variables ==========
 
-:root{
+:root {
     --white-color: #{$white};
     --black-color: #{$black};
     --grey-color : #{$grey};
@@ -16,8 +16,8 @@
     --xxxl-sizing : #{$xxxl-sizing};
 
 
-    --font-title : "Ginger", serif;
-    --font-text : "DM Sans", sans-serif;
+    --font-title: "Ginger", serif;
+    --font-text: "DM Sans", sans-serif;
 }
 
 // ========== Font face ==========
@@ -25,17 +25,17 @@
 @font-face {
     font-family: 'Ginger';
     src: url('./assets/fonts/ginger-modern-stylish-font/Ginger.woff') format('woff'),
-         url('./assets/fonts/ginger-modern-stylish-font/Ginger.ttf') format('truetype'),
-         url('./assets/fonts/ginger-modern-stylish-font/Ginger.otf') format('opentype');
+        url('./assets/fonts/ginger-modern-stylish-font/Ginger.ttf') format('truetype'),
+        url('./assets/fonts/ginger-modern-stylish-font/Ginger.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
-  }
-  
+}
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 // ========== Reset ==========
 
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -52,19 +52,44 @@ img {
 
 // ========== Global ==========
 
-body{
+body {
     background-color: var(--black-color);
     color: var(--white-color);
     font-family: var(--font-text);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-title);
     font-weight: 400;
+}
+
+p {
+
+    &.intro {
+        font-size: min(2.2vw, 2.2rem);
+        font-weight: 200;
+        margin-bottom: var(--l-sizing);
+
+        @media (max-width: 991.98px) {
+            font-size: 2rem;
+        }
+
+        @media (max-width: 575.98px) {
+            font-size: 1.5rem;
+        }
+    }
 }
 
 .container {
     padding-left: max(20px, 3vw);
     padding-right: max(20px, 3vw);
+    // max-width: 1920px;
+    // margin-left: auto;
+    // margin-right: auto;
+    // overflow: visible;
 }
-

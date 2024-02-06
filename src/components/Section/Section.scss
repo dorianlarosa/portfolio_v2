@@ -7,15 +7,18 @@
         padding-top: 5rem;
         padding-bottom: 5rem;
     }
-    
+
+    .wrapper-flower {
+        display: flex;
+        justify-content: end;
+    }
+
     .svg-flower {
         transform: rotate(calc(var(--progress) * 100deg));
         height: 7vw;
-        margin-bottom: 1rem;
-
         width: auto;
-        margin-left: auto;
-        display: block;
+        margin-bottom: 1rem;
+        display: inline-block;
 
         @media (max-width: 767.98px) {
             height: 50px;
@@ -32,7 +35,7 @@
         --progress-origin-center: calc(var(--progress) - .5);
 
         font-size: max(3.5rem, 10vw);
-        transform:  translate3d(calc((-30vw * var(--progress-origin-center) )), 0, 0);
+        transform: translate3d(calc((-30vw * var(--progress-origin-center))), 0, 0);
         white-space: nowrap;
         position: relative;
 
@@ -45,7 +48,7 @@
                 margin-left: 2vw;
                 margin-right: 2vw;
             }
-           
+
             &.text-grey {
                 opacity: .1;
             }

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Parallax } from 'react-scroll-parallax';
+
 
 import "./Section.scss";
 
@@ -13,29 +15,33 @@ class Section extends Component {
         const { title, children, id } = this.props;
 
         return (
-            <section id={id} className="section container">
+            <section id={id} className="section">
+                <div className="container">
+                    <div className="wrapper-flower">
+                        <Parallax rotate={[-180, 0]}>
+                            <SvgFlower></SvgFlower>
+                        </Parallax>
+                    </div>
 
-                <SvgFlower></SvgFlower>
+                    <div className="wrapper-h2">
+                        <Parallax translateX={['10vw', '-10vw']}>
+                            <h2 data-text={title} className="my-element">
+                                <span aria-hidden="true" className="text-grey">{title}</span>
 
-                <div className="wrapper-h2">
+                                <span aria-hidden="true" className="text-grey">{title}</span>
 
-                    <h2 data-scroll data-scroll-css-progress data-text={title} className="my-element">
-                        <span aria-hidden="true" className="text-grey">{title}</span>
+                                <span>{title}</span>
+                                <span aria-hidden="true" className="text-grey">{title}</span>
 
-                        <span aria-hidden="true" className="text-grey">{title}</span>
+                                <span aria-hidden="true" className="text-grey">{title}</span>
+                            </h2>
+                        </Parallax>
 
-                        <span>{title}</span>
-                        <span aria-hidden="true" className="text-grey">{title}</span>
+                    </div>
 
-                        <span aria-hidden="true" className="text-grey">{title}</span>
-
-                    </h2>
-                </div>
-
-                <div className="content-section">
-
-                    {children}
-
+                    <div className="content-section">
+                        {children}
+                    </div>
                 </div>
             </section>
         );

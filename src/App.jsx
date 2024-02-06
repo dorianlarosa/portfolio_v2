@@ -5,7 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import { Header, ScrollLocomotiveProvider } from './components';
+import { Header } from './components';
 
 import Home from './Home';
 import About from './pages/About';
@@ -22,7 +22,7 @@ class App extends Component {
   render() {
 
     return (
-      <ScrollLocomotiveProvider>
+      <>
         <Header />
         <Routes>
           <Route path="/" exact element={<Home />} />
@@ -30,7 +30,7 @@ class App extends Component {
           <Route path="/projets/:slug" element={<WrapperProjectPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </ScrollLocomotiveProvider>
+      </>
     )
   }
 }

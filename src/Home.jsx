@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Home.scss";
+import { Parallax } from 'react-scroll-parallax';
 
 import {
   Section, BadgeScroll, Button, ListTag, WaveEffectImage
@@ -22,10 +23,8 @@ class Home extends Component {
   }
 
   componentDidMount() {
-
     // Get projects
     this.fetchProjets();
-    
   }
 
 
@@ -35,7 +34,7 @@ class Home extends Component {
       .then(data => {
         console.log(data.data);
         this.setState({ projets: data.data }); // Assurez-vous que cela correspond au format de votre réponse
-      
+
       })
       .catch(error => console.error("Erreur lors de la récupération des projets:", error));
   }
@@ -50,10 +49,10 @@ class Home extends Component {
 
     // Define parallax project
     const projectsParallax = {
-      1: .1,
-      2: .3,
-      3: .4,
-      4: .2
+      1: 5,
+      2: 10,
+      3: 20,
+      4: 10
     };
 
     return (
@@ -88,63 +87,65 @@ class Home extends Component {
             </div>
 
             <div className="right">
-              <img
-                className="image image-1"
-                data-scroll data-scroll-speed="0.1"
-                src={imageConstruction1}
-                alt=""
-                onLoad={this.handleImageLoaded}
-              />
+              <Parallax speed={8} className="image image-1">
+                <img
+                  src={imageConstruction1}
+                  alt=""
+                  onLoad={this.handleImageLoaded}
+                />
+              </Parallax>
 
-              <img
-                className="image image-2"
-                data-scroll data-scroll-speed="0.12"
-                src={imageConstruction2}
-                alt=""
-                onLoad={this.handleImageLoaded}
-              />
+              <Parallax speed={10} className="image image-2">
+                <img
+                  src={imageConstruction2}
+                  alt=""
+                  onLoad={this.handleImageLoaded}
+                />
+              </Parallax>
 
-              <img
-                className="image image-3"
-                data-scroll data-scroll-speed="0.14"
-                src={imageConstruction3}
-                alt=""
-                onLoad={this.handleImageLoaded}
-              />
+              <Parallax speed={12} className="image image-3">
+                <img
+                  src={imageConstruction3}
+                  alt=""
+                  onLoad={this.handleImageLoaded}
+                />
+              </Parallax>
+
             </div>
           </div>
 
 
-        </Section>
+        </Section >
 
         <Section title="Réalisation" id="projects">
 
           <div className="list-projects">
             {projets.map((projet) => (
+              <Parallax speed={projectsParallax[projet.id]} className={`project project-${projet.id}`}>
+                <a
+                  className="link-project"
+                  key={projet.id}
+                  href={`projets/${projet.attributes.slug}`}
+                >
 
-              <a
-                className={`project project-${projet.id}`}
-                key={projet.id}
-                href={`projets/${projet.attributes.slug}`}
-                data-scroll
-                data-scroll-speed={projectsParallax[projet.id]}
-              >
+                  <WaveEffectImage imageUrl={"http://localhost:1337" + projet.attributes.image.data.attributes.url} />
+                  <h3 className="name">{projet.attributes.nom}</h3>
+                  {/* <p>{projet.attributes.description}</p> */}
 
-                <WaveEffectImage imageUrl={"http://localhost:1337" + projet.attributes.image.data.attributes.url} />
-                <h3 className="name">{projet.attributes.nom}</h3>
-                {/* <p>{projet.attributes.description}</p> */}
-
-                <ListTag tags={projet.attributes.tags.data}></ListTag>
+                  <ListTag tags={projet.attributes.tags.data}></ListTag>
 
 
-              </a>
+                </a>
+              </Parallax>
+
             ))}
           </div>
 
         </Section>
 
         <Section title="Services" id="projects">
-          <p>Contenu de la section Projets...</p>
+          <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
+
         </Section>
 
         <Section title="Me contacter" id="projects">
