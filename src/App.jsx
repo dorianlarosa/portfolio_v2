@@ -9,13 +9,10 @@ import Contact from './pages/Contact';
 import WrapperProjectPage from './pages/ProjectPage/WrapperProjectPage';
 import NotFound from './pages/NotFound';
 
-import { Canvas } from '@react-three/fiber';
-import { BackgroundSphere } from './components/three/BackgroundSphere';
-import { BlobSphere } from './components/three/BlobSphere';
-import { BlendFunction } from 'postprocessing';
-import { EffectComposer, Noise, SMAA } from "@react-three/postprocessing";
+import FixedHeightCanvas from "./FixedHeightCanvas";
 
-import AnimatedCursor from "react-animated-cursor"
+
+import { Stats } from '@react-three/drei';
 
 
 function App() {
@@ -23,50 +20,11 @@ function App() {
 
   return (
     <>
+      <Stats></Stats>
       <Header />
-      <Canvas
-        id="container-blob"
-        camera={{
-          position: [0, 0, 1.3],
-          fov: 50,
-          aspect: window.innerWidth / window.innerHeight,
-          near: 0.1,
-          far: 2000
-        }}
-        dpr={window.devicePixelRatio}>
-
-        <BackgroundSphere />
-        <BlobSphere />
-
-        <EffectComposer >
-          <Noise opacity={.2} blendFunction={BlendFunction.SOFT_LIGHT} />
-          <SMAA />
-        </EffectComposer>
-
-      </Canvas>
-      <AnimatedCursor
-        className="cursor"
-        innerSize={8}
-        outerSize={40}
-        innerStyle={{
-          background: '#fff',
-          mixBlendMode: 'difference'
-        }}
-        hasBlendMode={true}
-        outerStyle={{
-          background: '#ffffff00',
-          border: '1px solid var(--white-color)',
-          mixBlendMode: 'difference'
-        }}
-        outerAlpha={1}
-        innerScale={5}
-        outerScale={1}
-        
-      />
-
-
-
-      {console.log(location.pathname)}
+    
+      <FixedHeightCanvas/>
+     
       <AnimatePresence mode='wait' initial={false} >
         <ScrollToTop />
 

@@ -24,7 +24,7 @@ class Section extends Component {
                     </div>
 
                     <div className="wrapper-h2">
-                        <Parallax translateX={['10vw', '-10vw']}>
+                        <Parallax translateX={[10, -10]}>
                             <h2 data-text={title} className="my-element">
                                 <span aria-hidden="true" className="text-grey">{title}</span>
 

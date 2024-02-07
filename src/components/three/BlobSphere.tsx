@@ -1,15 +1,45 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
 const globalU_time = { value: 0 };
-  
-export const BlobSphere = () => {
-    // create refs
-	const parentRef = useRef<THREE.Group | null>(null);
 
-    // create geometries
-    const sphereGeometry = new THREE.IcosahedronGeometry(0.4, 20);
+export const BlobSphere = () => {
+    const parentRef = useRef<THREE.Group | null>(null);
+
+
+    // Écouter les changements de taille de la fenêtre
+    const [windowSize, setWindowSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight,
+    });
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Adapter la taille de la géométrie en fonction de la taille de la fenêtre
+    const sphereGeometry = useMemo(() => {
+        // Vous pouvez ajuster la logique ici pour changer la taille en fonction de la largeur de la fenêtre
+        let size = windowSize.width / 3000;
+
+        // Appliquer un minimum et un maximum
+        const minSize = 0.3; // Définir la taille minimale
+        const maxSize = 0.4; // Définir la taille maximale
+        size = Math.max(minSize, Math.min(size, maxSize));
+
+        return new THREE.IcosahedronGeometry(size, 20);
+    }, [windowSize.width]);
+
 
     // frame loop
     const vec3 = new THREE.Vector3();

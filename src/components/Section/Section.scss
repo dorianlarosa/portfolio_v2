@@ -20,6 +20,7 @@
         width: auto;
         margin-bottom: 1rem;
         display: inline-block;
+        will-change: transform;
 
         @media (max-width: 767.98px) {
             height: 50px;
@@ -29,6 +30,8 @@
     .wrapper-h2 {
         display: flex;
         justify-content: center;
+        will-change: transform;
+
     }
 
     h2 {
@@ -36,14 +39,17 @@
         --progress-origin-center: calc(var(--progress) - .5);
 
         font-size: max(3.5rem, 10vw);
-        transform: translate3d(calc((-30vw * var(--progress-origin-center))), 0, 0);
+        // transform: translate3d(calc((-30vw * var(--progress-origin-center))), 0, 0);
         white-space: nowrap;
         position: relative;
+        will-change: transform;
+
 
 
         span {
             margin-left: 1vw;
             margin-right: 1vw;
+            will-change: transform;
 
             @media (max-width: 767.98px) {
                 margin-left: 2vw;
