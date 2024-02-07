@@ -2,6 +2,8 @@ import React, { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
+const globalU_time = { value: 0 };
+  
 export const BlobSphere = () => {
     // create refs
 	const parentRef = useRef<THREE.Group | null>(null);
@@ -56,7 +58,7 @@ const InnerGeometry = (props) => {
             u_FresnelBias: { value: .1 },
             u_FresnelScale: { value: 2 },
             u_FresnelPower: { value: 1 },
-            u_time: { value: 0 }
+            u_time: globalU_time
         },
         vertexShader: vertexShader,
         fragmentShader: fragmentShader,

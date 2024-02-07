@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { PageTransition } from "../components";
-class About extends Component {
+class Contact extends Component {
 
   render() {
 
     return (
       <>
-        <h1>Je suis page1</h1>
+        <h1>Je suis page contact</h1>
         <PageTransition />
 
       </>
@@ -14,4 +14,4 @@ class About extends Component {
   }
 }
 
-export default About
+export default Contact

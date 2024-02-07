@@ -14,6 +14,7 @@
     --xl-sizing : #{$xl-sizing};
     --xxl-sizing : #{$xxl-sizing};
     --xxxl-sizing : #{$xxxl-sizing};
+    --xxxxl-sizing : #{$xxxxl-sizing};
 
 
     --font-title: "Ginger", serif;
@@ -57,7 +58,7 @@ img {
 body {
     background-color: var(--black-color);
     color: var(--white-color);
-    font-family: var(--font-text); 
+    font-family: var(--font-text);
 }
 
 h1,
@@ -106,14 +107,56 @@ p {
     overflow: visible;
 }
 
+// ========== Page Transition ==========
+.slide-in {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: bottom;
+}
+
+.slide-out {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: top;
+}
+
+.page-transition {
+    background-color: var(--black-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+
 // ========== Animations ==========
 
 @keyframes rotatingFlower {
     from {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
 
     to {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}
+
+
+#container-blob {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    // TODO enlever pour le hover ??
+    z-index: -100;
+}

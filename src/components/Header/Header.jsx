@@ -47,6 +47,9 @@ class Header extends Component {
                         <NavLink className="nav-link" to="/a-propos">
                             A propos
                         </NavLink>
+                        <NavLink className="nav-link" to="/contact">
+                            Contact
+                        </NavLink>
 
                     </nav>
                 </div>

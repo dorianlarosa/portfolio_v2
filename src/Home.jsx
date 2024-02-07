@@ -1,19 +1,18 @@
 import React, { Component, Suspense } from "react";
 import "./Home.scss";
 import { ParallaxBanner, Parallax } from 'react-scroll-parallax';
+import { Link } from 'react-router-dom';
 
-import { Section, BadgeScroll, Button, ListTag, WaveEffectImage } from "./components";
 
 import { Canvas } from '@react-three/fiber';
 import { BackgroundSphere } from './components/three/BackgroundSphere';
 import { BlobSphere } from './components/three/BlobSphere';
 import { BlendFunction } from 'postprocessing';
+import { EffectComposer, Noise, SMAA } from "@react-three/postprocessing";
 
-import {
-  EffectComposer,
-  Noise,
-  SMAA
-} from "@react-three/postprocessing";
+import { Section, BadgeScroll, Button, ListTag, WaveEffectImage, PageTransition } from "./components";
+
+
 
 import imageConstruction1 from './assets/images/construction-1.jpg';
 import imageConstruction2 from './assets/images/construction-2.jpg';
@@ -81,27 +80,6 @@ class Home extends Component {
     return (
       <>
         <section id="section-hero">
- 
-          <Canvas
-            id="container-blob"
-            camera={{
-              position: [0, 0, 1.3],
-              fov: 50,
-              aspect: window.innerWidth / window.innerHeight,
-              near: 0.1,
-              far: 2000
-            }}
-            dpr={window.devicePixelRatio}>
-            {/* objects */}
-            <BackgroundSphere />
-            <BlobSphere />
-            {/* effects */}
-            <EffectComposer >
-              <Noise opacity={.2}  blendFunction={BlendFunction.SOFT_LIGHT}/>
-              <SMAA />
-            </EffectComposer>
-          </Canvas>
-
           <h1>
             <span className="name">
               Dorian LA ROSA
@@ -161,22 +139,32 @@ class Home extends Component {
 
         </Section >
 
+        {/* <Section title="Réalisation" id="projects">
+
+          <div className="list-projects">
+            {projets.map((projet) => (
+              <Parallax key={"projet" + projet.id} speed={projectsParallax[projet.id]} className={`project project-${projet.id}`}>
+                <Link to={`projets/${projet.attributes.slug}`} className="link-project" >
+                  <WaveEffectImage imageUrl={"http://localhost:1337" + projet.attributes.image.data.attributes.url} />
+                  <h3 className="name">{projet.attributes.nom}</h3>
+
+                </Link>
+              </Parallax>
+
+            ))}
+          </div>
+
+        </Section> */}
+
         <Section title="Réalisation" id="projects">
 
           <div className="list-projects">
             {projets.map((projet) => (
               <Parallax key={"projet" + projet.id} speed={projectsParallax[projet.id]} className={`project project-${projet.id}`}>
-                <a
-                  className="link-project"
-                  href={`projets/${projet.attributes.slug}`}
-                >
-
-                  <WaveEffectImage imageUrl={"http://localhost:1337" + projet.attributes.image.data.attributes.url} />
+                <Link to={`projets/${projet.attributes.slug}`} className="link-project" >
+                  <img src={"http://localhost:1337" + projet.attributes.image.data.attributes.url} />
                   <h3 className="name">{projet.attributes.nom}</h3>
-                  {/* <ListTag tags={projet.attributes.tags.data}></ListTag> */}
-                  {/* <p>{projet.attributes.description}</p> */}
-
-                </a>
+                </Link>
               </Parallax>
 
             ))}
@@ -229,17 +217,21 @@ class Home extends Component {
             ))}
           </div>
         </Section>
+        <div id="banner-home">
+          <ParallaxBanner
 
-        <ParallaxBanner
-          id="banner-home"
-          layers={[
-            {
-              image: bannerHome,
-              speed: -10,
-            },
-          ]}
-          style={{ aspectRatio: '2 / 1' }}
-        />
+            layers={[
+              {
+                image: bannerHome,
+                speed: -10,
+              },
+            ]}
+            style={{ aspectRatio: '2 / 1' }}
+          />
+        </div>
+
+        <PageTransition />
+
       </>
     );
   }

@@ -3,10 +3,11 @@ import * as THREE from 'three';
 import { Icosahedron } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 
+const globalU_time = { value: 0 };
 export const BackgroundSphere = () => {
   const shader = {
     uniforms: {
-      u_time: { value: 0 },
+      u_time: globalU_time,
 	  u_patternScale: { value: .1 },
 	  u_patternBias1: { value: .5 },
 	  u_patternBias2: { value: .1 },

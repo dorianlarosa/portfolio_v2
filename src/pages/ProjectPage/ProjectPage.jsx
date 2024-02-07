@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NotFound from '../NotFound';
 
 import {
-  BadgeScroll, Button, ListTag
+  BadgeScroll, Button, ListTag, PageTransition, ScrollToTop
 } from "../../components";
 
 import "./ProjectPage.scss";
@@ -18,7 +18,7 @@ class ProjectPage extends Component {
   }
 
   componentDidMount() {
-    
+
     const { slug } = this.props.params;
 
 
@@ -49,6 +49,7 @@ class ProjectPage extends Component {
     // Affichez le projet si trouvé
     return (
       <>
+      <ScrollToTop />
         {project ? (
           <>
             <section id="section-hero-project" className="container">
@@ -77,6 +78,8 @@ class ProjectPage extends Component {
         ) : (
           <div>Chargement...</div>
         )}
+        <PageTransition />
+
       </>
     );
   }
