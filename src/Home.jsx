@@ -2,14 +2,11 @@ import React, { Component, Suspense } from "react";
 import "./Home.scss";
 import { ParallaxBanner, Parallax } from 'react-scroll-parallax';
 
-// Assurez-vous que les composants suivants sont correctement importés.
 import { Section, BadgeScroll, Button, ListTag, WaveEffectImage } from "./components";
 
 import { Canvas } from '@react-three/fiber';
 import { BackgroundSphere } from './components/three/BackgroundSphere';
 import { BlobSphere } from './components/three/BlobSphere';
-
-
 import { BlendFunction } from 'postprocessing';
 
 import {
@@ -33,11 +30,7 @@ class Home extends Component {
       openAccordeonId: null,
     };
 
-    // Initialiser un objet vide pour stocker les refs des panels de services.
     this.accordeonRefs = {};
-
-    this.myCustomEffectRef = React.createRef();
-
   }
 
   componentDidMount() {
@@ -88,10 +81,7 @@ class Home extends Component {
     return (
       <>
         <section id="section-hero">
-          {/* <Blob/> */}
-          {/* <BlobWithBackground/> */}
-          {/* <BlobWithBackgroundWithReflexion/> */}
-
+ 
           <Canvas
             id="container-blob"
             camera={{
