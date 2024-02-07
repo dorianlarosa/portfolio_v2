@@ -1,9 +1,22 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import "./Home.scss";
 import { ParallaxBanner, Parallax } from 'react-scroll-parallax';
 
 // Assurez-vous que les composants suivants sont correctement importés.
-import { Section, BadgeScroll, Button, ListTag, WaveEffectImage, Blob, BlobWithBackground } from "./components";
+import { Section, BadgeScroll, Button, ListTag, WaveEffectImage } from "./components";
+
+import { Canvas } from '@react-three/fiber';
+import { BackgroundSphere } from './components/three/BackgroundSphere';
+import { BlobSphere } from './components/three/BlobSphere';
+
+
+import { BlendFunction } from 'postprocessing';
+
+import {
+  EffectComposer,
+  Noise,
+  SMAA
+} from "@react-three/postprocessing";
 
 import imageConstruction1 from './assets/images/construction-1.jpg';
 import imageConstruction2 from './assets/images/construction-2.jpg';
@@ -22,10 +35,14 @@ class Home extends Component {
 
     // Initialiser un objet vide pour stocker les refs des panels de services.
     this.accordeonRefs = {};
+
+    this.myCustomEffectRef = React.createRef();
+
   }
 
   componentDidMount() {
     this.fetchProjets();
+
     this.fetchServices();
   }
 
@@ -57,8 +74,6 @@ class Home extends Component {
     }));
   }
 
-
-
   render() {
     const { projets, services, openAccordeonId } = this.state;
 
@@ -74,7 +89,29 @@ class Home extends Component {
       <>
         <section id="section-hero">
           {/* <Blob/> */}
-          <BlobWithBackground/>
+          {/* <BlobWithBackground/> */}
+          {/* <BlobWithBackgroundWithReflexion/> */}
+
+          <Canvas
+            id="container-blob"
+            camera={{
+              position: [0, 0, 1.3],
+              fov: 50,
+              aspect: window.innerWidth / window.innerHeight,
+              near: 0.1,
+              far: 2000
+            }}
+            dpr={window.devicePixelRatio}>
+            {/* objects */}
+            <BackgroundSphere />
+            <BlobSphere />
+            {/* effects */}
+            <EffectComposer >
+              <Noise opacity={.2}  blendFunction={BlendFunction.SOFT_LIGHT}/>
+              <SMAA />
+            </EffectComposer>
+          </Canvas>
+
           <h1>
             <span className="name">
               Dorian LA ROSA
@@ -87,12 +124,8 @@ class Home extends Component {
             </span>
           </h1>
 
-
+          <div className="divider-gradient" />
           <BadgeScroll></BadgeScroll>
-
-          {/* <div className="divider-gradient"/> */}
-
-        
 
         </section>
 
@@ -153,8 +186,6 @@ class Home extends Component {
                   {/* <ListTag tags={projet.attributes.tags.data}></ListTag> */}
                   {/* <p>{projet.attributes.description}</p> */}
 
-
-
                 </a>
               </Parallax>
 
@@ -164,8 +195,8 @@ class Home extends Component {
         </Section>
 
         <Section title="Services" id="services-section">
-        <p className="intro">Lorem ipsum dolor sit amet consectetur adipisicing elit. A quod minima consequatur, perspiciatis sequi minus inventore fuga voluptatem impedit error fugiat debitis, itaque eos nisi quia quam rem, nam aliquid!
-        Tempore at dolor fugit quisquam debitis sit saepe modi labore, laborum officiis commodi similique, tenetur enim inventore deserunt numquam, voluptatem itaque. Non animi fuga ducimus velit, consequuntur impedit vel alias.</p>
+          <p className="intro">Lorem ipsum dolor sit amet consectetur adipisicing elit. A quod minima consequatur, perspiciatis sequi minus inventore fuga voluptatem impedit error fugiat debitis, itaque eos nisi quia quam rem, nam aliquid!
+            Tempore at dolor fugit quisquam debitis sit saepe modi labore, laborum officiis commodi similique, tenetur enim inventore deserunt numquam, voluptatem itaque. Non animi fuga ducimus velit, consequuntur impedit vel alias.</p>
 
           <div className="list-services">
             {services.map((service, index) => (

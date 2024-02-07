@@ -1,3 +1,48 @@
+import React from 'react';
+import * as THREE from 'three';
+import { Icosahedron } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+
+export const BackgroundSphere = () => {
+  const shader = {
+    uniforms: {
+      u_time: { value: 0 },
+	  u_patternScale: { value: .1 },
+	  u_patternBias1: { value: .5 },
+	  u_patternBias2: { value: .1 },
+	  u_firstColor: { value: new THREE.Color("#262626") },
+	  u_secondColor: { value: new THREE.Color("#1c1c1c")},
+	  u_accentColor: { value: new THREE.Color("#0a0a0a") }
+    },
+    vertexShader: vertexShader,
+    fragmentShader: fragmentShader
+  }
+
+  useFrame(() => {
+    shader.uniforms.u_time.value += 0.01;
+  });
+
+  return (
+    <Icosahedron args={[1.5, 20]}>
+      <shaderMaterial args={[shader]} side={THREE.DoubleSide} />
+    </Icosahedron>
+  );
+};
+
+// ========================================================
+// shader
+
+const vertexShader = `
+varying vec3 v_pos;
+
+void main() {
+  v_pos = position;
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+}
+`
+
+const fragmentShader = `
 uniform float u_time;
 uniform float u_patternScale;
 uniform float u_patternBias1;
@@ -57,3 +102,4 @@ void main() {
 
   gl_FragColor = vec4(secondBaseColor, 1.0);
 }
+`
