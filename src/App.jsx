@@ -15,6 +15,8 @@ import { BlobSphere } from './components/three/BlobSphere';
 import { BlendFunction } from 'postprocessing';
 import { EffectComposer, Noise, SMAA } from "@react-three/postprocessing";
 
+import AnimatedCursor from "react-animated-cursor"
+
 
 function App() {
   const location = useLocation();
@@ -42,8 +44,29 @@ function App() {
         </EffectComposer>
 
       </Canvas>
+      <AnimatedCursor
+        className="cursor"
+        innerSize={8}
+        outerSize={40}
+        innerStyle={{
+          background: '#fff',
+          mixBlendMode: 'difference'
+        }}
+        hasBlendMode={true}
+        outerStyle={{
+          background: '#ffffff00',
+          border: '1px solid var(--white-color)',
+          mixBlendMode: 'difference'
+        }}
+        outerAlpha={1}
+        innerScale={5}
+        outerScale={1}
+        
+      />
 
-     { console.log(location.pathname)}
+
+
+      {console.log(location.pathname)}
       <AnimatePresence mode='wait' initial={false} >
         <ScrollToTop />
 
