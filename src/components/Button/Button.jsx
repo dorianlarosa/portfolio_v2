@@ -1,13 +1,26 @@
 import React, { Component } from "react";
 import "./Button.scss";
+import { Link } from 'react-router-dom';
+import CustomCursorContext from "../CustomCursor/context/CustomCursorContext";
 
 
 class Button extends Component {
+    static contextType = CustomCursorContext;
+
+    // Gestionnaire d'événements pour le survol
+    handleMouseEnter = () => {
+        this.context.setType("link"); // Utilisez le type que vous voulez montrer au survol
+    };
+
+    // Gestionnaire d'événements pour le sortir du survol
+    handleMouseLeave = () => {
+        this.context.setType("default"); // Retour au type par défaut
+    };
 
     render() {
         const { link, children } = this.props;
         return (
-            <a className="button" href={link} target="_blank">
+            <Link className="button" to={link} target="_blank" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                 <div className="text">{children}</div>
                 <div className="icon">
                     <svg
@@ -28,7 +41,7 @@ class Button extends Component {
 
 
                 </div>
-            </a>
+            </Link>
 
         );
     }

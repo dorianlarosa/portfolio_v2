@@ -12,19 +12,22 @@ import NotFound from './pages/NotFound';
 import FixedHeightCanvas from "./FixedHeightCanvas";
 
 
-import { Stats } from '@react-three/drei';
+import CustomCursor from "./components/CustomCursor/CustomCursor";
+import CustomCursorManager from "./components/CustomCursor/context/manager";
+
 
 
 function App() {
   const location = useLocation();
 
   return (
-    <>
-      <Stats></Stats>
+    <CustomCursorManager>
+
       <Header />
-    
-      <FixedHeightCanvas/>
-     
+
+      <FixedHeightCanvas />
+      <CustomCursor />
+
       <AnimatePresence mode='wait' initial={false} >
         <ScrollToTop />
 
@@ -39,7 +42,7 @@ function App() {
       </AnimatePresence>
 
       <Footer />
-    </>
+    </CustomCursorManager>
   );
 }
 

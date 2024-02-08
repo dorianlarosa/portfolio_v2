@@ -1,0 +1,240 @@
+.cursor-wrapper {
+    transition: opacity .75s cubic-bezier(.19, 1, .22, 1);
+}
+
+.main-cursor,
+.secondary-cursor {
+    z-index: 100000;
+
+    pointer-events: none;
+    // overflow: hidden;
+    transform: translate3d(0, 0, 0);
+    position: fixed;
+}
+
+.main-cursor {
+    transition: opacity 0.75s cubic-bezier(.19, 1, .22, 1);
+    animation: fadeIn 0.75s cubic-bezier(.19, 1, .22, 1) 0s;
+
+    mix-blend-mode: difference;
+
+    .main-cursor-background {
+        width: 80px;
+        height: 80px;
+        background: var(--white-color);
+        border-radius: 50%;
+        transform: scale(.1);
+        transition: all 0.75s cubic-bezier(.19, 1, .22, 1) 0s;
+
+
+        .icon-arrow {
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            opacity: 0;
+
+            svg {
+                stroke: black;
+            }
+        }
+    }
+}
+
+.secondary-cursor {
+    width: 40px;
+    height: 40px;
+    mix-blend-mode: difference;
+
+    .cursor-border {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 1px solid var(--white-color);
+        position: relative;
+        transition: all 0.75s cubic-bezier(.19, 1, .22, 1) 0s;
+
+        .cursor-background {
+            background-color: rgb(231, 231, 231);
+            opacity: .3;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: all 0.75s cubic-bezier(.19, 1, .22, 1) 0s;
+            transform: scale(0);
+        }
+    }
+}
+
+.link {
+    .secondary-cursor {
+
+        .cursor-border {
+            border: 1px solid transparent;
+
+            .cursor-background {
+                transform: scale(1);
+            }
+        }
+    }
+}
+
+.arrow {
+
+    .main-cursor {
+        mix-blend-mode: initial;
+
+        .main-cursor-background {
+            transform: scale(1);
+
+            .icon-arrow {
+                display: flex;
+                opacity: 1;
+
+                svg {}
+            }
+        }
+    }
+
+    .secondary-cursor {
+        z-index: 10000;
+
+        .cursor-border {
+            animation: borderOut 0.75s 0s forwards;
+        }
+    }
+}
+
+.arrow-mix-blend-mode {
+    @extend .arrow;
+
+    .main-cursor {
+        mix-blend-mode: difference;
+    }
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes bgUp {
+    from {
+        background-color: transparent;
+    }
+
+    to {
+        background-color: black;
+    }
+}
+
+@keyframes bgDown {
+    from {
+        background-color: black;
+    }
+
+    to {
+        background-color: transparent;
+    }
+}
+
+
+@keyframes borderOut {
+    from {
+        border: 1px solid var(--white-color);
+    }
+
+    to {
+        border: 1px solid transparent;
+    }
+}
+
+@keyframes borderIn {
+    from {
+        border: 1px solid transparent;
+
+    }
+
+    to {
+        border: 1px solid var(--white-color);
+
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleDown {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(0);
+    }
+}
+
+@keyframes scaleBig {
+    from {
+        transform: scale(.1);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleLittle {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(.1);
+    }
+}
+
+
+@keyframes translateLeftDot {
+    from {
+        transform: translate(20px, -50%);
+    }
+
+    to {
+        transform: translate(0px, -50%);
+    }
+}
+
+@keyframes translateRightDot {
+    from {
+        transform: translate(-20px, -50%);
+    }
+
+    to {
+        transform: translate(0px, -50%);
+    }
+}

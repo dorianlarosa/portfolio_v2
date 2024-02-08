@@ -8,23 +8,33 @@ import { EffectComposer, Noise, SMAA } from "@react-three/postprocessing";
 const fixedHeight = window.innerHeight; // Exemple de hauteur fixe
 
 const FixedHeightCanvas = () => {
-  // Définissez la hauteur fixe que vous souhaitez pour votre canvas
+  // Initialisation des états pour la taille du canvas et la largeur précédente de la fenêtre
   const [size, setSize] = useState({
     width: window.innerWidth,
-    height: fixedHeight,
+    height: window.innerHeight, // Utilisation de la hauteur initiale de la fenêtre
   });
+  const [prevWindowWidth, setPrevWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const handleResize = () => {
-      // Ajustez seulement la largeur à la taille de la fenêtre, gardez la hauteur fixe
-      setSize({ width: window.innerWidth, height: fixedHeight });
+      const currentWidth = window.innerWidth;
+      // Vérifiez si la largeur de la fenêtre a changé
+      if (currentWidth !== prevWindowWidth) {
+        // Mise à jour de la largeur et de la hauteur si la largeur de la fenêtre a changé
+        setSize({ width: currentWidth, height: window.innerHeight });
+      } else {
+        // Optionnel: ajustez ici si vous souhaitez un comportement spécifique lorsque seule la hauteur change
+      }
+      // Mise à jour de la largeur précédente de la fenêtre
+      setPrevWindowWidth(currentWidth);
     };
 
     window.addEventListener('resize', handleResize);
 
-    // Nettoyez l'écouteur d'événement lorsque le composant se démonte
-    return () => window.removeEventListener('resize', handleResize);
-  }, [fixedHeight]); // Dépendances de l'effet
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [prevWindowWidth]); // Ajoutez prevWindowWidth dans le tableau des dépendances
 
   return (
     <Canvas
@@ -38,7 +48,7 @@ const FixedHeightCanvas = () => {
       }}
       style={{ width: size.width, height: size.height }}
       dpr={window.devicePixelRatio * 0.5}
-      antialias={true}
+      antialias={'false'}
     >
        
 

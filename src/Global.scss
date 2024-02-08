@@ -25,7 +25,14 @@
 
 
 html {
+    cursor: none;
+
+    * {
+        cursor: none !important;
+
+    }
 }
+
 // ========== Font face ==========
 
 @font-face {

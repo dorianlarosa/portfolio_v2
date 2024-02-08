@@ -33,7 +33,7 @@ export const BlobSphere = () => {
         let size = windowSize.width / 3000;
 
         // Appliquer un minimum et un maximum
-        const minSize = 0.3; // Définir la taille minimale
+        const minSize = 0.2; // Définir la taille minimale
         const maxSize = 0.4; // Définir la taille maximale
         size = Math.max(minSize, Math.min(size, maxSize));
 
@@ -43,10 +43,10 @@ export const BlobSphere = () => {
 
     // frame loop
     const vec3 = new THREE.Vector3();
-    useFrame(({ mouse, viewport }) => {
+    useFrame(({ pointer, viewport }) => {
         // mouse motion
-        const x = (mouse.x * viewport.width) / 2;
-        const y = (mouse.y * viewport.height) / 2;
+        const x = (pointer.x * viewport.width) / 2;
+        const y = (pointer.y * viewport.height) / 2;
         vec3.lerp(new THREE.Vector3(x, y, 1), 0.2);
 		if (parentRef.current instanceof THREE.Group) {
 			parentRef.current.lookAt(vec3);

@@ -1,39 +1,35 @@
-import React, { Component } from "react";
-import {
-  SvgFlower
-} from "..";
-
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { SvgFlower } from "..";
+import { useCustomCursor } from '../../hooks/useCustomCursor'; // Assurez-vous que le chemin d'import est correct
 import "./Footer.scss";
 
+const Footer = () => {
+  const { handleMouseEnter, handleMouseLeave } = useCustomCursor();
 
-class Footer extends Component {
+  return (
+    <>
+      <footer id="footer">
+        <div className="container">
+          <div className="content-footer">
 
-  render() {
-
-    return (
-      <>
-        <footer id="footer">
-          <div className="container">
-            <div className="content-footer">
-
-              <div className="title">
-                <SvgFlower />
-                <h2>Me contacter</h2>
-              </div>
-
-              <a className="mail" href="mailto:hello@dorianlarosa.fr">hello@dorianlarosa.fr</a>
+            <div className="title">
+              <SvgFlower />
+              <h2>Me contacter</h2>
             </div>
 
-            <div className="credits">
-              <p>Made with 🤍 from France</p>
-            </div>
+            <Link className="mail" to="mailto:hello@dorianlarosa.fr" onMouseEnter={handleMouseEnter('arrow-mix-blend-mode')} onMouseLeave={handleMouseLeave}>
+              hello@dorianlarosa.fr
+            </Link>
           </div>
 
-        </footer>
+          <div className="credits">
+            <p>Made with 🤍 from France</p>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+};
 
-      </>
-    );
-  }
-}
-
-export default Footer
+export default Footer;
