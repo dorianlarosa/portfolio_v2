@@ -40,7 +40,7 @@ const FixedHeightCanvas = () => {
     <Canvas
       id="container-blob"
       camera={{
-        position: [0, 0, 1.3],
+        position: [.8, .4, 1.3],
         fov: 50,
         aspect: size.width / size.height,
         near: 0.1,
@@ -49,13 +49,17 @@ const FixedHeightCanvas = () => {
       style={{ width: size.width, height: size.height }}
       dpr={window.devicePixelRatio * 0.5}
       antialias={'false'}
+      onCreated={({ camera }) => {
+        // Vous pouvez ajuster la position de la caméra ici en fonction de la position du blob
+      // camera.lookAt(new THREE.Vector3(blobX, blobY, blobZ));
+      }}
     >
        
 
        <BackgroundSphere />
         <BlobSphere />
         <EffectComposer >
-          <Noise opacity={.1} blendFunction={BlendFunction.SOFT_LIGHT} />
+          <Noise opacity={.15} blendFunction={BlendFunction.SOFT_LIGHT} />
         </EffectComposer>
     </Canvas>
   );

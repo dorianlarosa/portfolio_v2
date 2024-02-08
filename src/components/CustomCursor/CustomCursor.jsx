@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./CustomCursor.scss";
 import CustomCursorContext from "./context/CustomCursorContext";
 
@@ -8,6 +8,8 @@ const CustomCursor = () => {
 
     const secondaryCursor = React.useRef(null);
     const mainCursor = React.useRef(null);
+    const [blendMode, setBlendMode] = useState('difference'); // Ajouté pour gérer mix-blend-mode
+
     const positionRef = React.useRef({
         mouseX: 0,
         mouseY: 0,
@@ -17,6 +19,19 @@ const CustomCursor = () => {
         distanceY: 0,
         key: -1,
     });
+
+
+      // Écouter les changements de 'type' et ajuster mix-blend-mode avec un délai
+      React.useEffect(() => {
+        if (type !== "arrow") {
+            const timer = setTimeout(() => {
+                setBlendMode('difference');
+            }, 500); // Appliquer 'difference' après un délai de 0.5s
+            return () => clearTimeout(timer);
+        } else {
+            setBlendMode('initial'); // Ou tout autre valeur appropriée quand 'arrow' est le type
+        }
+    }, [type]);
 
     React.useEffect(() => {
         document.addEventListener("mousemove", (event) => {
@@ -81,8 +96,8 @@ const CustomCursor = () => {
         followMouse();
     }, []);
     return (
-        <div className={`cursor-wrapper ${type}`} ref={cursorWrapperRef}>
-            <div className="main-cursor " ref={mainCursor}>
+        <div className={`cursor-wrapper ${type}`} ref={cursorWrapperRef} >
+            <div className="main-cursor " ref={mainCursor} style={{ mixBlendMode: blendMode }}>
                 <div className="main-cursor-background">
                     <div className="icon-arrow">
                         <svg

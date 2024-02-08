@@ -64,21 +64,26 @@ const Home = () => {
   return (
     <>
       <section id="section-hero">
-        <h1>
-          <span className="name">
-            Dorian LA ROSA
-          </span>
-          <span>
-            Développeur
-          </span>
-          <span>
-            Front-End
-          </span>
-        </h1>
+        <div className="container">
+          <div className="content">
 
-        <div className="divider-gradient" />
-        <BadgeScroll></BadgeScroll>
+            <h1>
+              <span className="name">
+                Dorian LA ROSA
+              </span>
+              <span>
+                Développeur Web
+              </span>
+              <span>
+                & Web Designer
+              </span>
+            </h1>
+            <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
+          </div>
 
+          <div className="divider-gradient" />
+          <BadgeScroll></BadgeScroll>
+        </div>
       </section>
 
 

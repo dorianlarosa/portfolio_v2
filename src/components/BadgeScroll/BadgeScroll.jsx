@@ -16,18 +16,18 @@ class BadgeScroll extends Component {
             <div className="badge-scroll">
 
                 <ReactCurvedText
-                    width={130}
-                    height={130}
-                    cx={65}
-                    cy={65}
-                    rx={27.5}
-                    ry={27.5}
+                    width={80}
+                    height={80}
+                    cx={40}
+                    cy={40}
+                    rx={18}
+                    ry={18}
                     startOffset={null}
                     reversed={true}
-                    text="Scroll - Scroll - Scroll - "
+                    text="Scroll - Scroll -"
                     textProps={null}
                     textPathProps={null}
-                    tspanProps={{ "dy": "-25" }}
+                    tspanProps={{ "dy": "-12" }}
                     ellipseProps={null}
                     svgProps={null}
                 />

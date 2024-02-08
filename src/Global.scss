@@ -63,6 +63,13 @@ img {
     height: auto;
 }
 
+.disable-transitions {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
 // ========== Global ==========
 
 body {
@@ -79,10 +86,11 @@ h5,
 h6 {
     font-family: var(--font-title);
     font-weight: 400;
+    text-wrap: pretty;
 }
 
 p {
-
+    text-wrap: pretty;
     line-height: 1.8;
 
     @media (max-width: 991.98px) {
@@ -111,6 +119,7 @@ p {
 .container {
     padding-left: max(20px, 3vw);
     padding-right: max(20px, 3vw);
+    width: 100%;
     max-width: 1920px;
     margin-left: auto;
     margin-right: auto;

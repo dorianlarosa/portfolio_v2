@@ -1,10 +1,44 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useCustomCursor } from '../../hooks/useCustomCursor';
 import "./Header.scss";
 
 const Header = () => {
+    const [lastScrollY, setLastScrollY] = useState(0);
     const { handleMouseEnter, handleMouseLeave } = useCustomCursor();
+
+    const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > lastScrollY;
+
+        // Sélectionnez l'élément que vous souhaitez modifier
+        const headerElement = document.getElementById('header');
+
+        if (headerElement) {
+            if (scrollingDown) {
+                // Ajouter une classe si l'utilisateur fait défiler vers le bas
+                headerElement.classList.add('scrolling-down');
+                headerElement.classList.remove('scrolling-up');
+            } else {
+                // Ajouter une classe différente si l'utilisateur fait défiler vers le haut
+                headerElement.classList.remove('scrolling-down');
+                headerElement.classList.add('scrolling-up');
+            }
+        }
+
+        // Mise à jour de la dernière position de défilement
+        setLastScrollY(currentScrollY);
+    };
+
+    useEffect(() => {
+        // Ajouter le gestionnaire d'événements au montage
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        // Nettoyer le gestionnaire d'événements au démontage
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [lastScrollY]);
 
     return (
         <header id="header">

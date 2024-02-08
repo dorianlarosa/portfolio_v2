@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Router, Routes, Route, useLocation } from "react-router-dom";
 import { Header, Footer, PageTransition, ScrollToTop } from './components';
@@ -19,6 +19,31 @@ import CustomCursorManager from "./components/CustomCursor/context/manager";
 
 function App() {
   const location = useLocation();
+
+  useEffect(() => {
+    window.addEventListener('resize', disableTransitionsOnResize);
+
+    return () => {
+      window.removeEventListener('resize', disableTransitionsOnResize);
+    };
+  }, []);
+
+  let resizeTimer;
+
+  function disableTransitionsOnResize() {
+    // Ajoute la classe pour désactiver les transitions
+    document.body.classList.add('disable-transitions');
+
+    // Efface le timer précédent pour s'assurer qu'il ne s'exécute qu'une fois après la fin du redimensionnement
+    clearTimeout(resizeTimer);
+
+    // Réactive les transitions après un court délai une fois le redimensionnement terminé
+    resizeTimer = setTimeout(() => {
+      document.body.classList.remove('disable-transitions');
+    }, 100); // 100 ms est un délai couramment utilisé, mais vous pouvez l'ajuster selon vos besoins
+  }
+
+  
 
   return (
     <CustomCursorManager>

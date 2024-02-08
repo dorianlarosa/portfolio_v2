@@ -37,7 +37,7 @@ export const BlobSphere = () => {
         const maxSize = 0.4; // Définir la taille maximale
         size = Math.max(minSize, Math.min(size, maxSize));
 
-        return new THREE.IcosahedronGeometry(size, 20);
+        return new THREE.IcosahedronGeometry(.4, 20);
     }, [windowSize.width]);
 
 
@@ -64,7 +64,7 @@ export const BlobSphere = () => {
 
 // ========================================================
 const InnerGeometry = (props) => {
-    const { geometry, scale = 1, position = [0, 0, 0] } = props;
+    const { geometry, scale = 2, position = [.9, .4, 0] } = props;
 
     const meshRef = useRef<THREE.Mesh>(null);
 

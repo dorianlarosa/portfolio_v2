@@ -3,20 +3,22 @@
   bottom: 3vw;
   left: 3vw;
 
+  @media (max-width: 767.98px) {
+    display: none;
+  }
+
   .badge-scroll {
     animation: rotatingFlower 15s linear infinite;
-    width: 130px;
-    height: 130px;
+    width: 80px;
+    height: 80px;
 
-    @media (max-width: 767.98px) {
-      display: none;
-    }
+   
 
     text {
       fill: white;
       text-transform: uppercase;
       font-size: .75rem;
-      font-weight: 300;
+      font-weight: 200;
     }
 
     .svg-flower {
@@ -24,7 +26,7 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: 35px;
+      width: 20px;
       height: auto;
     }
   }
