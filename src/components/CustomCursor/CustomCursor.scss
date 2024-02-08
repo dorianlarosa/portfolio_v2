@@ -4,7 +4,7 @@
 
 .main-cursor,
 .secondary-cursor {
-    z-index: 100000;
+  
 
     pointer-events: none;
     // overflow: hidden;
@@ -15,8 +15,9 @@
 .main-cursor {
     transition: opacity 0.75s cubic-bezier(.19, 1, .22, 1);
     animation: fadeIn 0.75s cubic-bezier(.19, 1, .22, 1) 0s;
-
+    z-index: 100000;
     mix-blend-mode: difference;
+    
 
     .main-cursor-background {
         width: 80px;
@@ -46,6 +47,7 @@
     width: 40px;
     height: 40px;
     mix-blend-mode: difference;
+    z-index: 10000;
 
     .cursor-border {
         width: 100%;
@@ -89,7 +91,6 @@
             transform: scale(1);
 
             .icon-arrow {
-                display: flex;
                 opacity: 1;
 
                 svg {}
@@ -98,10 +99,9 @@
     }
 
     .secondary-cursor {
-        z-index: 10000;
 
         .cursor-border {
-            animation: borderOut 0.75s 0s forwards;
+            border: 1px solid transparent;
         }
     }
 }
