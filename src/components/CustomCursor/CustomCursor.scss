@@ -1,5 +1,4 @@
 .cursor-wrapper {
-    transition: opacity .75s cubic-bezier(.19, 1, .22, 1);
     display: none;
 
     @media not all and (pointer: coarse) {
@@ -9,20 +8,19 @@
 
 .main-cursor,
 .secondary-cursor {
-  
 
+    transition: opacity .75s cubic-bezier(.19, 1, .22, 1);
     pointer-events: none;
-    // overflow: hidden;
     transform: translate3d(0, 0, 0);
     position: fixed;
 }
 
 .main-cursor {
-    transition: opacity 0.75s cubic-bezier(.19, 1, .22, 1);
-    animation: fadeIn 0.75s cubic-bezier(.19, 1, .22, 1) 0s;
+    // transition: opacity 0.75s cubic-bezier(.19, 1, .22, 1);
+    // animation: fadeIn 0.75s cubic-bezier(.19, 1, .22, 1) 0s;
     z-index: 100000;
     mix-blend-mode: difference;
-    
+
 
     .main-cursor-background {
         width: 80px;
@@ -67,12 +65,44 @@
 
         .cursor-background {
             background-color: rgb(231, 231, 231);
-            opacity: .3; 
+            opacity: .3;
             min-width: 50px;
             height: 50px;
             border-radius: 50%;
             transition: all 0.75s cubic-bezier(.19, 1, .22, 1) 0s;
             transform: scale(0);
+        }
+    }
+}
+
+.hidden {
+
+    .main-cursor,
+    .secondary-cursor {
+        opacity: 0;
+    }
+}
+
+.pressed {
+    .secondary-cursor {
+
+        .cursor-border {
+            transform: scale(0.7);
+            transition: all .1s;
+
+        }
+    }
+
+    &.arrow {
+
+        .main-cursor {
+            mix-blend-mode: initial;
+
+            .main-cursor-background {
+                transform: scale(.8);
+                transition: all .1s;
+
+            }
         }
     }
 }

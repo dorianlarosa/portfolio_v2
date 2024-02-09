@@ -1,11 +1,13 @@
 .wrapper-scroll-info {
   position: absolute;
   bottom: 3vw;
-  left: 3vw;
+  right: 3vw;
 
-  @media (max-width: 767.98px) {
-    display: none;
-  }
+  @media (max-width: 575.98px) {
+    right: 50%;
+    bottom: 10vw;
+    transform: translateX(50%);
+}
 
   .badge-scroll {
     animation: rotatingFlower 15s linear infinite;
@@ -30,4 +32,7 @@
       height: auto;
     }
   }
+
+ 
+
 }

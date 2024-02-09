@@ -1,14 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import "./CustomCursor.scss";
 import CustomCursorContext from "./context/CustomCursorContext";
 
 const CustomCursor = () => {
-    const { type } = useContext(CustomCursorContext);
+    const { type, setType } = useContext(CustomCursorContext);
     const cursorWrapperRef = React.useRef(null);
 
     const secondaryCursor = React.useRef(null);
     const mainCursor = React.useRef(null);
     const [blendMode, setBlendMode] = useState('difference'); // Ajouté pour gérer mix-blend-mode
+    const [isPressed, setIsPressed] = useState(false); // État pour gérer si le bouton de la souris est appuyé
+
 
     const positionRef = React.useRef({
         mouseX: 0,
@@ -20,9 +22,42 @@ const CustomCursor = () => {
         key: -1,
     });
 
+    
 
-      // Écouter les changements de 'type' et ajuster mix-blend-mode avec un délai
-      React.useEffect(() => {
+    useEffect(() => {
+        
+        const handleMouseDown = () => {
+            setIsPressed(true); // Mettre à jour l'état quand le bouton de la souris est appuyé
+        };
+
+        const handleMouseUp = () => {
+            if (type === 'arrow') {
+                setType('default');
+            }
+            setIsPressed(false); // Réinitialiser l'état quand le bouton de la souris est relâché
+            
+        };
+
+        document.addEventListener("mousedown", handleMouseDown);
+        document.addEventListener("mouseup", handleMouseUp);
+
+        return () => {
+            document.removeEventListener("mousedown", handleMouseDown);
+            document.removeEventListener("mouseup", handleMouseUp);
+        };
+    }, [type, setType]);
+
+    // Appliquer l'effet de scale basé sur l'état isPressed
+    useEffect(() => {
+        if (isPressed) {
+            cursorWrapperRef.current.classList.add("pressed");
+        } else {
+            cursorWrapperRef.current.classList.remove("pressed");
+        }
+    }, [isPressed]);
+
+    // Écouter les changements de 'type' et ajuster mix-blend-mode avec un délai
+    React.useEffect(() => {
         if (type !== "arrow") {
             const timer = setTimeout(() => {
                 setBlendMode('difference');
@@ -32,6 +67,7 @@ const CustomCursor = () => {
             setBlendMode('initial'); // Ou tout autre valeur appropriée quand 'arrow' est le type
         }
     }, [type]);
+
 
     React.useEffect(() => {
         document.addEventListener("mousemove", (event) => {
@@ -50,8 +86,8 @@ const CustomCursor = () => {
         });
 
         // Ajouter des écouteurs pour mouseenter et mouseleave
-        const showCursor = () => cursorWrapperRef.current.style.opacity = 1;
-        const hideCursor = () => cursorWrapperRef.current.style.opacity = 0;
+        const showCursor = () => cursorWrapperRef.current.classList.remove("hidden");
+        const hideCursor = () => cursorWrapperRef.current.classList.add("hidden");
 
         document.addEventListener("mouseenter", showCursor);
         document.addEventListener("mouseleave", hideCursor);

@@ -10,6 +10,8 @@ export type CustomCursorType = {
   setType: (type: CursorLookType) => void;
 };
 
+
+
 const CustomCursorContext = createContext<CustomCursorType>({
   type: "default",
   setType: () => {},

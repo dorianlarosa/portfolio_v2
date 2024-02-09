@@ -7,6 +7,9 @@ import {
 
 import "./ProjectPage.scss";
 
+import data from './../../api/data.json';
+
+
 
 class ProjectPage extends Component {
   constructor(props) {
@@ -21,63 +24,100 @@ class ProjectPage extends Component {
 
     const { slug } = this.props.params;
 
+    // Recherche du projet en fonction du slug
+    const project = data.projects.find(project => project.slug === slug);
 
-    // Imaginons que vous fassiez une requête à une API pour récupérer le projet
-    fetch(`http://localhost:1337/api/projets?filters%5Bslug%5D%5B%24eq%5D=${slug}&populate[0]=image&populate[1]=tags&populate[2]=gallerie`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.data.length > 0) {
-          this.setState({ project: data.data[0].attributes, projectFound: true });
-        } else {
-          this.setState({ projectFound: false });
-        }
-      })
-      .catch(error => {
-        console.error('Erreur de fetch:', error);
-        this.setState({ projectFound: false });
-      });
+    // Mettre à jour l'état avec le résultat de la recherche
+    this.setState({ projectFound: !!project, project });
+
+    console.log(project);
   }
 
   render() {
     const { projectFound, project } = this.state;
 
     if (!projectFound) {
-      // Affichez le contenu "Not Found" sans changer l'URL
       return <NotFound />;
     }
 
     // Affichez le projet si trouvé
     return (
       <>
-      <ScrollToTop />
+        <ScrollToTop />
+
         {project ? (
           <>
-            <section id="section-hero-project" className="container">
-              <div className="left">
-                <h1>{project.nom}</h1>
-                <ListTag tags={project.tags.data}></ListTag>
-                <p>{project.description}</p>
-                <Button link={project.url}>Voir le site web</Button>
+
+            {/* ========== Section Hero ========== */}
+
+            <section id="section-hero-project" >
+
+              <div className="overlay" style={{ backgroundImage: `url(${project.thumbnail})` }}>
+
               </div>
 
 
-              <div className="right">
-                <img src={"http://localhost:1337" + project.image.data.attributes.url} alt="" />
+              <div className="container content">
+
+                <div className="info-project">
+                  <h1>{project.name}</h1>
+                  <p className="description">{project.description}</p>
+                  <Button link={project.url}>Voir le site web</Button>
+
+
+                  <div className="list-info">
+
+                    <div className="info">
+                      <p className="name-info">Role</p>
+                      <p className="data-info">
+
+                        {project.tags}
+                      </p>
+                    </div>
+                    <div className="info">
+                      <p className="name-info">Technologies</p>
+                      <p className="data-info">{project.technos}</p>
+                    </div>
+
+                    <div className="info">
+                      <p className="name-info">Date</p>
+                      <p className="data-info">{project.year}</p>
+                    </div>
+
+
+                  </div>
+
+
+
+
+                </div>
+                <div className="divider-gradient" />
+
+                <BadgeScroll></BadgeScroll>
+
               </div>
 
-              <BadgeScroll></BadgeScroll>
             </section>
 
-            <section id="list-images" className="section container">
+            {/* ========== Section list images ========== */}
 
-              {project.gallerie.data.map((image) => (
-                <img key={image.id} src={"http://localhost:1337" + image.attributes.url} alt="" />
-              ))}
+            <section id="section-list-images" className="section ">
+
+              <div className="container">
+                <div className="list-images">
+
+                  {project.gallerie.map((image) => (
+                    <img src={image.url} alt="" />
+                  ))}
+                </div>
+              </div>
+
             </section>
           </>
         ) : (
           <div>Chargement...</div>
-        )}
+        )
+        }
         <PageTransition />
 
       </>

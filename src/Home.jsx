@@ -12,39 +12,12 @@ import imageConstruction2 from './assets/images/construction-2.jpg';
 import imageConstruction3 from './assets/images/construction-3.jpg';
 import bannerHome from './assets/images/banner-home.jpg';
 
+import data from './api/data.json';
+
 const Home = () => {
-  const [projets, setProjets] = useState([]);
-  const [services, setServices] = useState([]);
   const [openAccordeonId, setOpenAccordeonId] = useState(null);
   const { handleMouseEnter, handleMouseLeave } = useCustomCursor();
   const accordeonRefs = useRef({});
-
-
-  useEffect(() => {
-    // Fonctions pour fetch les projets et les services
-    const fetchProjets = async () => {
-      try {
-        const response = await fetch('http://localhost:1337/api/projets?fields[0]=nom&fields[1]=description&fields[2]=slug&populate[0]=image&populate[1]=tags');
-        const data = await response.json();
-        setProjets(data.data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des projets:", error);
-      }
-    };
-
-    const fetchServices = async () => {
-      try {
-        const response = await fetch('http://localhost:1337/api/services?fields[0]=nom&fields[1]=description&fields&populate[0]=tags');
-        const data = await response.json();
-        setServices(data.data);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des services:", error);
-      }
-    };
-
-    fetchProjets();
-    fetchServices();
-  }, []);
 
   const togglePanel = (id) => {
     console.log("Current ID:", id);
@@ -63,8 +36,11 @@ const Home = () => {
 
   return (
     <>
+
+      {/* ========== Section Hero ========== */}
       <section id="section-hero">
         <div className="container">
+
           <div className="content">
 
             <h1>
@@ -79,18 +55,20 @@ const Home = () => {
               </span>
             </h1>
             <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
+
           </div>
 
           <div className="divider-gradient" />
           <BadgeScroll></BadgeScroll>
+
         </div>
       </section>
 
+      {/* ========== Section Ma Vision ========== */}
 
       <Section title="Ma vision" id="about">
-
-
         <div className="row" >
+
           <div className="left">
             <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!</p>
@@ -99,61 +77,45 @@ const Home = () => {
 
           <div className="right">
             <Parallax speed={2} className="image image-1">
-
-              <img
-                src={imageConstruction1}
-                alt=""
-              />
-
+              <img src={imageConstruction1} alt="" />
             </Parallax>
 
             <Parallax speed={4} className="image image-2">
-              <img
-                src={imageConstruction2}
-                alt=""
-              />
+              <img src={imageConstruction2} alt="" />
             </Parallax>
 
             <Parallax speed={6} className="image image-3">
-              <img
-                src={imageConstruction3}
-                alt=""
-              />
+              <img src={imageConstruction3} alt="" />
             </Parallax>
 
           </div>
+
         </div>
-
-
       </Section >
 
+      {/* ========== Section Réalisation ========== */}
+
       {/* <Section title="Réalisation" id="projects">
-
-          <div className="list-projects">
-            {projets.map((projet) => (
-              <Parallax key={"projet" + projet.id} speed={projectsParallax[projet.id]} className={`project project-${projet.id}`}>
-                <Link to={`projets/${projet.attributes.slug}`} className="link-project" >
-                  <WaveEffectImage imageUrl={"http://localhost:1337" + projet.attributes.image.data.attributes.url} />
-                  <h3 className="name">{projet.attributes.nom}</h3>
-
-                </Link>
-              </Parallax>
-
-            ))}
-          </div>
-
-        </Section> */}
-
-      <Section title="Réalisation" id="projects">
-
         <div className="list-projects">
-          {projets.map((projet) => (
-            <Parallax key={"projet" + projet.id} speed={projectsParallax[projet.id]} className={`project project-${projet.id}`}>
-              <Link to={`projets/${projet.attributes.slug}`} className="link-project" onMouseEnter={handleMouseEnter("arrow")} onMouseLeave={handleMouseLeave} >
-                <div className="container-image">
 
+          {projets.map((projet) => (
+
+            <Parallax
+              key={"projet" + projet.id}
+              speed={projectsParallax[projet.attributes.order]}
+              className={`project project-${projet.attributes.order}`}
+            >
+
+              <Link to={`projets/${projet.attributes.slug}`}
+                className="link-project"
+                onMouseEnter={handleMouseEnter("arrow")}
+                onMouseLeave={handleMouseLeave}
+              >
+
+                <div className="container-image">
                   <img src={"http://localhost:1337" + projet.attributes.image.data.attributes.url} />
                 </div>
+
                 <h3 className="name">{projet.attributes.nom}</h3>
                 <p className="tags">
                   {projet.attributes.tags.data.map((tag) => (
@@ -162,41 +124,80 @@ const Home = () => {
                     </span>
                   ))}
                 </p>
+
               </Link>
+
             </Parallax>
 
           ))}
-        </div>
 
+        </div>
+      </Section> */}
+
+      <Section title="Réalisation" id="projects">
+        <div className="list-projects">
+
+          {data.projects.map((project) => (
+
+            <Parallax
+              key={"project" + project.id}
+              speed={projectsParallax[project.id]}
+              className={`project project-${project.id}`}
+            >
+
+              <Link to={`projets/${project.slug}`}
+                className="link-project"
+                onMouseEnter={handleMouseEnter("arrow")}
+                onMouseLeave={handleMouseLeave}
+              >
+
+                <div className="container-image">
+                  <img src={project.thumbnail} />
+                </div>
+
+                <h3 className="name">{project.name}</h3>
+                <p className="tags">
+                  {project.tags}
+                </p>
+
+              </Link>
+
+            </Parallax>
+
+          ))}
+
+        </div>
       </Section>
 
-      <Section title="Services" id="services-section">
+      {/* ========== Section Services ========== */}
+
+      {/* <Section title="Services" id="services-section">
+        <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
+
         <div className="list-services">
+
           {services.map(service => (
-            <div key={service.id} className="service-item">
+
+            <div
+              key={service.id}
+              className={`service-item ${openAccordeonId === service.id ? 'open' : 'closed'}`}
+            >
+
               <div className="name"
                 onClick={() => togglePanel(service.id)}
                 onMouseEnter={handleMouseEnter("arrow-mix-blend-mode")}
                 onMouseLeave={handleMouseLeave}>
+
                 {service.attributes.nom}
-                {
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-plus"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="M12 5v14" />
-                  </svg>}
+
+                <div className='icon'>
+                  <span></span>
+                  <span></span>
+                </div>
+
               </div>
-              <div className={`panel ${openAccordeonId === service.id ? 'open' : 'closed'}`}
+
+              <div className="panel"
                 ref={el => accordeonRefs.current[service.id] = el}
                 style={{
                   maxHeight: openAccordeonId === service.id ? `${accordeonRefs.current[service.id]?.scrollHeight}px` : "0"
@@ -207,14 +208,67 @@ const Home = () => {
                   <ListTag tags={service.attributes.tags.data}></ListTag>
                   <Button>Prendre contact</Button>
                 </div>
+
               </div>
+
             </div>
           ))}
+
+        </div>
+      </Section> */}
+
+      <Section title="Services" id="services-section">
+        <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
+
+        <div className="list-services">
+
+          {data.services.map(service => (
+
+            <div
+              key={service.id}
+              className={`service-item ${openAccordeonId === service.id ? 'open' : 'closed'}`}
+            >
+
+              <div className="name"
+                onClick={() => togglePanel(service.id)}
+                onMouseEnter={handleMouseEnter("arrow-mix-blend-mode")}
+                onMouseLeave={handleMouseLeave}>
+
+                {service.name}
+
+                <div className='icon'>
+                  <span></span>
+                  <span></span>
+                </div>
+
+              </div>
+
+              <div className="panel"
+                ref={el => accordeonRefs.current[service.id] = el}
+                style={{
+                  maxHeight: openAccordeonId === service.id ? `${accordeonRefs.current[service.id]?.scrollHeight}px` : "0"
+                }}
+              >
+                <div className="content-panel">
+                  <p className="description">{service.description}</p>
+                  <ListTag tags={service.tags}></ListTag>
+                  <Button>Prendre contact</Button>
+                </div>
+
+              </div>
+
+            </div>
+          ))}
+
         </div>
       </Section>
+
+
+
+      {/* ========== Banner Image ========== */}
+
       <div id="banner-home">
         <ParallaxBanner
-
           layers={[
             {
               image: bannerHome,
@@ -224,6 +278,8 @@ const Home = () => {
           style={{ aspectRatio: '2 / 1' }}
         />
       </div>
+
+      {/* ========== Page Transition Overlay ========== */}
 
       <PageTransition />
 

@@ -1,0 +1,236 @@
+{
+    "projects": [
+        {
+            "id": 1,
+            "name": "Sandrine F Bien-être",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!",
+            "url": "https://sandrinef-bien-etre.fr/",
+            "slug": "sandrinef-bien-etre",
+            "technos": "WordPress, ACF, JavaScript, Kalendes",
+            "tags": "Branding, Chartre graphique, Identité de marque, WebDesign, Création de thème WordPress",
+            "background": "",
+            "year": "2024",
+            "image": "",
+            "thumbnail" : "/images-projects/sandrinef-bien-etre/thumbnail.jpg",
+            "gallerie": [
+                {
+                    "url": "/images-projects/sandrinef-bien-etre/mockup_website.gif"
+                },
+                {
+                    "url": "/images-projects/sandrinef-bien-etre/mockup_website-1.jpg"
+                },
+                {
+                    "url": "/images-projects/sandrinef-bien-etre/mockup_website-2.jpg"
+                },
+                {
+                    "url": "/images-projects/sandrinef-bien-etre/mockup_website-7.jpg"
+                },
+                {
+                    "url": "/images-projects/sandrinef-bien-etre/mockup_website-4.jpg"
+                },
+                {
+                    "url": "/images-projects/sandrinef-bien-etre/mockup_website-6.jpg"
+                },
+                {
+                    "url": "/images-projects/sandrinef-bien-etre/mockup_website-3.jpg"
+                },
+                {
+                    "url": "/images-projects/sandrinef-bien-etre/mockup_website-5.jpg"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Vous C'est Nous",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!",
+            "url": "https://vouscestnous.com/",
+            "slug": "vous-cest-nous",
+            "technos": "WordPress, ACF, JavaScript",
+            "tags": "Branding, Chartre graphique, Identité de marque, WebDesign, Création de thème WordPress",
+            "background": "",
+            "year": "2023",
+            "image": "",
+            "thumbnail" : "/images-projects/vous-cest-nous/thumbnail.jpg",
+            "gallerie": [
+                {
+                    "url": "/images-projects/vous-cest-nous/thumbnail.jpg"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "EGS Sécurité",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!",
+            "url": "https://egs-securite.fr",
+            "slug": "egs-securite",
+            "technos": "WordPress, ACF, JavaScript, Kalendes",
+            "tags": "Branding, Chartre graphique, Identité de marque, WebDesign, Création de thème WordPress",
+            "background": "",
+            "year": "2023",
+            "image": "",
+            "thumbnail" : "/images-projects/egs-securite/thumbnail.jpg",
+            "gallerie": [
+                {
+                    "url": "/images-projects/egs-securite/mockup_website.jpg"
+                },
+                {
+                    "url": "/images-projects/egs-securite/mockup_website5.jpg"
+                },
+                {
+                    "url": "/images-projects/egs-securite/mockup_website7.jpg"
+                },
+                {
+                    "url": "/images-projects/egs-securite/mockup_website1.jpg"
+                },
+                {
+                    "url": "/images-projects/egs-securite/mockup_website6.jpg"
+                },
+                {
+                    "url": "/images-projects/egs-securite/mockup_website2.jpg"
+                },
+                {
+                    "url": "/images-projects/egs-securite/mockup_website4.jpg"
+                },
+                {
+                    "url": "/images-projects/egs-securite/mockup_website8.jpg"
+                },
+                {
+                    "url": "/images-projects/egs-securite/mockup_website9.jpg"
+                },
+                {
+                    "url": "/images-projects/egs-securite/mockup_website3.jpg"
+                },
+                {
+                    "url": "/images-projects/egs-securite/mockup_website10.jpg"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Parizoo",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!",
+            "url": "https://parizoo.com/",
+            "slug": "parizoo",
+            "technos": "WordPress, ACF, JavaScript, Kalendes",
+            "tags": "Branding, Chartre graphique, Identité de marque, WebDesign, Création de thème WordPress",
+            "background": "",
+            "year": "2023",
+            "image": "",
+            "thumbnail" : "/images-projects/parizoo/thumbnail.jpg",
+            "gallerie": [
+                {
+                    "url": "/images-projects/parizoo/mockup_website2.jpg"
+                },
+                {
+                    "url": "/images-projects/parizoo/mockup_website.jpg"
+                },
+                {
+                    "url": "/images-projects/parizoo/mockup_website6.jpg"
+                },
+                {
+                    "url": "/images-projects/parizoo/mockup_website7.jpg"
+                },
+                {
+                    "url": "/images-projects/parizoo/mockup_website9.jpg"
+                },
+                {
+                    "url": "/images-projects/parizoo/mockup_website8.jpg"
+                },
+                {
+                    "url": "/images-projects/parizoo/mockup_website10.jpg"
+                },
+                {
+                    "url": "/images-projects/parizoo/mockup_website11.jpg"
+                }
+                ,
+                {
+                    "url": "/images-projects/parizoo/mockup_website5.jpg"
+                },
+                {
+                    "url": "/images-projects/parizoo/mockup_website4.jpg"
+                },
+                {
+                    "url": "/images-projects/parizoo/mockup_website3.jpg"
+                }
+            ]
+        }
+    ],
+    "services": [
+        {
+            "id": 1,
+            "name": "Branding",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!",
+            "tags": [
+                {
+                    "name": "Chartre Graphique"
+                },
+                {
+                    "name": "Création de logo"
+                },
+                {
+                    "name": "Développement de thème WordPress"
+                },
+                {
+                    "name": "Identité de marque"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Conception de design",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!",
+            "tags": [
+                {
+                    "name": "Chartre Graphique"
+                },
+                {
+                    "name": "Création de logo"
+                },
+                {
+                    "name": "Développement de thème WordPress"
+                },
+                {
+                    "name": "Identité de marque"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Développement de site web",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!",
+            "tags": [
+                {
+                    "name": "Chartre Graphique"
+                },
+                {
+                    "name": "Création de logo"
+                },
+                {
+                    "name": "Développement de thème WordPress"
+                },
+                {
+                    "name": "Identité de marque"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Maintenance",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!",
+            "tags": [
+                {
+                    "name": "Chartre Graphique"
+                },
+                {
+                    "name": "Création de logo"
+                },
+                {
+                    "name": "Développement de thème WordPress"
+                },
+                {
+                    "name": "Identité de marque"
+                }
+            ]
+        }
+    ]
+}
