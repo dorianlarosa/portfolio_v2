@@ -14,10 +14,28 @@ import bannerHome from './assets/images/banner-home.jpg';
 
 import data from './api/data.json';
 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const Home = () => {
   const [openAccordeonId, setOpenAccordeonId] = useState(null);
   const { handleMouseEnter, handleMouseLeave } = useCustomCursor();
   const accordeonRefs = useRef({});
+  const refImage1 = useRef(null);
+  const refImage2 = useRef(null);
+  const refBannerImage = useRef(null);
+
+  const refImage3 = useRef(null);
+  const projectRefs = useRef({});
+
+  const parallaxConfig = {
+    1: 0, // ID du projet: intensité du parallaxe
+    2: 10,
+    3: 15,
+    4: 5
+  };
 
   const togglePanel = (id) => {
     console.log("Current ID:", id);
@@ -25,13 +43,86 @@ const Home = () => {
     setOpenAccordeonId(openAccordeonId === id ? null : id);
   };
 
-  // Define parallax project
-  const projectsParallax = {
-    1: -2,
-    2: 2,
-    3: 0,
-    4: -4
-  };
+  useEffect(() => {
+    gsap.fromTo(refImage1.current,
+      { y: '10%' },
+      {
+        y: '-10%',
+        ease: "none",
+        scrollTrigger: {
+          trigger: refImage1.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        }
+      }
+    );
+
+    gsap.fromTo(refImage2.current,
+      { y: '20%' },
+      {
+        y: '-20%',
+        ease: "none",
+        scrollTrigger: {
+          trigger: refImage2.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        }
+      }
+    );
+
+    gsap.fromTo(refImage3.current,
+      { y: '30%' },
+      {
+        y: '-30%',
+        ease: "none",
+        scrollTrigger: {
+          trigger: refImage3.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        }
+      }
+    );
+
+    data.projects.forEach(project => {
+      const ref = projectRefs.current[project.id].current;
+      const parallaxIntensity = parallaxConfig[project.id] || 0; // Utilisez une valeur par défaut si non spécifiée
+
+      if (ref) {
+        gsap.fromTo(ref,
+          { y: `-${parallaxIntensity}%` },
+          {
+            y: `${parallaxIntensity}%`, // Intensité de parallaxe basée sur la configuration
+            ease: "none",
+            scrollTrigger: {
+              trigger: ref,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            }
+          }
+        );
+      }
+    });
+
+    gsap.fromTo(refBannerImage.current,
+      {
+        y: "-15%", // Commence avec un petit décalage vers le haut pour l'effet parallaxe
+      },
+      {
+        y: "15%", // Déplace l'image vers le bas au fur et à mesure que l'utilisateur fait défiler la page
+        ease: "none",
+        scrollTrigger: {
+          trigger: refBannerImage.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true, // Lie l'animation au défilement
+        }
+      }
+    );
+  }, []);
 
 
   return (
@@ -76,17 +167,11 @@ const Home = () => {
           </div>
 
           <div className="right">
-            <Parallax speed={2} className="image image-1">
-              <img src={imageConstruction1} alt="" />
-            </Parallax>
+            <img src={imageConstruction1} ref={refImage1} className='image image-1' alt="" />
 
-            <Parallax speed={4} className="image image-2">
-              <img src={imageConstruction2} alt="" />
-            </Parallax>
+            <img src={imageConstruction2} ref={refImage2} className='image image-2' alt="" />
 
-            <Parallax speed={6} className="image image-3">
-              <img src={imageConstruction3} alt="" />
-            </Parallax>
+            <img src={imageConstruction3} ref={refImage3} className='image image-3' alt="" />
 
           </div>
 
@@ -95,54 +180,15 @@ const Home = () => {
 
       {/* ========== Section Réalisation ========== */}
 
-      {/* <Section title="Réalisation" id="projects">
-        <div className="list-projects">
-
-          {projets.map((projet) => (
-
-            <Parallax
-              key={"projet" + projet.id}
-              speed={projectsParallax[projet.attributes.order]}
-              className={`project project-${projet.attributes.order}`}
-            >
-
-              <Link to={`projets/${projet.attributes.slug}`}
-                className="link-project"
-                onMouseEnter={handleMouseEnter("arrow")}
-                onMouseLeave={handleMouseLeave}
-              >
-
-                <div className="container-image">
-                  <img src={"http://localhost:1337" + projet.attributes.image.data.attributes.url} />
-                </div>
-
-                <h3 className="name">{projet.attributes.nom}</h3>
-                <p className="tags">
-                  {projet.attributes.tags.data.map((tag) => (
-                    <span>
-                      {tag.attributes.nom + ", "}
-                    </span>
-                  ))}
-                </p>
-
-              </Link>
-
-            </Parallax>
-
-          ))}
-
-        </div>
-      </Section> */}
-
       <Section title="Réalisation" id="projects">
         <div className="list-projects">
 
           {data.projects.map((project) => (
 
-            <Parallax
-              key={"project" + project.id}
-              speed={projectsParallax[project.id]}
+
+            <div key={"project" + project.id}
               className={`project project-${project.id}`}
+              ref={el => projectRefs.current[project.id] = { current: el }}
             >
 
               <Link to={`projets/${project.slug}`}
@@ -161,61 +207,16 @@ const Home = () => {
                 </p>
 
               </Link>
+            </div>
 
-            </Parallax>
+
 
           ))}
 
         </div>
-      </Section>
+      </Section >
 
       {/* ========== Section Services ========== */}
-
-      {/* <Section title="Services" id="services-section">
-        <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
-
-        <div className="list-services">
-
-          {services.map(service => (
-
-            <div
-              key={service.id}
-              className={`service-item ${openAccordeonId === service.id ? 'open' : 'closed'}`}
-            >
-
-              <div className="name"
-                onClick={() => togglePanel(service.id)}
-                onMouseEnter={handleMouseEnter("arrow-mix-blend-mode")}
-                onMouseLeave={handleMouseLeave}>
-
-                {service.attributes.nom}
-
-                <div className='icon'>
-                  <span></span>
-                  <span></span>
-                </div>
-
-              </div>
-
-              <div className="panel"
-                ref={el => accordeonRefs.current[service.id] = el}
-                style={{
-                  maxHeight: openAccordeonId === service.id ? `${accordeonRefs.current[service.id]?.scrollHeight}px` : "0"
-                }}
-              >
-                <div className="content-panel">
-                  <p className="description">{service.attributes.description}</p>
-                  <ListTag tags={service.attributes.tags.data}></ListTag>
-                  <Button>Prendre contact</Button>
-                </div>
-
-              </div>
-
-            </div>
-          ))}
-
-        </div>
-      </Section> */}
 
       <Section title="Services" id="services-section">
         <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
@@ -267,21 +268,15 @@ const Home = () => {
 
       {/* ========== Banner Image ========== */}
 
-      <div id="banner-home">
-        <ParallaxBanner
-          layers={[
-            {
-              image: bannerHome,
-              speed: -10,
-            },
-          ]}
-          style={{ aspectRatio: '2 / 1' }}
-        />
+      <div id="banner-home" >
+        <div className='parallax-container'>
+          <img ref={refBannerImage} src={bannerHome} className="parallax-image" alt="Parallax Image" />
+        </div>
       </div>
 
       {/* ========== Page Transition Overlay ========== */}
-
       <PageTransition />
+
 
     </>
   );

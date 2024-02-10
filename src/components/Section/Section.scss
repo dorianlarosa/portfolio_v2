@@ -39,14 +39,13 @@
     .wrapper-h2 {
         display: flex;
         justify-content: center;
-        will-change: transform;
-
+        will-change: transform
     }
 
     h2 {
         // Redéfinir pregress par rapport au centre de l'écran
-        --progress-origin-center: calc(var(--progress) - .5);
-
+        // --progress-origin-center: calc(var(--progress) - .5);
+        // transform: translateX(-400px);
         font-size: max(3.5rem, 10vw);
         // transform: translate3d(calc((-30vw * var(--progress-origin-center))), 0, 0);
         white-space: nowrap;

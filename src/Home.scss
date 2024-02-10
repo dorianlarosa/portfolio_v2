@@ -404,4 +404,31 @@
     padding-bottom: var(--xxxxl-sizing);
     z-index: 10;
     position: relative;
+
+    .parallax-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: 800px;
+        /* ou la hauteur désirée */
+
+        @media (max-width: 991.98px) {
+            height: 600px;
+        }
+
+        @media (max-width: 575.98px) {
+            height: 400px;
+        }
+
+        .parallax-image {
+            width: 120%;
+            height: 120%; /* Assurez-vous que l'image couvre la hauteur du conteneur */
+            object-fit: cover; /* Cette propriété est clé pour couvrir l'espace sans perdre les proportions */
+            position: absolute;
+            top: -15%;
+        }
+    }
 }
+
+
+

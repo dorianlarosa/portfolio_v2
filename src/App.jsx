@@ -23,11 +23,18 @@ function App() {
 
   const location = useLocation();
 
+   // Fonction pour rafraîchir ScrollTrigger sur resize
+   const handleResize = () => {
+    ScrollTrigger.refresh();
+  };
+
   useEffect(() => {
     window.addEventListener('resize', disableTransitionsOnResize);
-
+    window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', disableTransitionsOnResize);
+      window.removeEventListener('resize', handleResize);
+
     };
   }, []);
 
