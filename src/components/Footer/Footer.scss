@@ -1,7 +1,10 @@
 #footer {
+    z-index: 10;
+    position: relative;
+    pointer-events: none;
+
     .content-footer {
         height: 100vh;
-        // border-top: 1px solid var(--grey-color);
         border-bottom: 1px solid var(--grey-color);
         display: flex;
         flex-direction: column;
@@ -9,12 +12,12 @@
         justify-content: center;
         text-align: center;
 
+
         .title {
             .svg-flower {
                 width: 30px;
                 height: auto;
                 animation: rotatingFlower 15s linear infinite;
-
             }
 
             h2 {
@@ -27,6 +30,8 @@
             font-family: var(--font-title);
             color: var(--white);
             font-size: 7vw;
+            pointer-events: all;
+
         }
     }
 

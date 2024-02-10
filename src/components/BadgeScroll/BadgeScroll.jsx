@@ -12,30 +12,15 @@ class BadgeScroll extends Component {
 
 
         return (
-            <div className="wrapper-scroll-info">
-            <div className="badge-scroll">
+            <>
+                <div className="wrapper-scroll-info">
+                    <div className="badge-scroll">
 
-                <ReactCurvedText
-                    width={80}
-                    height={80}
-                    cx={40}
-                    cy={40}
-                    rx={18}
-                    ry={18}
-                    startOffset={null}
-                    reversed={true}
-                    text="Scroll - Scroll -"
-                    textProps={null}
-                    textPathProps={null}
-                    tspanProps={{ "dy": "-12" }}
-                    ellipseProps={null}
-                    svgProps={null}
-                />
+                        <div className="mouse-icon"><div className="wheel"></div></div>
+                    </div>
+                </div>
+            </>
 
-            
-                <SvgFlower></SvgFlower>
-            </div>
-            </div>
         );
     }
 }

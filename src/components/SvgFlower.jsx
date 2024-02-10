@@ -4,9 +4,10 @@ import React, { Component } from "react";
 class SvgFlower extends Component {
 
     render() {
+        const { id } = this.props;
 
         return (
-            <svg className="svg-flower" xmlns="http://www.w3.org/2000/svg"
+            <svg className="svg-flower" id={id} xmlns="http://www.w3.org/2000/svg"
                 width="200"
                 height="200"
                 fill="none"

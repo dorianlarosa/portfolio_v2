@@ -8,10 +8,10 @@
             "slug": "sandrinef-bien-etre",
             "technos": "WordPress, ACF, JavaScript, Kalendes",
             "tags": "Branding, Chartre graphique, Identité de marque, WebDesign, Création de thème WordPress",
-            "background": "",
+            "background": "/images-projects/sandrinef-bien-etre/background.jpeg",
             "year": "2024",
             "image": "",
-            "thumbnail" : "/images-projects/sandrinef-bien-etre/thumbnail.jpg",
+            "thumbnail": "/images-projects/sandrinef-bien-etre/thumbnail.jpg",
             "gallerie": [
                 {
                     "url": "/images-projects/sandrinef-bien-etre/mockup_website.gif"
@@ -47,10 +47,10 @@
             "slug": "vous-cest-nous",
             "technos": "WordPress, ACF, JavaScript",
             "tags": "Branding, Chartre graphique, Identité de marque, WebDesign, Création de thème WordPress",
-            "background": "",
+            "background": "/images-projects/vous-cest-nous/background.jpeg",
             "year": "2023",
             "image": "",
-            "thumbnail" : "/images-projects/vous-cest-nous/thumbnail.jpg",
+            "thumbnail": "/images-projects/vous-cest-nous/thumbnail.jpg",
             "gallerie": [
                 {
                     "url": "/images-projects/vous-cest-nous/thumbnail.jpg"
@@ -65,10 +65,10 @@
             "slug": "egs-securite",
             "technos": "WordPress, ACF, JavaScript, Kalendes",
             "tags": "Branding, Chartre graphique, Identité de marque, WebDesign, Création de thème WordPress",
-            "background": "",
+            "background": "/images-projects/egs-securite/background.jpeg",
             "year": "2023",
             "image": "",
-            "thumbnail" : "/images-projects/egs-securite/thumbnail.jpg",
+            "thumbnail": "/images-projects/egs-securite/thumbnail.jpg",
             "gallerie": [
                 {
                     "url": "/images-projects/egs-securite/mockup_website.jpg"
@@ -113,10 +113,10 @@
             "slug": "parizoo",
             "technos": "WordPress, ACF, JavaScript, Kalendes",
             "tags": "Branding, Chartre graphique, Identité de marque, WebDesign, Création de thème WordPress",
-            "background": "",
+            "background": "/images-projects/parizoo/background.jpg",
             "year": "2023",
             "image": "",
-            "thumbnail" : "/images-projects/parizoo/thumbnail.jpg",
+            "thumbnail": "/images-projects/parizoo/thumbnail.jpg",
             "gallerie": [
                 {
                     "url": "/images-projects/parizoo/mockup_website2.jpg"
@@ -141,8 +141,7 @@
                 },
                 {
                     "url": "/images-projects/parizoo/mockup_website11.jpg"
-                }
-                ,
+                },
                 {
                     "url": "/images-projects/parizoo/mockup_website5.jpg"
                 },

@@ -3,10 +3,19 @@
     padding-bottom: 7rem;
     overflow: hidden;
     background-color: var(--black-color);
+    z-index: 100;
+    position: relative;
 
     @media (max-width: 767.98px) {
         padding-top: 5rem;
         padding-bottom: 5rem;
+    }
+
+
+    @media (max-width: 575.98px) {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+
     }
 
     .wrapper-flower {
@@ -67,6 +76,11 @@
 
         @media (max-width: 767.98px) {
             margin-top: var(--xl-sizing);
+        }
+
+        @media (max-width: 575.98px) {
+            margin-top: var(--l-sizing);
+
         }
     }
 }

@@ -52,7 +52,7 @@ class ProjectPage extends Component {
 
             <section id="section-hero-project" >
 
-              <div className="overlay" style={{ backgroundImage: `url(${project.thumbnail})` }}>
+              <div className="overlay" style={{ backgroundImage: `url(${project.background})` }}>
 
               </div>
 

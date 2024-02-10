@@ -1,19 +1,21 @@
 #header {
     mix-blend-mode: difference;
-    padding-bottom: max(20px, 3vw);
     padding-top: max(20px, 3vw);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 10000;
     opacity: 1;
-    transition: .45s;
+    // transition: opacity .45s linear;
+    // -webkit-transition: -webkit-opacity .45s linear;
+    // -moz-transition: opacity .45s linear;
+    // -o-transition: opacity .45s linear;
+    will-change: opacity;
+    /* Indique que l'opacité de l'élément va changer */
 
     &.scrolling-down {
         opacity: 0;
-        visibility: hidden;
-        transition: opacity .45s, visibility .45s linear .45s;
     }
 
     .content-header {
@@ -22,15 +24,16 @@
         align-items: center;
 
 
+
+
         // ========== Logo ==========
 
-        #wrapper-logo {
-            
-        }
+        #wrapper-logo {}
+
         #logo {
             stroke: var(--white-color);
             height: 50px;
-            
+
 
             .st0 {
                 fill: none;
@@ -51,6 +54,7 @@
             // @media (max-width: 767.98px) {
             //     display: none;
             // }
+
 
             .nav-link {
                 font-size: 1rem;
@@ -76,112 +80,119 @@
 
         // ========== Burger ==========
 
-        .hamburger {
-            display: inline-block;
-            cursor: pointer;
-            transition-property: opacity, filter;
-            transition-duration: 0.15s;
-            transition-timing-function: linear;
-            font: inherit;
-            color: inherit;
-            text-transform: none;
-            background-color: transparent;
+        .burger {
+            display: inline-flex;
+            outline: none;
             border: 0;
-            margin: 0;
-            overflow: visible;
+            background: transparent;
+            transition: all .5s ease-out;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 21;
+            top: 4vw;
+            right: 4vw;
+            width: 6.93vw;
+            height: 5.33vw;
+            padding: 5.33vw;
             display: none;
-            width: 35px;
-            height: 24px;
-            margin: .9rem 0;
 
-            // @media (max-width: 767.98px) {
-            //     display: block;
-            // }
-
-            .hamburger-box {
-                width: 35px;
-                height: 24px;
-                display: inline-block;
-                position: relative;
+            @media (max-width: 767.98px) {
+                display: block;
             }
 
-            .hamburger-inner {
-                display: block;
-                top: 50%;
-                margin-top: -2px;
-                width: 35px;
-                height: 2px;
-                background-color: var(--white-color);
-                border-radius: 4px;
+
+
+            &::before,
+            &::after {
+                content: "";
                 position: absolute;
-                transition-property: transform;
-                transition-duration: 0.15s;
-                transition-timing-function: ease;
+                background: #fff;
+                transition: all .5s cubic-bezier(.19, 1, .22, 1);
+                top: 5.33vw;
+                left: 2vw;
+                width: 6.93vw;
+                height: 0.27vw;
+            }
 
-                &,
-                &::before,
-                &::after {
-                    width: 35px;
-                    height: 2px;
-                    background-color: var(--white-color);
-                    border-radius: 4px;
-                    position: absolute;
-                    transition-property: transform;
-                    transition-duration: 0.15s;
-                    transition-timing-function: ease;
-                }
+            &::after {
+                transform: translate3d(0, 0.7vw, 0) rotate(0deg);
+            }
 
-                &::before,
+            &::before {
+                transform: translate3d(0, -0.7vw, 0) rotate(0deg);
+            }
+
+            // ========== Burger open ==========
+
+            &.open {
                 &::after {
-                    content: "";
-                    display: block;
+                    transform: translateZ(0) rotate(-45deg);
                 }
 
                 &::before {
-                    top: -10px;
-                }
-
-                &::after {
-                    bottom: -10px;
-                }
-            }
-
-            &--spin {
-                .hamburger-inner {
-                    transition-duration: 0.22s;
-                    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-
-                    &::before {
-                        transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
-                    }
-
-                    &::after {
-                        transition: bottom 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-                    }
-                }
-
-                &.is-active {
-                    .hamburger-inner {
-                        transform: rotate(225deg);
-                        transition-delay: 0.12s;
-                        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-
-                        &::before {
-                            top: 0;
-                            opacity: 0;
-                            transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out;
-                        }
-
-                        &::after {
-                            bottom: 0;
-                            transform: rotate(-90deg);
-                            transition: bottom 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
-                        }
-                    }
+                    transform: translateZ(0) rotate(45deg);
                 }
             }
         }
-
-        // ========== Nav mobile ==========
     }
+
+    // ========== Nav mobile ==========
+}
+
+// ========== Nav ==========
+
+.nav-mobile {
+
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    background-color: black;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: max(20px, 3vw);
+    padding-right: max(20px, 3vw);
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+
+    // background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: left bottom 10%;
+
+
+
+    .nav-link {
+        font-size: 2.5rem;
+        color: var(--white-color);
+        transition: all .1s;
+        font-weight: 300;
+        margin: 1.2rem 0;
+        display: inline-block;
+
+        &.active {
+            color: var(--white-color);
+        }
+
+        &.mail {
+            font-size: 1.2rem;
+            text-transform: none;
+            display: flex;
+            align-items: center;
+            margin-top: var(--xl-sizing);
+
+            svg {
+                margin-right: .5rem;
+            }
+        }
+
+       
+    }
+
+
+
 }

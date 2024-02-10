@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Router, Routes, Route, useLocation } from "react-router-dom";
-import { Header, Footer, PageTransition, ScrollToTop } from './components';
+import { Header, Footer, SvgFlower, ScrollToTop } from './components';
+import { useCustomCursor } from './hooks/useCustomCursor';
 import Home from './Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -9,7 +10,7 @@ import Contact from './pages/Contact';
 import WrapperProjectPage from './pages/ProjectPage/WrapperProjectPage';
 import NotFound from './pages/NotFound';
 
-import FixedHeightCanvas from "./FixedHeightCanvas";
+import FixedHeightCanvas from "./components/three/FixedHeightCanvas";
 
 
 import CustomCursor from "./components/CustomCursor/CustomCursor";
@@ -18,6 +19,8 @@ import CustomCursorManager from "./components/CustomCursor/context/manager";
 
 
 function App() {
+  const { handleMouseEnter, handleMouseLeave } = useCustomCursor();
+
   const location = useLocation();
 
   useEffect(() => {
@@ -49,7 +52,6 @@ function App() {
     <CustomCursorManager>
 
       <Header />
-
       <FixedHeightCanvas />
       <CustomCursor />
 

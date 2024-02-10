@@ -121,12 +121,12 @@
 }
 
 .arrow {
-
     .main-cursor {
         mix-blend-mode: initial;
 
         .main-cursor-background {
             transform: scale(1);
+            background-color: white;
 
             .icon-arrow {
                 opacity: 1;
