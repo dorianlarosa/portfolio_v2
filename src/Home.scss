@@ -79,7 +79,7 @@
         .right {}
 
         .left {
-            width: 50%;
+            width: 45%;
             max-width: 700px;
 
             .intro {
@@ -91,51 +91,80 @@
             }
 
             .button {
-                margin-top: var(--l-sizing);
+                margin-top: var(--xl-sizing);
+
+                @media (max-width: 991.98px) {
+                    margin-top: var(--l-sizing);
+
+                }
             }
         }
 
         .right {
-            width: 45%;
+            width: 50%;
             padding-left: 2rem;
-            height: 38vw;
+            height: 50rem;
             position: relative;
+
+            @media (max-width: 1999.98px) {             
+                height: 43vw;
+            }
+
+            @media (max-width: 1399.98px) {
+                height: 46vw;
+            }
 
             @media (max-width: 991.98px) {
                 width: 100%;
                 margin-top: var(--xl-sizing);
-                height: 87vw;
+                height: 89vw;
             }
 
             .image {
                 position: absolute;
                 width: 53%;
-
+                border-radius: var(--border-radius-image);
                 img {
                     border-radius: var(--border-radius-image);
                 }
             }
 
             .image-1 {
-                top: 3vw;
+                top: 0;
                 left: 0;
             }
 
             .image-2 {
                 right: 0;
-                top: 10vw;
+                top: 12rem;
+
+                @media (max-width: 1999.98px) {             
+                    top: 7vw;
+                }
+
+                @media (max-width: 1399.98px) {
+                    top: 10vw;
+                }
 
                 @media (max-width: 991.98px) {
-                    top: 21vw;
+                    top: 18vw;
                 }
             }
 
             .image-3 {
                 left: 20%;
-                top: 19vw;
+                top: 24rem;
+
+                @media (max-width: 1999.98px) {             
+                    top: 16vw;
+                }
+
+                @media (max-width: 1399.98px) {
+                    top: 20vw;
+                }
 
                 @media (max-width: 991.98px) {
-                    top: 37vw;
+                    top: 40vw;
                 }
             }
         }
@@ -400,8 +429,7 @@
 
 #banner-home {
     background-color: var(--black-color);
-    padding-top: var(--xxxl-sizing);
-    padding-bottom: var(--xxxxl-sizing);
+    padding-top: var(--xl-sizing);
     z-index: 10;
     position: relative;
 

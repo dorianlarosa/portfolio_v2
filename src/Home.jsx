@@ -19,6 +19,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+
 const Home = () => {
   const [openAccordeonId, setOpenAccordeonId] = useState(null);
   const { handleMouseEnter, handleMouseLeave } = useCustomCursor();
@@ -32,8 +33,8 @@ const Home = () => {
 
   const parallaxConfig = {
     1: 0, // ID du projet: intensité du parallaxe
-    2: 10,
-    3: 15,
+    2: 17,
+    3: 22,
     4: 5
   };
 
@@ -45,9 +46,9 @@ const Home = () => {
 
   useEffect(() => {
     gsap.fromTo(refImage1.current,
-      { y: '10%' },
+      { y: '5%' },
       {
-        y: '-10%',
+        y: '-5%',
         ease: "none",
         scrollTrigger: {
           trigger: refImage1.current,
@@ -59,9 +60,9 @@ const Home = () => {
     );
 
     gsap.fromTo(refImage2.current,
-      { y: '20%' },
+      { y: '10%' },
       {
-        y: '-20%',
+        y: '-10%',
         ease: "none",
         scrollTrigger: {
           trigger: refImage2.current,
@@ -73,9 +74,9 @@ const Home = () => {
     );
 
     gsap.fromTo(refImage3.current,
-      { y: '30%' },
+      { y: '15%' },
       {
-        y: '-30%',
+        y: '-15%',
         ease: "none",
         scrollTrigger: {
           trigger: refImage3.current,
@@ -92,9 +93,9 @@ const Home = () => {
 
       if (ref) {
         gsap.fromTo(ref,
-          { y: `-${parallaxIntensity}%` },
+          { y: `${parallaxIntensity}%` },
           {
-            y: `${parallaxIntensity}%`, // Intensité de parallaxe basée sur la configuration
+            y: `-${parallaxIntensity}%`, // Intensité de parallaxe basée sur la configuration
             ease: "none",
             scrollTrigger: {
               trigger: ref,

@@ -24,14 +24,6 @@
 }
 
 
-html {
-    cursor: none;
-
-    * {
-        cursor: none !important;
-
-    }
-}
 
 // ========== Font face ==========
 
@@ -53,6 +45,16 @@ html {
     margin: 0;
     box-sizing: border-box;
 }
+
+html {
+    cursor: none;
+
+    * {
+        cursor: none !important;
+
+    }
+}
+
 
 a {
     text-decoration: none;
@@ -79,6 +81,25 @@ img {
     color: var(--black-color);
     background: var(--white-color);
 }
+
+// ========== Scroll bar ==========
+
+html {
+
+    scrollbar-width: none; /* thin, auto, or none */
+}
+
+body::-webkit-scrollbar {
+    width: 0;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    body {
+        scrollbar-width: none; /* thin, auto, or none */
+    }
+}
+
+
 
 // ========== Global ==========
 
@@ -118,7 +139,7 @@ p {
     }
 
     &.intro {
-        font-size: min(2.2vw, 2.2rem);
+        font-size: min(1.7vw, 1.9rem);
         font-weight: 200;
 
         @media (max-width: 991.98px) {
@@ -152,23 +173,23 @@ p {
 }
 
 // ========== Page Transition ==========
-.slide-in {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform-origin: bottom;
-}
+// .slide-in {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     transform-origin: bottom;
+// }
 
-.slide-out {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform-origin: top;
-}
+// .slide-out {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     transform-origin: top;
+// }
 
 .page-transition {
     background-color: var(--black-color);
@@ -176,8 +197,8 @@ p {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    z-index: 100;
+    height: calc(100lvh + 50px);
+    z-index: 1000;
 }
 
 
@@ -202,12 +223,12 @@ p {
     height: 100%;
 }
 
-#toggle-theme-button.svg-flower {
-    position: fixed;
-    right: 2.5vw;
-    bottom: 2.5vw;
-    width: 30px;
-    height: auto;
-    z-index: 100;
-    mix-blend-mode: difference;
-}
+// #toggle-theme-button.svg-flower {
+//     position: fixed;
+//     right: 2.5vw;
+//     bottom: 2.5vw;
+//     width: 30px;
+//     height: auto;
+//     z-index: 100;
+//     mix-blend-mode: difference;
+// }

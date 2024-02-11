@@ -34,16 +34,6 @@ export const BackgroundSphere = () => {
     }
   });
 
-  // const vec3 = new THREE.Vector3();
-  // useFrame(({ pointer, viewport }) => {
-  //   // mouse motion
-  //   const x = (pointer.x * viewport.width) ;
-  //   const y = (pointer.y * viewport.height);
-  //   vec3.lerp(new THREE.Vector3(x, y, 1), 0.2);
-  //   if (parentRef.current instanceof THREE.Group) {
-  //     parentRef.current.lookAt(vec3);
-  //   }
-  // });
   return (
     <Icosahedron args={[2, 20]}>
       <shaderMaterial args={[shader]} side={THREE.DoubleSide} />

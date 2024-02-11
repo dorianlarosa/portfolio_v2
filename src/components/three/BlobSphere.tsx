@@ -35,11 +35,7 @@ export const BlobSphere = () => {
 
     // frame loop
     const vec3 = new THREE.Vector3();
-    useFrame(({ pointer, viewport }) => {
-        // mouse motion
-        // const x = (pointer.x * viewport.width) / 5;
-        // const y = (pointer.y * viewport.height) / 5;
-        // vec3.lerp(new THREE.Vector3(x, y, 1), 0.2);
+    useFrame(() => {
         if (parentRef.current instanceof THREE.Group) {
             parentRef.current.lookAt(vec3);
         }
@@ -67,7 +63,7 @@ const InnerGeometry = (props) => {
             format: THREE.RGBAFormat,
             generateMipmaps: true,
             minFilter: THREE.LinearMipMapLinearFilter,
-            encoding: THREE.sRGBEncoding
+            colorSpace: 'srgb'
         });
         // create cube camera
         const cubeCamera = new THREE.CubeCamera(0.1, 10, cubeRenderTarget);

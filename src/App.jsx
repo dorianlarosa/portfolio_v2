@@ -13,27 +13,33 @@ import NotFound from './pages/NotFound';
 import FixedHeightCanvas from "./components/three/FixedHeightCanvas";
 
 
+import LenisController from './LenisController'; // Assurez-vous que le chemin d'importation est correct
+
+
 import CustomCursor from "./components/CustomCursor/CustomCursor";
 import CustomCursorManager from "./components/CustomCursor/context/manager";
 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
+
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 function App() {
-  const { handleMouseEnter, handleMouseLeave } = useCustomCursor();
-
   const location = useLocation();
 
-   // Fonction pour rafraîchir ScrollTrigger sur resize
-   const handleResize = () => {
-    ScrollTrigger.refresh();
-  };
+  // Fonction pour rafraîchir ScrollTrigger sur resize
+  //  const handleResize = () => {
+  //   ScrollTrigger.refresh();
+  // };
 
   useEffect(() => {
     window.addEventListener('resize', disableTransitionsOnResize);
-    window.addEventListener('resize', handleResize);
+    // window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', disableTransitionsOnResize);
-      window.removeEventListener('resize', handleResize);
+      // window.removeEventListener('resize', handleResize);
 
     };
   }, []);
@@ -52,8 +58,14 @@ function App() {
       document.body.classList.remove('disable-transitions');
     }, 100); // 100 ms est un délai couramment utilisé, mais vous pouvez l'ajuster selon vos besoins
   }
+ScrollTrigger.addEventListener("refreshInit", () => {
+    console.log("Refresh init started");
+});
 
-  
+ScrollTrigger.addEventListener("refresh", () => {
+    console.log("Refresh completed");
+});
+
 
   return (
     <CustomCursorManager>
@@ -63,16 +75,14 @@ function App() {
       <CustomCursor />
 
       <AnimatePresence mode='wait' initial={false} >
-        <ScrollToTop />
-
-        <Routes key={location.pathname} location={location} >
-          <Route path="/" exact element={<Home />} />
-          <Route path="/a-propos" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/projets/:slug" element={<WrapperProjectPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-
+          <LenisController />
+          <Routes key={location.pathname} location={location} >
+            <Route path="/" exact element={<Home />} />
+            <Route path="/a-propos" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/projets/:slug" element={<WrapperProjectPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
       </AnimatePresence>
 
       <Footer />

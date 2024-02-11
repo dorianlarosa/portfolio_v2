@@ -9,8 +9,8 @@ class ListTag extends Component {
 
         return (
             <ul className="list-tag">
-                {tags.map((tag) => (
-                    <li>
+                {tags.map((tag, index) => (
+                    <li key={index}>
                         <span className="tag">
                             {tag.name}
                         </span>
