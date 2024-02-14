@@ -91,16 +91,17 @@ const Header = () => {
             const currentScrollY = window.scrollY;
             const scrollingDown = currentScrollY > lastScrollY.current;
             const distanceScrolled = Math.abs(currentScrollY - scrollChangeStart.current);
-            if (scrollingDown) {
-                if (distanceScrolled >= 50) { // Ajusté à 100px
-                    setHeaderVisible(false);
-                    scrollChangeStart.current = currentScrollY;
-                }
-            } else {
-                if (distanceScrolled >= 50) { // Ajusté à 100px
-                    setHeaderVisible(true);
-                    scrollChangeStart.current = currentScrollY;
-                } else if (currentScrollY < 100) { // Gardez le header visible si moins de 100px ont été défilés
+            if (currentScrollY > 100) { // Gardez le header visible si moins de 100px ont été défilés
+                if (scrollingDown) {
+                    if (distanceScrolled >= 50) { // Ajusté à 100px
+                        setHeaderVisible(false);
+                        scrollChangeStart.current = currentScrollY;
+                    }
+                } else {
+                    if (distanceScrolled >= 50) { // Ajusté à 100px
+                        setHeaderVisible(true);
+                        scrollChangeStart.current = currentScrollY;
+                    }
                     setHeaderVisible(true);
                 }
             }

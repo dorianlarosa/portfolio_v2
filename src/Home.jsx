@@ -168,11 +168,11 @@ const Home = () => {
           </div>
 
           <div className="right">
-            <img src={imageConstruction1} ref={refImage1} className='image image-1' alt="" />
+            <img rel="preload" src={imageConstruction1} ref={refImage1} className='image image-1' alt="" />
 
-            <img src={imageConstruction2} ref={refImage2} className='image image-2' alt="" />
+            <img rel="preload" src={imageConstruction2} ref={refImage2} className='image image-2' alt="" />
 
-            <img src={imageConstruction3} ref={refImage3} className='image image-3' alt="" />
+            <img rel="preload" src={imageConstruction3} ref={refImage3} className='image image-3' alt="" />
 
           </div>
 
@@ -199,7 +199,7 @@ const Home = () => {
               >
 
                 <div className="container-image">
-                  <img src={project.thumbnail} />
+                  <img rel="preload" src={project.thumbnail} />
                 </div>
 
                 <h3 className="name">{project.name}</h3>
@@ -271,7 +271,7 @@ const Home = () => {
 
       <div id="banner-home" >
         <div className='parallax-container'>
-          <img ref={refBannerImage} src={bannerHome} className="parallax-image" alt="Parallax Image" />
+          <img rel="preload" ref={refBannerImage} src={bannerHome} className="parallax-image" alt="Parallax Image" />
         </div>
       </div>
 

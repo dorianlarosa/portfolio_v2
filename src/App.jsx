@@ -58,14 +58,6 @@ function App() {
       document.body.classList.remove('disable-transitions');
     }, 100); // 100 ms est un délai couramment utilisé, mais vous pouvez l'ajuster selon vos besoins
   }
-ScrollTrigger.addEventListener("refreshInit", () => {
-    console.log("Refresh init started");
-});
-
-ScrollTrigger.addEventListener("refresh", () => {
-    console.log("Refresh completed");
-});
-
 
   return (
     <CustomCursorManager>
@@ -75,14 +67,14 @@ ScrollTrigger.addEventListener("refresh", () => {
       <CustomCursor />
 
       <AnimatePresence mode='wait' initial={false} >
-          <LenisController />
-          <Routes key={location.pathname} location={location} >
-            <Route path="/" exact element={<Home />} />
-            <Route path="/a-propos" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/projets/:slug" element={<WrapperProjectPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+        <LenisController />
+        <Routes key={location.pathname} location={location} >
+          <Route path="/" exact element={<Home />} />
+          <Route path="/a-propos" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/projets/:slug" element={<WrapperProjectPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </AnimatePresence>
 
       <Footer />

@@ -7,6 +7,9 @@ class About extends Component {
     return (
       <>
         <h1>Je suis page1</h1>
+
+
+        
         <PageTransition />
 
       </>

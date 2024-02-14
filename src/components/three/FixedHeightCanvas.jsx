@@ -12,10 +12,10 @@ const fixedHeight = window.innerHeight; // Exemple de hauteur fixe
 const useCameraController = () => {
   const { camera } = useThree(); // Ceci est l'importation manquante qui causait l'erreur
 
-  useFrame(({ mouse }) => {
+  useFrame(({ pointer }) => {
     // Logique pour ajuster la position de la caméra basée sur la position de la souris
-    const x = mouse.x / 2;
-    const y = mouse.y / 2;
+    const x = pointer.x / 2;
+    const y = pointer.y / 2;
 
     const maxX = 1; // Limite maximale sur l'axe X
     const minX = -1; // Limite minimale sur l'axe X
@@ -23,8 +23,8 @@ const useCameraController = () => {
     const minY = -1; // Limite minimale sur l'axe Y
 
     // Calcul de la nouvelle position souhaitée basée sur la position de la souris
-    const targetX = mouse.x * 2;
-    const targetY = mouse.y * 2;
+    const targetX = pointer.x * 2;
+    const targetY = pointer.y * 2;
 
     // Application des limites pour s'assurer que la caméra reste dans la plage spécifiée
     const clampedX = Math.max(minX, Math.min(maxX, targetX));
