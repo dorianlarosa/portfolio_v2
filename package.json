@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cyriacbr/react-split-text": "^1.0.0",
     "@react-three/drei": "^9.97.3",
     "@react-three/fiber": "^8.15.16",
     "@react-three/postprocessing": "^2.15.13",
@@ -24,6 +25,7 @@
     "react-router-dom": "^6.18.0",
     "react-scroll-parallax": "^3.4.5",
     "react-transition-group": "^4.4.5",
+    "splitting": "^1.0.6",
     "styled-components": "^6.1.0",
     "three": "^0.161.0",
     "vite-plugin-glsl": "^1.2.1"

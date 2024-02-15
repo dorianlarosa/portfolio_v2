@@ -4,7 +4,7 @@ import { Router, Routes, Route, useLocation } from "react-router-dom";
 import { Header, Footer, SvgFlower, ScrollToTop } from './components';
 import { useCustomCursor } from './hooks/useCustomCursor';
 import Home from './Home';
-import About from './pages/About';
+import About from './pages/AboutPage/About';
 import Contact from './pages/Contact';
 
 import WrapperProjectPage from './pages/ProjectPage/WrapperProjectPage';

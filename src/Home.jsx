@@ -127,7 +127,7 @@ const Home = () => {
 
 
   return (
-    <>
+    <div id="home">
 
       {/* ========== Section Hero ========== */}
       <section id="section-hero">
@@ -279,7 +279,7 @@ const Home = () => {
       <PageTransition />
 
 
-    </>
+    </div>
   );
 }
 
