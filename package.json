@@ -17,6 +17,7 @@
     "@react-three/postprocessing": "^2.15.13",
     "@studio-freight/react-lenis": "^0.0.36",
     "@types/three": "^0.161.2",
+    "aos": "^2.3.4",
     "framer-motion": "^11.0.3",
     "gsap": "^3.12.5",
     "react": "^18.2.0",

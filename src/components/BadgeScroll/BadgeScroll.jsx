@@ -5,12 +5,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const BadgeScroll = () => {
+const BadgeScroll = ({ delayReveal = 0 }) => {
 
     const scrollbadgeRef = useRef(null);
     useEffect(() => {
 
-
+        console.log(delayReveal);
         gsap.fromTo(scrollbadgeRef.current,
             {
                 autoAlpha: 1,
@@ -29,8 +29,9 @@ const BadgeScroll = () => {
     }, []);
     return (
         <>
-            <div ref={scrollbadgeRef} className="wrapper-scroll-info">
-                <div className="badge-scroll">
+            <div ref={scrollbadgeRef} className="wrapper-scroll-info"
+            >
+                <div className="badge-scroll" data-aos="fade" data-aos-delay={delayReveal} data-aos-anchor="#header">
 
                     <div className="mouse-icon"><div className="wheel"></div></div>
                 </div>

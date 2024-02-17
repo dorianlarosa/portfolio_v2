@@ -48,12 +48,12 @@
 
 
 html {
-    cursor: none;
+    // cursor: none;
 
-    * {
-        cursor: none !important;
+    // * {
+    //     cursor: none !important;
 
-    }
+    // }
 }
 
 
@@ -87,7 +87,8 @@ img {
 
 html {
 
-    scrollbar-width: none; /* thin, auto, or none */
+    scrollbar-width: none;
+    /* thin, auto, or none */
 }
 
 body::-webkit-scrollbar {
@@ -96,7 +97,8 @@ body::-webkit-scrollbar {
 
 @supports not selector(::-webkit-scrollbar) {
     body {
-        scrollbar-width: none; /* thin, auto, or none */
+        scrollbar-width: none;
+        /* thin, auto, or none */
     }
 }
 
@@ -139,16 +141,23 @@ p {
         line-height: 1.4;
     }
 
-    &.intro {
-        font-size: min(1.7vw, 1.9rem);
-        font-weight: 200;
 
-        @media (max-width: 991.98px) {
-            font-size: 2rem;
-        }
+}
+
+.intro {
+    font-size: 1.7rem;
+    font-weight: 200;
+
+    @media (max-width: 575.98px) {
+        font-size: 1.2rem;
+    }
+
+    &.intro--small {
+        font-size: 1.5rem;
+        font-weight: 300;
 
         @media (max-width: 575.98px) {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
     }
 }

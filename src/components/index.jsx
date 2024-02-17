@@ -9,6 +9,8 @@ export { default as WaveEffectImage } from "./WaveEffectImage/WaveEffectImage";
 
 export { default as PageTransition } from "./PageTransition";
 export { default as ScrollToTop } from "./ScrollToTop";
+export { default as SplitText } from "./SplitText";
+
 
 
 

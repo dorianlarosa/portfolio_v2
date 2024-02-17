@@ -1,49 +1,129 @@
 #about {
     #section-hero-about {
-        height: 100vh;
+        height: 100svh;
         background-color: var(--black-color);
         z-index: 1000;
         position: relative;
         padding-top: var(--xxl-sizing);
-        padding-bottom: var(--l-sizing);
+        overflow: hidden;
+
+        @media (max-width: 991.98px) {
+            height: initial;
+        }
 
         .container {
+            overflow: visible;
             height: 100%;
 
-            .content {
-                width: 50%;
+            .row {
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: start;
-                padding-right: 10rem;
+                align-items: center;
+                flex-wrap: wrap;
                 height: 100%;
 
-                h1 {
-                    font-size: 6vw;
-                    text-transform: uppercase;
+
+                .content {
+                    height: 100%;
+                    width: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: start;
+                    padding-right: 10rem;
+                    padding-bottom: var(--l-sizing);
+
+
+                    .svg-flower {
+                        height: 90px;
+                        width: auto;
+                        animation: rotatingFlower 10s linear infinite;
+                    }
+
+                    h1 {
+                        font-size: 4vw;
+                        display: flex;
+                        flex-direction: column;
+                        margin-top: var(--m-sizing);
+
+                    }
+
+                    p {
+                        margin-top: var(--m-sizing);
+                    }
+
+                    .button {
+                        margin-top: var(--l-sizing);
+                    }
                 }
 
-                .button {
-                    margin-top: var(--l-sizing);
+                .container-image {
+                    overflow: visible;
+                    width: calc(50% - max(20px, 3vw));
+                    position: absolute;
+                    left: 50%;
+                    right: max(20px, 3vw);
+                    top: 7.5rem;
+                    height: 100%;
+
+                    .image {
+                        object-fit: cover;
+                        object-position: top center;
+
+                        min-height: 100%;
+                        min-width: 100%;
+                        height: 100%;
+                        filter: contrast(100%) brightness(70%);
+                    }
+                }
+
+
+
+
+                @media (max-width: 991.98px) {
+
+
+
+                    .content {
+                        width: 100%;
+                        padding-right: 0;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+
+                        .svg-flower {
+                            height: 50px;
+
+                        }
+
+                        h1 {
+                            flex-direction: row;
+                            font-size: 10vw;
+
+                        }
+                    }
+
+                    .container-image {
+                        margin-top: var(--l-sizing);
+                        width: 100%;
+                        position: initial;
+
+                        .image {
+                            object-fit: cover;
+                            min-height: 100%;
+                            min-width: 100%;
+                            object-position: top center;
+                            width: 100%;
+                            filter: contrast(100%) brightness(100%);
+                        }
+                    }
                 }
             }
+        }
 
-            .container-image {
-                position: absolute;
-                right: 0;
-                top: 0;
-                height: 100%;
-                width: 50%;
-                overflow: hidden;
-
-                .image {
-                    object-fit: cover;
-                    min-height: 100%;
-                    min-width: 100%;
-                    object-position: top center;
-                    filter: contrast(110%) brightness(40%);
-                }
+        #wrapper-scroll-info {
+            @media (max-width: 991.98px) {
+                display: none;
             }
         }
     }
@@ -54,7 +134,7 @@
             align-items: start;
             padding-top: var(--xxxl-sizing);
             padding-bottom: var(--xxxl-sizing);
-
+            flex-wrap: wrap;
 
             .left {
                 width: 40%;
@@ -62,6 +142,18 @@
                 h3 {
                     font-family: var(--font-text);
                     font-size: 2rem;
+                    display: flex;
+
+                    @media (max-width: 575.98px) {
+                        font-size: 1.5rem;
+                    }
+
+
+                    span {
+                        font-size: 1rem;
+                        opacity: .4;
+                        margin-left: .5rem;
+                    }
                 }
             }
 
@@ -70,15 +162,27 @@
 
                 &.list-item {
 
-                    .item { 
-                        padding-top: var(--l-sizing);
-                        padding-bottom: var(--l-sizing);
-            
+                    .item {
+
+
+                        &:not(:first-of-type) {
+                            border-top: 1px solid var(--grey-color);
+                            padding-top: var(--xl-sizing);
+                        }
+
+                        &:not(:last-of-type) {
+                            padding-bottom: var(--xl-sizing);
+                        }
 
                         h4 {
                             font-family: var(--font-text);
                             font-size: 1.5rem;
                             margin-bottom: var(--m-sizing);
+                            font-weight: 700;
+
+                            @media (max-width: 575.98px) {
+                                font-size: 1.25rem;
+                            }
                         }
 
                     }
@@ -86,6 +190,28 @@
 
                 .intro {
                     position: relative;
+
+                    .letter,
+                    .word {
+                        will-change: transform, opacity;
+                        transform: translate3d(0, 0, 0);
+                        /* Initial state, can be omitted if set through JS */
+                    }
+                }
+            }
+
+            @media (max-width: 991.98px) {
+
+                padding-top: var(--xl-sizing);
+                padding-bottom: var(--xl-sizing);
+
+                .left,
+                .right {
+                    width: 100%;
+                }
+
+                .right {
+                    margin-top: var(--l-sizing);
                 }
             }
         }

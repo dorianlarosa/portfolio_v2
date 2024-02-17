@@ -88,7 +88,7 @@ const FixedHeightCanvas = () => {
       <BackgroundSphere />
       <BlobSphere />
       <EffectComposer >
-        <Noise opacity={.1} blendFunction={BlendFunction.SOFT_LIGHT} />
+        <Noise opacity={0} blendFunction={BlendFunction.SOFT_LIGHT} />
       </EffectComposer>
     </Canvas>
   );

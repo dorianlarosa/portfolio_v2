@@ -5,7 +5,6 @@ import { Header, Footer, SvgFlower, ScrollToTop } from './components';
 import { useCustomCursor } from './hooks/useCustomCursor';
 import Home from './Home';
 import About from './pages/AboutPage/About';
-import Contact from './pages/Contact';
 
 import WrapperProjectPage from './pages/ProjectPage/WrapperProjectPage';
 import NotFound from './pages/NotFound';
@@ -15,6 +14,9 @@ import FixedHeightCanvas from "./components/three/FixedHeightCanvas";
 
 import LenisController from './LenisController'; // Assurez-vous que le chemin d'importation est correct
 
+
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Importez le CSS d'AOS
 
 import CustomCursor from "./components/CustomCursor/CustomCursor";
 import CustomCursorManager from "./components/CustomCursor/context/manager";
@@ -34,6 +36,14 @@ function App() {
   //   ScrollTrigger.refresh();
   // };
 
+
+  useEffect(() => {
+    AOS.init({
+      // options ici
+      duration: 1000, // Durée de l'animation en millisecondes
+    });
+  }, []);
+
   useEffect(() => {
     window.addEventListener('resize', disableTransitionsOnResize);
     // window.addEventListener('resize', handleResize);
@@ -47,16 +57,22 @@ function App() {
   let resizeTimer;
 
   function disableTransitionsOnResize() {
-    // Ajoute la classe pour désactiver les transitions
-    document.body.classList.add('disable-transitions');
+    const heightChange = Math.abs(window.innerHeight - lastHeight);
+    const heightThreshold = 100; // Définissez un seuil approprié pour votre cas d'utilisation
 
-    // Efface le timer précédent pour s'assurer qu'il ne s'exécute qu'une fois après la fin du redimensionnement
-    clearTimeout(resizeTimer);
+    // Vérifie si le changement de hauteur dépasse un certain seuil
+    if (heightChange > heightThreshold) {
+      // La hauteur a beaucoup changé, ce qui peut indiquer une rotation ou un redimensionnement majeur
+      document.body.classList.add('disable-transitions');
 
-    // Réactive les transitions après un court délai une fois le redimensionnement terminé
-    resizeTimer = setTimeout(() => {
-      document.body.classList.remove('disable-transitions');
-    }, 100); // 100 ms est un délai couramment utilisé, mais vous pouvez l'ajuster selon vos besoins
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        document.body.classList.remove('disable-transitions');
+      }, 100);
+    }
+
+    // Mise à jour de la dernière hauteur pour la prochaine comparaison
+    lastHeight = window.innerHeight;
   }
 
   return (
@@ -71,7 +87,6 @@ function App() {
         <Routes key={location.pathname} location={location} >
           <Route path="/" exact element={<Home />} />
           <Route path="/a-propos" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/projets/:slug" element={<WrapperProjectPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -5,6 +5,8 @@ import "./Header.scss";
 import gsap from 'gsap';
 import backgroundNav from '../../assets/images/background-nav.jpg';
 import { useLenis } from '@studio-freight/react-lenis'; // Assurez-vous que cette importation est correcte
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Importez le CSS d'AOS
 
 const Header = () => {
     const [headerVisible, setHeaderVisible] = useState(true);
@@ -19,12 +21,22 @@ const Header = () => {
     const navigate = useNavigate();
 
 
+    // État pour suivre si c'est le premier chargement
+    const [isFirstLoad, setIsFirstLoad] = useState(true);
+
+
     // Ajoute les éléments à la référence
     const addToRefs = (el) => {
         if (el && !navItemsRefs.current.includes(el)) {
             navItemsRefs.current.push(el);
         }
     };
+
+    // Fonction pour conditionnellement appliquer les attributs AOS
+    const getAosAttributes = (delay) => {
+        return isFirstLoad ? { 'data-aos': 'fade', 'data-aos-delay': delay } : {};
+    };
+
 
     useLayoutEffect(() => {
         // Assurez-vous que GSAP anime les éléments une fois qu'ils sont montés et visibles
@@ -63,6 +75,11 @@ const Header = () => {
             });
         }
     }, [isBurgerOpen]);
+
+    useEffect(() => {
+        // Définir à false après le premier rendu
+        setIsFirstLoad(false);
+    }, []);
 
     useEffect(() => {
         const handleResize = () => {
@@ -156,7 +173,9 @@ const Header = () => {
             <div id="header" style={{ opacity: headerVisible ? 1 : 0, transition: 'opacity 0.25s' }}>
 
                 <div className="container content-header">
-                    <Link to="/" onMouseEnter={handleMouseEnter("link")} onMouseLeave={handleMouseLeave}>
+                    <Link
+                        data-aos="fade"
+                        to="/" onMouseEnter={handleMouseEnter("link")} onMouseLeave={handleMouseLeave}>
                         <svg
                             version="1.1"
                             id="logo"
@@ -180,20 +199,62 @@ const Header = () => {
                         </svg>
                     </Link>
 
-                    <div className={`burger ${isBurgerOpen ? "open" : ""}`} onClick={toggleBurger} onMouseEnter={handleMouseEnter("link")} onMouseLeave={handleMouseLeave}></div>
+                    <div data-aos="fade"
+                        data-aos-delay={300}>
+
+                        <div
+
+                            className={`burger ${isBurgerOpen ? "open" : ""}`}
+                            onClick={toggleBurger} onMouseEnter={handleMouseEnter("link")} onMouseLeave={handleMouseLeave}>
+
+
+                        </div>
+                    </div>
+
                     {!isMobile && (
                         <nav>
-                            <NavLink className="nav-link" to="/" onMouseEnter={handleMouseEnter("link")} onMouseLeave={handleMouseLeave}>
-                                Accueil
+                            <NavLink
+                                className="nav-link"
+                                to="/"
+                                onMouseEnter={handleMouseEnter("link")}
+                                onMouseLeave={handleMouseLeave}
+                            >
+
+                                <span data-aos="fade" data-aos-delay={100}>
+                                    Accueil
+
+                                </span>
                             </NavLink>
 
-                            <NavLink className="nav-link" to="/a-propos" onMouseEnter={handleMouseEnter("link")} onMouseLeave={handleMouseLeave}>
-                                A propos
+                            <NavLink
+                                className="nav-link" to="/a-propos" onMouseEnter={handleMouseEnter("link")} onMouseLeave={handleMouseLeave}>
+                                <span
+                                    data-aos="fade"
+                                    data-aos-delay={200}>A propos</span>
+
                             </NavLink>
 
 
-                            <NavLink className="nav-link" to="/contact" onMouseEnter={handleMouseEnter("link")} onMouseLeave={handleMouseLeave}>
-                                Contact
+                            <NavLink
+                                data-aos="fade"
+                                className="nav-link" to="mailto:hello@dorianlarosa.fr" onMouseEnter={handleMouseEnter("link")} onMouseLeave={handleMouseLeave}>
+                                <svg
+                                    width={15}
+                                    height={15}
+                                    viewBox="0 0 15 15"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    data-aos="fade"
+                                    data-aos-delay={300}
+                                >
+                                    <path
+                                        d="M1 2C0.447715 2 0 2.44772 0 3V12C0 12.5523 0.447715 13 1 13H14C14.5523 13 15 12.5523 15 12V3C15 2.44772 14.5523 2 14 2H1ZM1 3L14 3V3.92494C13.9174 3.92486 13.8338 3.94751 13.7589 3.99505L7.5 7.96703L1.24112 3.99505C1.16621 3.94751 1.0826 3.92486 1 3.92494V3ZM1 4.90797V12H14V4.90797L7.74112 8.87995C7.59394 8.97335 7.40606 8.97335 7.25888 8.87995L1 4.90797Z"
+                                        fill="currentColor"
+                                        fillRule="evenodd"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
+
                             </NavLink>
                         </nav>
                     )}
@@ -207,9 +268,6 @@ const Header = () => {
                     </NavLink>
                     <NavLink ref={addToRefs} className="nav-link" to="/a-propos" onMouseEnter={handleMouseEnter("link")} onMouseLeave={handleMouseLeave} onClick={closeBurgerForClickNavItem}>
                         A propos
-                    </NavLink>
-                    <NavLink ref={addToRefs} className="nav-link" to="/contact" onMouseEnter={handleMouseEnter("link")} onMouseLeave={handleMouseLeave} onClick={closeBurgerForClickNavItem}>
-                        Contact
                     </NavLink>
 
                     <NavLink ref={addToRefs} className="nav-link mail" to="mailto:hello@dorianlarosa.fr" onMouseEnter={handleMouseEnter('arrow-mix-blend-mode')} onMouseLeave={handleMouseLeave}>
