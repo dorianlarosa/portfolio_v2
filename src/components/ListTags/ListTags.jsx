@@ -12,7 +12,7 @@ class ListTag extends Component {
                 {tags.map((tag, index) => (
                     <li key={index}>
                         <span className="tag">
-                            {tag.name}
+                            {tag}
                         </span>
                     </li>
                 ))}

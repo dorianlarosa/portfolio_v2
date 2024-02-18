@@ -33,7 +33,7 @@ const About = () => {
     dependencies: [] // Dependencies if the animation needs to react to changes
   });
 
-  
+
   useEffect(() => {
     const refs = [introRef1, introRef2, introRef3];
 
@@ -83,18 +83,19 @@ const About = () => {
 
           <div className="row">
             <div className="content">
-              <SvgFlower 
+              <SvgFlower
                 data-aos="fade"
-                data-aos-delay={750} 
+                data-aos-delay={750}
               />
-               
+
               <h1 ref={animationRef}>
                 <SplitText splitType="letters" str={"A propos de moi"} />
               </h1>
 
-              <p className='intro' data-aos="fade" data-aos-delay={1600} >
-                Fort de plusieurs années d'expérience dans le domaine, je me spécialise dans le branding pour entreprises, la conception de chartes graphiques, la création de logos, ainsi que le design et le développement de sites web, tant sur le front-end que le back-end.
-              </p>
+              <p className='intro intro-about' data-aos="fade" data-aos-delay={1600} >
+
+
+              Forte d'une riche expérience, ma spécialisation s'étend du <b>branding d'entreprises</b> à la <b>création de logos</b> et <b>chartes graphiques</b>, en mettant un accent particulier sur la <b>conception</b> et le <b>développement de sites web</b> innovants.                            </p>
 
               {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nemo libero at natus sint exercitationem totam quidem quas assumenda quos quia quis praesentium eveniet ad ex commodi, illum illo nisi.</p> */}
 
@@ -162,7 +163,7 @@ const About = () => {
           </div>
 
         </div>
-        <div className="row" id="row-expertise">
+        {/* <div className="row" id="row-expertise">
           <div className="left" data-aos-anchor="#row-expertise" data-aos="fade-up">
             <h3>(Domaines d'expertise) <span>04</span>
 
@@ -200,7 +201,7 @@ const About = () => {
             </div>
 
           </div>
-        </div>
+        </div> */}
 
       </Section >
 

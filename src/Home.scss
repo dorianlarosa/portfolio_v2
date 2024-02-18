@@ -129,9 +129,14 @@
                     position: absolute;
                     width: 53%;
                     border-radius: var(--border-radius-image);
+                    height: 53%;
 
                     img {
                         border-radius: var(--border-radius-image);
+                        object-fit: cover;
+                        min-height: 100%;
+                        min-width: 100%;
+                        object-position: center;
                     }
                 }
 
@@ -319,7 +324,7 @@
 
                 .name {
                     padding: 1rem 0;
-                    margin: 2rem 0;
+                    margin: .5rem 0;
                     background-color: transparent;
                     color: var(--white-color);
                     cursor: pointer;
@@ -327,7 +332,7 @@
                     border: none;
                     text-align: left;
                     outline: none;
-                    font-size: 2rem;
+                    font-size: 1.5rem;
                     font-weight: 300;
                     transition: 0.4s;
                     display: flex;

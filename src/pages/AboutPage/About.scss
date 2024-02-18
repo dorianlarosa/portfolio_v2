@@ -37,13 +37,13 @@
 
 
                     .svg-flower {
-                        height: 90px;
+                        height: 60px;
                         width: auto;
                         animation: rotatingFlower 10s linear infinite;
                     }
 
                     h1 {
-                        font-size: 4vw;
+                        font-size: min(4vw, 6rem);
                         display: flex;
                         flex-direction: column;
                         margin-top: var(--m-sizing);
@@ -51,7 +51,8 @@
 
                     }
 
-                    p {
+                    .intro-about {
+                        font-size: 1.3rem;
                         margin-top: var(--m-sizing);
                     }
 

@@ -9,9 +9,9 @@ import { useCustomCursor } from './hooks/useCustomCursor';
 import { useGsapTitleAnimation } from './hooks/useGsapTitleAnimation';
 
 
-import imageConstruction1 from './assets/images/construction-1.jpg';
-import imageConstruction2 from './assets/images/construction-2.jpg';
-import imageConstruction3 from './assets/images/construction-3.jpg';
+import imageConstruction1 from './assets/images/construction-1.jpeg';
+import imageConstruction2 from './assets/images/construction-2.jpeg';
+import imageConstruction3 from './assets/images/construction-3.jpeg';
 import bannerHome from './assets/images/banner-home.jpg';
 
 import data from './api/data.json';
@@ -170,7 +170,7 @@ const Home = () => {
             <p className="intro" data-aos="fade"
               data-aos-delay="2300"
 
-            >Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
+            >Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des sites web immersifs alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
 
           </div>
 
@@ -187,8 +187,10 @@ const Home = () => {
         <div className="row" >
 
           <div className="left">
-            <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, eaque consectetur delectus quae cum ab, tenetur assumenda, qui commodi ad inventore et iusto nam laboriosam! Magni debitis ullam a numquam!</p>
+            <p className="intro">Je suis un créateur de <b>solutions digitales</b>, dédié à transformer chaque <b>site web</b> en une <b>expérience unique</b> et <b>mémorable</b>.</p>
+            <p>
+            Je m'engage à écouter vos besoins et comprendre vos ambitions, pour les convertir en sites web dynamiques alignés sur vos objectifs. Mon but est de fournir des solutions digitales captivantes qui favorisent l'interaction et la conversion, tout en mettant en avant votre identité unique. Chaque projet est une occasion de créer des sites qui engagent et inspirent.           
+           </p>
             <Button>Qui suis-je ?</Button>
           </div>
 
@@ -255,7 +257,10 @@ const Home = () => {
       {/* ========== Section Services ========== */}
 
       <Section title="Services" id="services-section">
-        <p className="intro">Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
+        <p className="intro">
+          
+Je vous accompagne à chaque étape de votre <b>projet digital</b>, d'une simple <b>idée</b> en passant par la <b>matérialisation de votre vision</b> jusqu'à la <b>réalisation finale</b> de votre projet. Mon engagement se caractérise par une <b>écoute attentive</b> et un <b>souci du détail</b> sans faille, essentiels pour comprendre et répondre à vos <b>besoins spécifiques</b> ainsi qu'à vos <b>enjeux stratégiques</b>. Armé d'une <b>expertise approfondie</b> en <b>développement</b> et en <b>design web</b>, je propose des <b>solutions sur mesure</b> qui non seulement répondent à vos attentes mais aspirent à les surpasser.
+        </p>
 
         <div className="list-services" id="list-services">
 
@@ -263,17 +268,17 @@ const Home = () => {
             <div className="container-service-item" data-aos-anchor="#list-services" data-aos="fade-up" data-aos-delay={`${300 * index}`}>
 
               <div
-                key={service.id}
-                className={`service-item ${openAccordeonId === service.id ? 'open' : 'closed'}`}
+                key={index}
+                className={`service-item ${openAccordeonId === index ? 'open' : 'closed'}`}
 
               >
 
                 <div className="name"
-                  onClick={() => togglePanel(service.id)}
+                  onClick={() => togglePanel(index)}
                   onMouseEnter={handleMouseEnter("arrow-mix-blend-mode")}
                   onMouseLeave={handleMouseLeave}>
 
-                  {service.name}
+                  {service.nom}
 
                   <div className='icon'>
                     <span></span>
@@ -283,9 +288,9 @@ const Home = () => {
                 </div>
 
                 <div className="panel"
-                  ref={el => accordeonRefs.current[service.id] = el}
+                  ref={el => accordeonRefs.current[index] = el}
                   style={{
-                    maxHeight: openAccordeonId === service.id ? `${accordeonRefs.current[service.id]?.scrollHeight}px` : "0"
+                    maxHeight: openAccordeonId === index ? `${accordeonRefs.current[index]?.scrollHeight}px` : "0"
                   }}
                 >
                   <div className="content-panel">
