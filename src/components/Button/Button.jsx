@@ -18,9 +18,9 @@ class Button extends Component {
     };
 
     render() {
-        const { link, children } = this.props;
+        const { link, children, ...restProps } = this.props;
         return (
-            <Link className="button" to={link} target="_blank" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+            <Link {...restProps} className="button" to={link} target="_blank" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                 <div className="text">{children}</div>
                 <div className="icon">
                     <svg

@@ -15,9 +15,9 @@ const SplitText = memo(({ str, splitType = "words" }) => {
   };
 
   return (
-    <div>
+    <span>
       {splitText(str, splitType)}
-    </div>
+    </span>
   );
 });
 

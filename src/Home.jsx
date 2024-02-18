@@ -50,8 +50,8 @@ const Home = () => {
     animationOptions: {
       from: { y: 200, autoAlpha: 0 },
       to: { y: 0, autoAlpha: 1, ease: 'Power3.easeOut', duration: .8 },
-      stagger: 0.05,
-      delay: .8
+      stagger: 0.03,
+      delay: 1.05
     },
     dependencies: [] // Dependencies if the animation needs to react to changes
   });
@@ -155,7 +155,7 @@ const Home = () => {
           <div className="content">
 
             <h1 ref={animationRef}>
-              <span className="line name" data-aos="fade" data-aos-delay={600}>
+              <span className="line name" data-aos="fade" data-aos-delay={900}>
                 Dorian LA ROSA
               </span>
               <span className='line'>
@@ -168,7 +168,7 @@ const Home = () => {
               </span>
             </h1>
             <p className="intro" data-aos="fade"
-              data-aos-delay="2600"
+              data-aos-delay="2300"
 
             >Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des expériences numériques immersives alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
 
@@ -176,7 +176,7 @@ const Home = () => {
 
           <div className="divider-gradient" />
 
-          <BadgeScroll delayReveal={2800}></BadgeScroll>
+          <BadgeScroll delayReveal={2450}></BadgeScroll>
 
         </div>
       </section>
@@ -194,14 +194,14 @@ const Home = () => {
 
           <div className="right" id="container-images-about">
             <div ref={refImage1} className='image image-1'>
-              <img rel="preload" src={imageConstruction1} data-aos-anchor="#container-images-about" data-aos="fade" alt="" />
+              <img rel="preload" src={imageConstruction1} data-aos-anchor="#container-images-about" data-aos="fade-up" alt="" />
 
             </div>
             <div ref={refImage2} className='image image-2'>
-              <img rel="preload" src={imageConstruction2} data-aos-anchor="#container-images-about" data-aos="fade" data-aos-delay="300" alt="" />
+              <img rel="preload" src={imageConstruction2} data-aos-anchor="#container-images-about" data-aos="fade-up" data-aos-delay="200" alt="" />
             </div>
             <div ref={refImage3} className='image image-3'>
-              <img rel="preload" src={imageConstruction3} data-aos-anchor="#container-images-about" data-aos="fade" data-aos-delay="600" alt="" />
+              <img rel="preload" src={imageConstruction3} data-aos-anchor="#container-images-about" data-aos="fade-up" data-aos-delay="400" alt="" />
             </div>
           </div>
 

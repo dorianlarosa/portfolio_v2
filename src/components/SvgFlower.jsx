@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 const SvgFlower = React.forwardRef((props, ref) => {
 
-    const { id } = props;
+    const { id, ...restProps } = props;
 
     return (
         <svg ref={ref} className="svg-flower" id={id} xmlns="http://www.w3.org/2000/svg"
@@ -13,6 +13,7 @@ const SvgFlower = React.forwardRef((props, ref) => {
             version="1.1"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             xmlns:svgjs="http://svgjs.dev/svgjs"
+            {...restProps}
         >
             <path
                 fill="var(--white-color)"
