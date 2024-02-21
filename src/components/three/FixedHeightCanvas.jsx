@@ -44,7 +44,7 @@ function CameraController() {
 }
 
 
-const FixedHeightCanvas = () => {
+const FixedHeightCanvas = ({ isLoading }) => {
 
   // Initialisation des états pour la taille du canvas et la largeur précédente de la fenêtre
   const [size, setSize] = useState({
@@ -86,7 +86,7 @@ const FixedHeightCanvas = () => {
     >
       <CameraController />
       <BackgroundSphere />
-      <BlobSphere />
+      <BlobSphere isLoading={isLoading} />
       <EffectComposer >
         <Noise opacity={0} blendFunction={BlendFunction.SOFT_LIGHT} />
       </EffectComposer>

@@ -6,6 +6,8 @@ export { default as BadgeScroll } from "./BadgeScroll/BadgeScroll";
 export { default as Button } from "./Button/Button";
 export { default as ListTag } from "./ListTags/ListTags";
 export { default as WaveEffectImage } from "./WaveEffectImage/WaveEffectImage";
+export { default as BannerImage } from "./BannerImage/BannerImage";
+export { default as LoaderSite } from "./LoaderSite/LoaderSite";
 
 export { default as PageTransition } from "./PageTransition";
 export { default as ScrollToTop } from "./ScrollToTop";

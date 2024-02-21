@@ -1,10 +1,12 @@
 import React, { useMemo, useRef, useState, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
+import gsap from 'gsap';
+
 
 const globalU_time = { value: 0 };
 
-export const BlobSphere = () => {
+export const BlobSphere = ({ isLoading }) => {
     const parentRef = useRef<THREE.Group | null>(null);
 
 
@@ -44,18 +46,43 @@ export const BlobSphere = () => {
     return (
         <group ref={parentRef}>
             <group>
-                <InnerGeometry geometry={sphereGeometry} />
+                <InnerGeometry geometry={sphereGeometry} isLoading={isLoading}/>
             </group>
         </group>
     );
 };
 
 // ========================================================
-const InnerGeometry = (props) => {
-    const { geometry, scale = 2.2, position = [0.8, 0.4, 0] } = props
+const InnerGeometry = ({geometry, isLoading}) => {
+    const scale = 2.2;
     const lastUpdateTime = useRef(performance.now());
     const updateInterval = 1000 / 80; // 1000ms / 60 fps = ~16.67ms par frame
     const meshRef = useRef<THREE.Mesh>(null);
+
+
+    // Initialiser la position en fonction de isLoading
+    const initialPosition = isLoading ? [1.6,1.2, 0] : [0.8, 0.4, 0];
+    const position = useRef(initialPosition).current;
+
+    useEffect(() => {
+        // Condition pour animer la position lors du changement de isLoading
+        if (meshRef.current) {
+            const newPosition = isLoading ? [1.6,1.3, 0] : [0.8, 0.4, 0];
+            gsap.to(meshRef.current.position, {
+                x: newPosition[0],
+                y: newPosition[1],
+                z: newPosition[2],
+                duration: 2.5, // Durée de l'animation en secondes
+                ease: "power3.out", // Type d'accélération, pour un effet plus doux
+            });
+        }
+
+        // gsap.to(shader.uniforms.opacity, {
+        //     value: isLoading ? 0 : 1.0, // Ajustez selon votre logique
+        //     duration: 2,
+        //     ease: "power3.out",
+        // });
+    }, [isLoading]); // Dépendance à isLoading pour réagir à ses changements
 
     const { cubeRenderTarget, cubeCamera } = useMemo(() => {
         // create cube render target
@@ -72,6 +99,8 @@ const InnerGeometry = (props) => {
 
     const shader = {
         uniforms: {
+            opacity: { value: 1 }, // Ajoutez un uniform pour contrôler l'opacité
+
             tCube: { value: cubeRenderTarget.texture },
             u_RefractionRatio: { value: 1 },
             u_FresnelBias: { value: .1 },
@@ -81,6 +110,8 @@ const InnerGeometry = (props) => {
         },
         vertexShader: vertexShader,
         fragmentShader: fragmentShader,
+        transparent: true, // Activez la transparence pour ce matériau
+
     };
 
     useFrame(({ gl, scene }) => {
@@ -141,19 +172,21 @@ void main() {
 
 const fragmentShader = `
 uniform samplerCube tCube;
+uniform float opacity;
 
 varying vec3 vReflect;
 varying vec3 vRefract[3];
 varying float vReflectionFactor;
 
 void main() {
-  vec4 reflectedColor = textureCube( tCube, vec3( -vReflect.x, vReflect.yz ) );
-  vec4 refractedColor = vec4( 1.0 );
+    vec4 reflectedColor = textureCube(tCube, vec3(-vReflect.x, vReflect.yz));
+    vec4 refractedColor = vec4(1.0);
 
-  refractedColor.r = textureCube( tCube, vec3( -vRefract[0].x, vRefract[0].yz ) ).r;
-  refractedColor.g = textureCube( tCube, vec3( -vRefract[1].x, vRefract[1].yz ) ).g;
-  refractedColor.b = textureCube( tCube, vec3( -vRefract[2].x, vRefract[2].yz ) ).b;
+    refractedColor.r = textureCube(tCube, vec3(-vRefract[0].x, vRefract[0].yz)).r;
+    refractedColor.g = textureCube(tCube, vec3(-vRefract[1].x, vRefract[1].yz)).g;
+    refractedColor.b = textureCube(tCube, vec3(-vRefract[2].x, vRefract[2].yz)).b;
 
-  gl_FragColor = mix( refractedColor, reflectedColor, clamp( vReflectionFactor, 0.0, 1.0 ) );
+    vec4 color = mix(refractedColor, reflectedColor, clamp(vReflectionFactor, 0.0, 1.0));
+    gl_FragColor = vec4(color.rgb, opacity); // Utilise l'uniform opacity pour la composante alpha
 }
 `

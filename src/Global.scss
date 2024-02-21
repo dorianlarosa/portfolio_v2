@@ -184,6 +184,7 @@ p {
 
 .letter {
     display: inline-block;
+    transform: translateY(200px);
 }
 
 // ========== Page Transition ==========
@@ -230,7 +231,7 @@ p {
 
 
 #container-blob {
-    position: fixed !important;
+    position: absolute !important;
     top: 0;
     left: 0;
     width: 100%;

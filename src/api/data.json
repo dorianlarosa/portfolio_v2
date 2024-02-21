@@ -156,17 +156,17 @@
     ],
     "services": [
         {
-          "nom": "Conception et Développement de Sites Web",
+          "nom": "Conception de Sites Web",
           "description": "Je propose un service complet de conception et développement de sites web incluant des sites vitrines, e-commerce, et blogs professionnels, avec une attention particulière portée au responsive design pour garantir une expérience utilisateur optimale sur tous les appareils. En plus, je développe des fonctionnalités spécifiques sur mesure pour répondre à vos besoins uniques, en utilisant les dernières technologies web pour assurer que votre site soit esthétique, fonctionnel et optimisé.",
           "tags": ["Développement HTML/CSS", "JavaScript", "WordPress", "Shopify", "CMS personnalisé", "Design responsive", "Développement personnalisé", "Intégration API"]
         },
         {
-          "nom": "Refonte de Sites Web déjà existant",
+          "nom": "Refonte de Sites Web existant",
           "description": "Améliorez l'impact de votre présence en ligne grâce à une refonte complète de votre site. J'évalue l'architecture, le design et les fonctionnalités existantes pour les mettre à jour selon les standards actuels, améliorant ainsi l'expérience utilisateur et la performance globale de votre site.",
           "tags": ["Refonte UX/UI", "Optimisation responsive", "Mise à jour CMS", "Amélioration SEO"]
         },
         {
-          "nom": "Maintenance et Support Technique",
+          "nom": "Maintenance et Support",
           "description": "Offrez à votre site la maintenance et le support technique dont il a besoin pour fonctionner sans interruption. Je propose des services de maintenance régulière, des mises à jour de sécurité et un support technique réactif pour résoudre les problèmes et garantir la performance optimale de votre site web.",
           "tags": ["Maintenance de site web", "Mises à jour de sécurité", "Support technique", "Sauvegarde et restauration"]
         },

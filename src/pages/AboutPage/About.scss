@@ -52,7 +52,7 @@
                     }
 
                     .intro-about {
-                        font-size: 1.3rem;
+                        font-size: 1.2rem;
                         margin-top: var(--m-sizing);
                     }
 
@@ -157,11 +157,11 @@
 
                 h3 {
                     font-family: var(--font-text);
-                    font-size: 2rem;
+                    font-size: 3rem;
                     display: flex;
 
                     @media (max-width: 575.98px) {
-                        font-size: 1.5rem;
+                        font-size: 2rem;
                     }
 
 

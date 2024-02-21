@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { PageTransition, Button, BadgeScroll, Section, SvgFlower, SplitText, } from "../../components";
+import { PageTransition, Button, BadgeScroll, Section, SvgFlower, SplitText, BannerImage } from "../../components";
 import image from './Dorian_LA_ROSA.png';
 
 import "./About.scss";
@@ -28,13 +28,15 @@ const About = () => {
       from: { y: 200 },
       to: { y: 0, ease: 'Power3.easeOut', duration: .8 },
       stagger: 0.03,
-      delay: 1.05
+      delay: .85
     },
     dependencies: [] // Dependencies if the animation needs to react to changes
   });
 
 
   useEffect(() => {
+    ScrollTrigger.refresh();
+
     const refs = [introRef1, introRef2, introRef3];
 
     refs.forEach(ref => {
@@ -62,11 +64,11 @@ const About = () => {
 
 
     // Étendre l'overlay de droite à gauche
-    tl.to(".overlay", { duration: 1.25, scaleX: 1, transformOrigin: 'left', ease: "power1.easeInOut", delay: 2 });
+    tl.to(".overlay", { duration: 1.25, scaleX: 1, transformOrigin: 'left', ease: "sine.inOut", delay: 1.8 });
 
     // Rétracter l'overlay de gauche à droite en changeant le transformOrigin
-    tl.to(".overlay", { duration: 1.25, scaleX: 0, transformOrigin: 'right', ease: "power1.easeInOut" })
-      .fromTo(".image", { autoAlpha: 0, scale: 1.4 }, { autoAlpha: 1, scale: 1, duration: 1.25, ease: "power1.easeInOut" }, "<");
+    tl.to(".overlay", { duration: 1.25, scaleX: 0, transformOrigin: 'right', ease: "sine.inOut" })
+      .fromTo(".image", { autoAlpha: 0, scale: 1.2 }, { autoAlpha: 1, scale: 1, duration: 1.25, ease: "power1.easeInOut" }, "<");
   });
 
   /* ---------- GSAP timeline --------- */
@@ -85,17 +87,17 @@ const About = () => {
             <div className="content">
               <SvgFlower
                 data-aos="fade"
-                data-aos-delay={750}
+                data-aos-delay={700}
               />
 
               <h1 ref={animationRef}>
                 <SplitText splitType="letters" str={"A propos de moi"} />
               </h1>
 
-              <p className='intro intro-about' data-aos="fade" data-aos-delay={1600} >
+              <p className='intro intro-about' data-aos="fade" data-aos-delay={1500} >
 
 
-              Forte d'une riche expérience, ma spécialisation s'étend du <b>branding d'entreprises</b> à la <b>création de logos</b> et <b>chartes graphiques</b>, en mettant un accent particulier sur la <b>conception</b> et le <b>développement de sites web</b> innovants.                            </p>
+                Forte d'une riche expérience, ma spécialisation s'étend du <b>branding d'entreprises</b> à la <b>création de logos</b> et <b>chartes graphiques</b>, en mettant un accent particulier sur la <b>conception</b> et le <b>développement de sites web</b> innovants.                            </p>
 
               {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nemo libero at natus sint exercitationem totam quidem quas assumenda quos quia quis praesentium eveniet ad ex commodi, illum illo nisi.</p> */}
 
@@ -112,7 +114,7 @@ const About = () => {
 
           </div>
 
-          <BadgeScroll></BadgeScroll>
+          <BadgeScroll delayReveal={2550}></BadgeScroll>
 
         </div>
 
@@ -204,6 +206,8 @@ const About = () => {
         </div> */}
 
       </Section >
+
+      <BannerImage />
 
       <PageTransition />
 

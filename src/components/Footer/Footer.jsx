@@ -20,6 +20,7 @@ const Footer = () => {
                 <h2>Me contacter</h2>
               </div>
 
+         
               <Link className="mail" to="mailto:hello@dorianlarosa.fr" onMouseEnter={handleMouseEnter('arrow-mix-blend-mode')} onMouseLeave={handleMouseLeave}>
                 hello@dorianlarosa.fr
               </Link>

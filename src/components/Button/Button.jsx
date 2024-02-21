@@ -20,7 +20,8 @@ class Button extends Component {
     render() {
         const { link, children, ...restProps } = this.props;
         return (
-            <Link {...restProps} className="button" to={link} target="_blank" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+            <div {...restProps}>
+            <Link  className="button" to={link} target="_blank" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
                 <div className="text">{children}</div>
                 <div className="icon">
                     <svg
@@ -42,6 +43,7 @@ class Button extends Component {
 
                 </div>
             </Link>
+            </div>
 
         );
     }

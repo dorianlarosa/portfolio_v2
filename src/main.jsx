@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './Global.scss';
 import { ReactLenis, useLenis } from '@studio-freight/react-lenis';
+import { LoaderSite } from './components';
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,9 +12,9 @@ gsap.registerPlugin(ScrollTrigger);
 import { BrowserRouter } from 'react-router-dom';
 
 const optionsLenis = {
-  duration: 2, // Durée du défilement en secondes
-  wheelMultiplier : 1,
-  lerp : .5
+  // duration: 2, // Durée du défilement en secondes
+  // wheelMultiplier: 1,
+  // lerp: .5
 };
 
 function LenisGSAPWrapper() {
@@ -35,13 +36,16 @@ function LenisGSAPWrapper() {
 }
 
 function AppWithLenis() {
+
+
   return (
     <React.StrictMode>
-      <BrowserRouter>
-        <ReactLenis options={optionsLenis} root autoRaf={false}>
-          <LenisGSAPWrapper />
-        </ReactLenis>
-      </BrowserRouter>
+
+        <BrowserRouter>
+          <ReactLenis options={optionsLenis} root autoRaf={false}>
+            <LenisGSAPWrapper />
+          </ReactLenis>
+        </BrowserRouter>
     </React.StrictMode>
   );
 }

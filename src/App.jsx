@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Router, Routes, Route, useLocation } from "react-router-dom";
-import { Header, Footer, SvgFlower, ScrollToTop } from './components';
+import { Header, Footer, SvgFlower, ScrollToTop, LoaderSite } from './components';
 import { useCustomCursor } from './hooks/useCustomCursor';
 import Home from './Home';
 import About from './pages/AboutPage/About';
+import WorksPage from './pages/WorksPage/WorksPage';
+
+import { useLenis } from '@studio-freight/react-lenis'; // Assurez-vous que cette importation est correcte
 
 import WrapperProjectPage from './pages/ProjectPage/WrapperProjectPage';
 import NotFound from './pages/NotFound';
@@ -30,12 +33,43 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 
 function App() {
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
+  const lenis = useLenis(); // Utilisez le hook pour obtenir l'instance de Lenis
+  const [progress, setProgress] = useState(0); // Nouvel état pour le pourcentage de chargement
 
   // Fonction pour rafraîchir ScrollTrigger sur resize
-  //  const handleResize = () => {
-  //   ScrollTrigger.refresh();
-  // };
+  const handleResize = () => {
+    ScrollTrigger.refresh();
+  };
+  useEffect(() => {
+    // Ici, vous pouvez vérifier si toutes les données initiales sont chargées
+    // ou simplement simuler un délai pour le loader
+    document.body.style.overflow = 'hidden';
+    if (lenis) lenis.stop(); // Arrête le défilement géré par Lenis
 
+
+    // Animation GSAP pour simuler le chargement
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsLoading(false);
+        document.body.style.overflow = '';
+        if (lenis) lenis.start(); // Reprend le défilement géré par Lenis
+        setIsLoading(false);
+
+      }
+    });
+
+    tl.to({}, {
+      duration: 3, // Durée totale de la simulation de chargement
+      ease: "power3.easeInOut", // Utilisez la fonction d'ease ici
+
+      onUpdate: function () {
+        const progress = this.progress() * 100;
+        setProgress(progress); // Mise à jour du pourcentage de chargement
+      }
+    });
+
+  }, []);
 
   useEffect(() => {
     AOS.init({
@@ -77,22 +111,34 @@ function App() {
 
   return (
     <CustomCursorManager>
+      <FixedHeightCanvas isLoading={isLoading} />
+      {/* <CustomCursor /> */}
+      <LoaderSite isLoading={isLoading} progress={Math.round(progress)} />
+      {isLoading ? (
+        <>
 
-      <Header />
-      <FixedHeightCanvas />
-      <CustomCursor />
+        </>
+      ) : (
+        <>
+          <Header />
 
-      <AnimatePresence mode='wait' initial={false} >
-        <LenisController />
-        <Routes key={location.pathname} location={location} >
-          <Route path="/" exact element={<Home />} />
-          <Route path="/a-propos" element={<About />} />
-          <Route path="/projets/:slug" element={<WrapperProjectPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </AnimatePresence>
+          <AnimatePresence mode='wait' initial={false} >
+            <LenisController />
+            <Routes key={location.pathname} location={location} >
+              <Route path="/" exact element={<Home />} />
+              <Route path="/a-propos" element={<About />} />
+              <Route path="/projets" element={<WorksPage />} />
+              <Route path="/projets/:slug" element={<WrapperProjectPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AnimatePresence>
 
-      <Footer />
+          {location.pathname !== '/projets' && <Footer />}
+        </>
+
+      )}
+
+
     </CustomCursorManager>
   );
 }

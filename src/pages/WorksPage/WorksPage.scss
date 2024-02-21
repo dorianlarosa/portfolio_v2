@@ -1,0 +1,260 @@
+@font-face {
+    font-family: 'font';
+    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/OakesGrotesk-Semi-Bold.woff.woff2') format('woff2');
+    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/OakesGrotesk-Semi-Bold.woff.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+#section-slide-works .scroll-content>* {
+    flex: 0 0 auto;
+    /* Empêche les éléments de se rétrécir */
+    margin-right: 20px;
+    /* Espacement entre les éléments, ajustez selon le besoin */
+}
+
+/* Assurez-vous que le conteneur parent a une largeur suffisante */
+#section-slide-works {
+    width: 100vw;
+    overflow-x: hidden;
+    /* pour le débogage, peut être enlevé si vous contrôlez le défilement via Lenis */
+}
+
+#section-slide-works {
+    height: 100vh;
+    overflow-y: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #111;
+    user-select: none;
+}
+
+figure {
+    padding: 0;
+    margin: 0;
+}
+
+.scroll {
+    cursor: grab;
+}
+
+.scroll-content {
+    display: flex;
+    white-space: nowrap;
+    position: relative;
+    height: 100vh;
+}
+
+
+.slide {
+    display: flex;
+    width: 60vw;
+    height: 100%;
+    padding: 20vh 0;
+    height: 100vh;
+    /* Assurez-vous que chaque slide a une hauteur définie pour l'alignement vertical */
+
+    // &--1 {
+    //     .slide__inner {  
+    //         justify-content: flex-start;
+    //     }
+    // }
+
+    // &--2 {
+    //     .slide__inner {
+    //         justify-content: flex-end;
+    //     }
+    // }
+
+    // &--3 {
+    //     .slide__inner {
+    //         justify-content: center;
+    //     }
+    // }
+
+    // &:not(:first-of-type) {
+    //     padding-left: 10vw;
+    // }
+
+    // &:first-of-type {
+    //     padding-left: max(20px, 3vw);
+
+    // }
+
+    // &:not(:last-of-type) {
+    //     padding-right: 10vw;
+    // }
+
+    // &:last-of-type {
+    //     padding-right: max(20px, 3vw);
+    // }
+
+    a {
+        width: 100%;
+        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__inner {
+        position: relative;
+        width: 100%;
+    
+        padding-left: 10vw;
+        padding-right: 10vw;
+
+        /* Alignement vertical par défaut */
+
+    }
+
+    &__sub-title {
+
+        color: rgba(#fff, 0.5);
+        font-size: 1vw;
+    }
+
+    &__title {
+
+        color: #fff;
+        font-size: 4vw;
+    }
+
+    &__project {
+        color: #fff;
+
+        font-size: 1.15vw;
+        padding-top: 1.5vw;
+    }
+
+    &__img {
+        position: relative;
+        overflow: hidden;
+        padding-top: 65%;
+        width: 100%;
+
+        figure {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.scrollbar {
+    position: fixed;
+    bottom: 7.5%;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background-color: rgba(#fff, 0.25);
+
+    &__handle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: scaleX(0);
+        transform-origin: left;
+        background-color: #fff;
+    }
+}
+
+// .mask {
+//     display: flex;
+//     flex-direction: column;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     z-index: 1000;
+//     visibility: hidden;
+//     opacity: 0;
+
+//     &__slice {
+//         flex: 1;
+//         background-color: #000;
+//     }
+
+//     &__inner {
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         transform: translateX(-50%) translateY(-50%);
+//     }
+
+//     &-line {
+//         position: relative;
+//         transform-origin: left;
+//         width: 20rem;
+//         height: 2px;
+//         overflow: hidden;
+//         background-color: rgba(#fff, 0.25);
+//         visibility: hidden;
+//         opacity: 0;
+
+//         &__inner {
+//             position: absolute;
+//             top: 0;
+//             left: 0;
+//             width: 100%;
+//             height: 100%;
+//             background-color: #fff;
+//             transform-origin: left;
+//         }
+//     }
+// }
+
+// .resize{
+//   display: none;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background-color: #000;
+//   z-index: 9999;
+
+//   &__inner{
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translateX(-50%) translateY(-50%);
+//     color: #fff;
+//     text-align: center;
+//     text-decoration: none;
+//   }
+
+//   span{
+//     color: rgba(#fff, 0.5);
+//   }
+
+//   @media (max-width: 800px) {
+//     display: block;
+//   }
+
+//   @media (max-height: 600px) {
+//     display: block;
+//   }
+// }
