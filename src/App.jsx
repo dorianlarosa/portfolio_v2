@@ -29,11 +29,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+
 ScrollTrigger.config({ ignoreMobileResize: true });
 
 function App() {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const lenis = useLenis(); // Utilisez le hook pour obtenir l'instance de Lenis
   const [progress, setProgress] = useState(0); // Nouvel état pour le pourcentage de chargement
 
@@ -112,7 +113,7 @@ function App() {
   return (
     <CustomCursorManager>
       <FixedHeightCanvas isLoading={isLoading} />
-      {/* <CustomCursor /> */}
+      <CustomCursor />
       <LoaderSite isLoading={isLoading} progress={Math.round(progress)} />
       {isLoading ? (
         <>
