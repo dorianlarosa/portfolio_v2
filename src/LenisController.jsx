@@ -11,11 +11,12 @@ const LenisController = () => {
         // Assurez-vous que Lenis est arrêté avant de commencer le changement de route
         if (lenis) {
             lenis.stop();
-            window.scrollTo(0, 0);
             const reactivateLenis = () => {
+                window.scrollTo(0, 0);
+
                 lenis.start();
             };
-            setTimeout(reactivateLenis, 100); // Le délai avant de réactiver peut toujours être nécessaire
+            setTimeout(reactivateLenis, 700); // Le délai avant de réactiver peut toujours être nécessaire
         }
     }, [location.pathname]); // Dépendance à location.pathname pour détecter les changements de route
 

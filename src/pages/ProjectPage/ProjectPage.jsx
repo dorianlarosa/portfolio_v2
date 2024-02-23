@@ -129,7 +129,7 @@ const ProjectPage = (props) => {
 
                 >{project.description}</p>
 
-                <Button data-aos="fade" data-aos-delay={1400} link={project.url} >Voir le site web</Button>
+                <Button data-aos="fade" data-aos-delay={1400} to={project.url} target="_blank">Voir le site web</Button>
                 <div className="list-info" data-aos="fade-up" data-aos-delay={1450}>
                   <div className="info" >
                     <p className="name-info">Role</p>

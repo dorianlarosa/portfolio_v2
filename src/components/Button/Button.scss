@@ -7,6 +7,7 @@
     display: inline-flex;
     align-items: center;
     transition: all .3s;
+    pointer-events: all;
 
     .text {
         color: var(--black-color);

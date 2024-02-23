@@ -1,81 +1,103 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import "./WorksPage.scss";
 import data from '../../api/data.json';
-import { PageTransition } from "../../components";
+import { PageTransition, Button } from "../../components";
+import { useCustomCursor } from '../../hooks/useCustomCursor';
+import { useLenis } from '@studio-freight/react-lenis'; // Assurez-vous que cette importation est correcte
+import { Link } from 'react-router-dom';
 
 
-class WorksPage extends Component {
-    constructor(props) {
-        super(props);
-        this.slider = null;
-    }
 
-    componentDidMount() {
-        this.slider = new Slider();
-        this.slider.init();
-    }
+const WorksPage = () => {
+    const { handleMouseEnter, handleMouseLeave } = useCustomCursor();
+    const sliderRef = useRef(null); // Utilisé pour stocker la référence à l'élément du slider
 
-    componentWillUnmount() {
-        // Assurez-vous de nettoyer les écouteurs d'événements ou les ressources lorsque le composant est démonté
-        // Par exemple :
-        // window.removeEventListener('wheel', this.slider.nextSlide);
-    }
+    useEffect(() => {
+        // Assurez-vous que la classe Slider est définie à l'extérieur du composant WorksPage
+        const slider = new Slider(sliderRef.current); // Passer la référence actuelle à l'instance de Slider
+        slider.init();
+        slider.listeners()
 
-    render() {
-        return (
-            <>
-                <section id="section-slide-works">
-                    <div className="slider js-slider" ref={this.sliderRef}>
-                        <div className="slider__inner js-slider__inner" ref={this.sliderInner}>
-                            <div className="overlay">
-                            </div></div>
+        // Retourne une fonction de nettoyage qui sera appelée au démontage du composant
+        return () => {
+            // Ici, vous pouvez nettoyer les ressources, les listeners, etc.
+            // window.removeEventListener('wheel', slider.nextSlide); // Exemple de nettoyage
+            slider.removeListeners();
+        };
+    }, []); // Le tableau vide assure que l'effet ne s'exécute qu'au montage
 
-                        {data.projects.map(project => (
-                            <div key={project.id} className="slide js-slide">
-                                <div className="slide__content">
-                                    <figure className="slide__img js-slide__img">
-                                        {/* Vous pouvez choisir d'afficher background ou thumbnail ici */}
-                                        <img src={project.thumbnail} alt={project.name} />
-                                    </figure>
+    return (
+        <>
+            <section id="section-slide-works">
+                <div className="slider js-slider" ref={sliderRef}>
+                    <div className="slider__inner js-slider__inner">
+                        <div className="overlay">
+                        </div></div>
+                    {data.projects.map(project => (
+                        <div key={'2' + project.id} className="slide js-slide">
+                            <div className="slide__content">
+                                <figure className="slide__img js-slide__img">
+                                    <Link to={`${project.slug}`}>
+                                        <img onMouseEnter={handleMouseEnter("arrow")}
+                                            onMouseLeave={handleMouseLeave}
+                                            src={project.thumbnail}
+                                            alt={project.name} />
+                                    </Link>
+                                </figure>
+
+                            </div>
+                            <div className="slider__text js-slider__text">
+                                <div className="slider__text-line js-slider__text-line">
+                                    <div className='js-slider__text-line__content name'>{project.name}</div>
                                 </div>
-                                <div className="slider__text js-slider__text">
-                                    <div className="slider__text-line js-slider__text-line"><div>{project.name}</div></div>
-                                    <div className="slider__text-line js-slider__text-line"><div className='text'>{project.description}</div></div>
-
-                                    {/* Ajoutez plus de détails de projet ici si nécessaire */}
+                                <div className="slider__text-line js-slider__text-line">
+                                    <div className='js-slider__text-line__content tags'>{project.tags}</div>
                                 </div>
+                                <div className="slider__text-line js-slider__text-line">
+                                    <div className='js-slider__text-line__content'>
+                                        <Button to={`${project.slug}`}>Voir le projet</Button>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    ))}
+                    <nav className="slider__nav js-slider__nav">
+
+                        {data.projects.map((project, index) => (
+                            <div key={project.id} className="slider-bullet js-slider-bullet">
+                                <span className="slider-bullet__text js-slider-bullet__text">{index + 1}</span>
+                                <div className="slider-bullet__container-line">
+                                    <span className="slider-bullet__container-line__line js-slider-bullet__line"></span>
+                                </div>
+
                             </div>
                         ))}
 
-                        <nav className="slider__nav js-slider__nav">
-
-                            {data.projects.map((project, index) => (
-                                <div className="slider-bullet js-slider-bullet">
-                                    <span className="slider-bullet__text js-slider-bullet__text">{index + 1}</span>
-                                    <div className="slider-bullet__container-line">
-                                        <span className="slider-bullet__container-line__line js-slider-bullet__line"></span>
-                                    </div>
-
-                                </div>
-                            ))}
-
-                        </nav>
-
-                        {/* <div className="scroll js-scroll">Scroll</div> */}
-                    </div>
-                </section>
-                <PageTransition />
-
-            </>
-        );
-    }
-}
+                    </nav>
+                </div>
+            </section>
+            <PageTransition />
+        </>
+    );
+};
 
 class Slider {
     constructor() {
-        this.bindAll()
+        this.startY = 0;
+        this.endY = 0;
+        // this.bindAll()
+        this.onWindowResize = this.onWindowResize.bind(this);
+        this.transitionSlide = this.transitionSlide.bind(this);
+        this.touchStart = this.touchStart.bind(this);
+        this.touchEnd = this.touchEnd.bind(this);
+        this.handleTouchMove = (e) => e.preventDefault(); // Empêche le comportement par défaut
+        this.render = this.render.bind(this);
+
 
         this.vert = `
         varying vec2 vUv;
@@ -158,10 +180,10 @@ class Slider {
         this.textures = null
     }
 
-    bindAll() {
-        ['render', 'nextSlide', 'onWindowResize']
-            .forEach(fn => this[fn] = this[fn].bind(this))
-    }
+    // bindAll() {
+    //     ['render', 'nextSlide', 'onWindowResize', 'touchStart', 'touchEnd', 'preventDefault']
+    //         .forEach(fn => this[fn] = this[fn].bind(this))
+    // }
 
     updateBullets(targetIndex) {
         this.bullets.forEach((bullet, index) => {
@@ -205,7 +227,9 @@ class Slider {
         this.slides.forEach((slide, index) => {
             if (index === 0) return
 
-            gsap.set(slide, { autoAlpha: 0 })
+            gsap.set(slide.querySelector('.slide__content'), { autoAlpha: 0 })
+            gsap.set(slide.querySelectorAll('.js-slider__text-line .js-slider__text-line__content'), { y: -100, })
+
         })
     }
 
@@ -274,16 +298,15 @@ class Slider {
         // Mise à jour des textures pour la transition
         this.updateTextures(this.data.current, targetIndex);
 
-
         this.updateBullets(targetIndex);
         // Commencer la transition avec GSAP
         gsap.to(this.mat.uniforms.dispPower, {
             value: 1,
-            duration: 2,
+            duration: 2.5,
             ease: "expo.inOut",
             onUpdate: this.render,
             onComplete: () => {
-                console.log("Animation Complete"); // Ajoutez cette ligne pour le débogage
+                console.log("Animation Complete");
 
                 this.mat.uniforms.dispPower.value = 0.0;
                 this.render.bind(this);
@@ -293,32 +316,93 @@ class Slider {
                 this.data.next = direction === "next"
                     ? (targetIndex + 1 >= this.images.length ? 0 : targetIndex + 1)
                     : (targetIndex - 1 < 0 ? this.images.length - 1 : targetIndex - 1);
-
             }
         });
 
-        // Animation spécifique à la direction
-        const currentSlide = this.slides[this.data.current];
-        const targetSlide = this.slides[targetIndex];
+        // Animation spécifique à la direction pour slide__content et slider__text-line
+        const currentSlideContent = this.slides[this.data.current].querySelector('.slide__content');
+        const targetSlideContent = this.slides[targetIndex].querySelector('.slide__content');
+        const currentTextLines = this.slides[this.data.current].querySelectorAll('.js-slider__text-line .js-slider__text-line__content');
+        const targetTextLines = this.slides[targetIndex].querySelectorAll('.js-slider__text-line .js-slider__text-line__content');
 
-        // Configuration de l'animation pour la slide courante et la cible
+        // Vérifier la largeur de l'écran
+        const isMobile = window.innerWidth < 992;
+
+        // Configuration de l'animation pour la slide courante et la cible (contenu)
         const tl = gsap.timeline({ paused: true });
-        tl.to(currentSlide, {
-            autoAlpha: 0,
-            duration: 1,
-            y: -200,
-            ease: "back.in(1.7)",
 
-        }).fromTo(targetSlide, {
-            autoAlpha: 0,
-            y: 200,
-        }, {
-            autoAlpha: 1,
-            y: 0,
-            duration: 1,
-            ease: "back.out(1.7)",
+        // Condition pour exécuter différentes animations basées sur la largeur de l'écran
+        if (isMobile) {
+            tl
+                // Faire disparaître simultanément les textes et le contenu de la slide actuelle
+                .to(currentTextLines, {
+                    y: "-100%",
+                    duration: 1.5,
+                    ease: "power3.inOut",
+                    stagger: 0.1
+                }, 0)
+                .to(currentSlideContent, {
+                    autoAlpha: 0,
+                    duration: 1.5,
+                    ease: "power3.inOut",
+                }, 0) // Commence en même temps que l'animation des textes
 
-        });
+            tl.addLabel("nextSlideStart", "-=.5");
+
+            // Moins de 992px - Animation pour mobile
+            tl.add(gsap.fromTo(targetTextLines, {
+                y: "100%",
+            }, {
+                y: 0,
+                duration: 1.5,
+                ease: "power3.inOut",
+                stagger: 0.1
+            }), "nextSlideStart")
+                .add(gsap.fromTo(targetSlideContent, {
+                    autoAlpha: 0,
+                }, {
+                    autoAlpha: 1,
+                    duration: 1.5,
+                    ease: "power3.inOut",
+                }), "nextSlideStart");
+        } else {
+            tl
+                // Faire disparaître simultanément les textes et le contenu de la slide actuelle
+                .to(currentTextLines, {
+                    y: "-100%",
+                    duration: 1.5,
+                    ease: "power3.inOut",
+                    stagger: 0.1
+                }, 0)
+                .to(currentSlideContent, {
+                    y: "-100%",
+                    autoAlpha: 0,
+                    duration: 1.5,
+                    ease: "back.inOut(1.7)",
+                }, 0) // Commence en même temps que l'animation des textes
+
+            tl.addLabel("nextSlideStart", "-=.5");
+
+
+            // 992px et plus - Animation pour desktop
+            tl.add(gsap.fromTo(targetTextLines, {
+                y: "100%",
+            }, {
+                y: 0,
+                duration: 1.5,
+                ease: "power3.inOut",
+                stagger: 0.1
+            }), "nextSlideStart")
+                .add(gsap.fromTo(targetSlideContent, {
+                    y: '100%',
+                    autoAlpha: 0,
+                }, {
+                    y: 0,
+                    autoAlpha: 1,
+                    duration: 1.5,
+                    ease: "back.inOut(1.7)",
+                }), "nextSlideStart");
+        }
 
         tl.play();
     }
@@ -412,6 +496,31 @@ class Slider {
         this.render();
     }
 
+    touchStart(e) {
+        e.preventDefault();
+
+        this.startY = e.touches[0].clientY;
+    }
+
+    touchEnd(e) {
+        this.endY = e.changedTouches[0].clientY;
+        this.handleSwipeGesture();
+    }
+
+    handleSwipeGesture() {
+        const threshold = 50; // Seuil minimal de déplacement en pixels pour considérer le geste comme un swipe
+        const swipeDistance = this.startY - this.endY;
+
+        if (swipeDistance > threshold) {
+            // Swipe vers le haut
+            this.transitionSlide("next");
+        } else if (swipeDistance < -threshold) {
+            // Swipe vers le bas
+            this.transitionSlide("prev");
+        }
+    }
+
+
 
     render() {
         this.renderer.render(this.scene, this.camera)
@@ -424,13 +533,10 @@ class Slider {
         this.createMesh()
         this.updateBullets(0)
         this.render()
-        this.listeners()
     }
-
 
     listeners() {
         window.addEventListener('resize', this.onWindowResize, false);
-
 
         window.addEventListener('wheel', (e) => {
             if (e.deltaY > 0) {
@@ -439,7 +545,23 @@ class Slider {
                 this.transitionSlide("prev");
             }
         }, { passive: true });
+
+        this.el.addEventListener('touchstart', this.touchStart, { passive: true });
+        this.el.addEventListener('touchend', this.touchEnd, { passive: true });
+
+        document.body.addEventListener('touchmove', this.handleTouchMove, { passive: false });
+
+    }
+
+    // Méthode pour supprimer les écouteurs d'événements
+    removeListeners() {
+        window.removeEventListener('resize', this.handleResize);
+        window.removeEventListener('wheel', this.handleWheel);
+        this.el.removeEventListener('touchstart', this.touchStart);
+        this.el.removeEventListener('touchend', this.touchEnd);
+        document.body.removeEventListener('touchmove', this.handleTouchMove);
     }
 }
+
 
 export default WorksPage;

@@ -49,7 +49,7 @@ const FixedHeightCanvas = ({ isLoading }) => {
   // Initialisation des états pour la taille du canvas et la largeur précédente de la fenêtre
   const [size, setSize] = useState({
     width: window.innerWidth,
-    height: "100vh", // Utilisation de la hauteur initiale de la fenêtre
+    height: "100svh", // Utilisation de la hauteur initiale de la fenêtre
   });
   const [prevWindowWidth, setPrevWindowWidth] = useState(window.innerWidth);
 
@@ -59,7 +59,7 @@ const FixedHeightCanvas = ({ isLoading }) => {
       const currentWidth = window.innerWidth;
       // Vérifiez si la largeur de la fenêtre a changé
         // Mise à jour de la largeur et de la hauteur si la largeur de la fenêtre a changé
-        setSize({ width: currentWidth, height: "100vh" });
+        setSize({ width: currentWidth, height: "100svh" });
   
     };
 

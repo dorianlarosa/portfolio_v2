@@ -34,7 +34,7 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 
 function App() {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const lenis = useLenis(); // Utilisez le hook pour obtenir l'instance de Lenis
   const [progress, setProgress] = useState(0); // Nouvel état pour le pourcentage de chargement
 
@@ -122,9 +122,9 @@ function App() {
       ) : (
         <>
           <Header />
+          <LenisController />
 
           <AnimatePresence mode='wait' initial={false} >
-            <LenisController />
             <Routes key={location.pathname} location={location} >
               <Route path="/" exact element={<Home />} />
               <Route path="/a-propos" element={<About />} />

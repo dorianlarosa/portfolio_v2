@@ -176,7 +176,7 @@ const Home = () => {
             <p>
             Mon engagement se caractérise par une écoute attentive et un souci du détail sans faille, essentiels pour comprendre et répondre à vos besoins spécifiques ainsi qu'à vos enjeux stratégiques. Armé d'une expertise approfondie en développement de site web et en design web, je propose des solutions sur mesure qui non seulement répondent à vos attentes mais aspirent à les surpasser.
             </p>
-            <Button>Qui suis-je ?</Button>
+            <Button to={"a-propos"}>Qui suis-je ?</Button>
           </div>
 
           <div className="right" id="container-images-about">
