@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { PageTransition, Button, BadgeScroll, Section, SvgFlower, SplitText, BannerImage } from "../../components";
-import image from './Dorian_LA_ROSA.png';
+import image from './dorian_la_rosa.jpg';
 
 import "./About.scss";
 
