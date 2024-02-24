@@ -36,35 +36,39 @@ const WorksPage = () => {
                         <div className="overlay">
                         </div></div>
                     {data.projects.map(project => (
-                        <div key={'2' + project.id} className="slide js-slide">
-                            <div className="slide__content">
-                                <figure className="slide__img js-slide__img">
-                                    <Link to={`${project.slug}`}>
-                                        <img onMouseEnter={handleMouseEnter("arrow")}
-                                            onMouseLeave={handleMouseLeave}
-                                            src={project.thumbnail}
-                                            alt={project.name} />
-                                    </Link>
-                                </figure>
+                        <div key={'slide-' + project.id} className="slide js-slide">
+                            <div className="container slide__wrapper">
 
-                            </div>
-                            <div className="slider__text js-slider__text">
-                                <div className="slider__text-line js-slider__text-line">
-                                    <div className='js-slider__text-line__content name'>{project.name}</div>
+                                <div className="slide__wrapper__content">
+                                    <figure className="slide__wrapper__img js-slide__wrapper__img">
+                                        <Link to={`${project.slug}`}>
+                                            <img onMouseEnter={handleMouseEnter("arrow")}
+                                                onMouseLeave={handleMouseLeave}
+                                                src={project.thumbnail}
+                                                alt={project.name} />
+                                        </Link>
+                                    </figure>
+
                                 </div>
-                                <div className="slider__text-line js-slider__text-line">
-                                    <div className='js-slider__text-line__content tags'>{project.tags}</div>
-                                </div>
-                                <div className="slider__text-line js-slider__text-line">
-                                    <div className='js-slider__text-line__content link'>
-                                        <CustomLink to={`${project.slug}`}>Voir le projet</CustomLink>
+                                <div className="slider__text js-slider__text">
+                                    <div className="slider__text-line js-slider__text-line">
+                                        <div className='js-slider__text-line__content name'>{project.name}</div>
                                     </div>
+                                    <div className="slider__text-line js-slider__text-line">
+                                        <div className='js-slider__text-line__content tags'>{project.tags}</div>
+                                    </div>
+                                    <div className="slider__text-line js-slider__text-line">
+                                        <div className='js-slider__text-line__content link'>
+                                            <CustomLink to={`${project.slug}`}>Voir le projet</CustomLink>
+                                        </div>
+                                    </div>
+
+
+
                                 </div>
-
-
-
                             </div>
                         </div>
+
                     ))}
                     <nav className="slider__nav js-slider__nav">
 
@@ -98,6 +102,12 @@ class Slider {
         this.handleTouchMove = (e) => e.preventDefault(); // Empêche le comportement par défaut
         this.render = this.render.bind(this);
 
+        this.textures = [];
+        // Initialisation de l'objet state
+        this.state = {
+            isLoading: true, // Définir l'état de chargement initial sur true
+        };
+
 
         this.vert = `
         varying vec2 vUv;
@@ -116,9 +126,13 @@ class Slider {
 
         uniform float dispPower;
         uniform float intensity;
+        uniform float transitionAlpha; // Ajout de l'uniforme pour la transition
 
         uniform vec2 size;
         uniform vec2 res;
+
+        uniform bool isInitialTransition; // true pour la transition initiale, false autrement
+
 
         vec2 backgroundCoverUv( vec2 screenSize, vec2 imageSize, vec2 uv ) {
           float screenRatio = screenSize.x / screenSize.y;
@@ -131,26 +145,27 @@ class Slider {
               : vec2(0.0, (newSize.y - screenSize.y) / 2.0)) / newSize;
           return uv * screenSize / newSize + newOffset;
         }
-
         void main() {
             vec2 uv = vUv;
-            
-            // Appliquez la fonction backgroundCoverUv pour calculer les nouvelles coordonnées UV
             vec2 coverUv = backgroundCoverUv(res, size, uv);
             
             vec4 disp = texture2D(disp, coverUv);
             vec2 dispVec = vec2(disp.r * 2.0 - 1.0, disp.g * 2.0 - 1.0);
             
-            vec2 distPos1 = coverUv + (dispVec * intensity * dispPower);
-            vec2 distPos2 = coverUv - (dispVec * -(intensity * (1.0 - dispPower)));
+            // Calcul des couleurs des textures en fonction de dispPower
+            vec4 textureColor1 = texture2D(texture1, coverUv + (dispVec * intensity * dispPower));
+            vec4 textureColor2 = texture2D(texture2, coverUv + (dispVec * intensity * (1.0 - dispPower))); // Texture 2 avec distorsion
             
-            vec4 _texture1 = texture2D(texture1, distPos1);
-            vec4 _texture2 = texture2D(texture2, distPos2);
+            // Mélange des couleurs en fonction de dispPower et isInitialTransition
+            vec4 finalColor = isInitialTransition ? textureColor1 : mix(textureColor1, textureColor2, dispPower);
             
-            gl_FragColor = mix(_texture1, _texture2, dispPower);
+            // Application de transitionAlpha uniquement lors de la transition initiale
+            gl_FragColor = isInitialTransition ? mix(vec4(0.0, 0.0, 0.0, 1.0), finalColor, transitionAlpha) : finalColor;
         }
         
         `
+
+
 
         this.el = document.querySelector('.js-slider')
         this.inner = this.el.querySelector('.js-slider__inner')
@@ -184,6 +199,102 @@ class Slider {
     //     ['render', 'nextSlide', 'onWindowResize', 'touchStart', 'touchEnd', 'preventDefault']
     //         .forEach(fn => this[fn] = this[fn].bind(this))
     // }
+
+    animateFirstTexture() {
+        if (!this.mat || !this.mat.uniforms) {
+            console.error('Material is not initialized.');
+            return;
+        }
+
+        // Assurez-vous que dispPower est réglé pour ne pas interférer avec cette animation initiale.
+        this.mat.uniforms.dispPower.value = 1; // Ou assurez-vous que cela correspond à votre logique initiale souhaitée.
+        // this.mat.uniforms.transitionAlpha.value = 0; // Ou assurez-vous que cela correspond à votre logique initiale souhaitée.
+
+        // Animer uniquement transitionAlpha de 0 (fond noir) à 1 (révéler la première texture).
+        gsap.to(this.mat.uniforms.transitionAlpha, {
+            value: 1,
+            duration: 2.5,
+            ease: "expo.inOut",
+            onStart: () => {
+                // Assurez-vous que texture1 est correctement définie si nécessaire.
+            },
+            onUpdate: () => this.render(),
+            onComplete: () => {
+              
+                // Ici, vous pouvez initialiser l'état pour les transitions de slide si nécessaire.
+
+            }
+        });
+
+        // // Animer uniquement transitionAlpha de 0 (fond noir) à 1 (révéler la première texture).
+        gsap.to(this.mat.uniforms.dispPower, {
+            value: 0,
+            duration: 2.5,
+            ease: "expo.inOut",
+            onStart: () => {
+                // Assurez-vous que texture1 est correctement définie si nécessaire.
+            },
+            onUpdate: () => this.render(),
+            onComplete: () => {
+                // Ici, vous pouvez initialiser l'état pour les transitions de slide si nécessaire.
+                this.mat.uniforms.isInitialTransition.value = false; // Ou assurez-vous que cela correspond à votre logique initiale souhaitée.
+
+            }
+        });
+
+        // Animation spécifique à la direction pour slide__wrapper__content et slider__text-line
+        const currentSlideContent = this.slides[this.data.current].querySelector('.slide__wrapper__content');
+        const currentTextLines = this.slides[this.data.current].querySelectorAll('.js-slider__text-line .js-slider__text-line__content');
+        const isMobile = window.innerWidth < 992;
+        const tl = gsap.timeline({ paused: true });
+
+        // Condition pour exécuter différentes animations basées sur la largeur de l'écran
+        if (isMobile) {
+
+
+            // Moins de 992px - Animation pour mobile
+            tl.add(gsap.fromTo(currentTextLines, {
+                y: "100%",
+            }, {
+                y: 0,
+                duration: 1.5,
+                ease: "power3.inOut",
+                stagger: 0.1
+            }), 1)
+                .add(gsap.fromTo(currentSlideContent, {
+                    autoAlpha: 0,
+                }, {
+                    autoAlpha: 1,
+                    duration: 1.5,
+                    ease: "power3.inOut",
+                }), 1.5);
+        } else {
+
+
+
+            // 992px et plus - Animation pour desktop
+            tl.add(gsap.fromTo(currentTextLines, {
+                y: "100%",
+            }, {
+                y: 0,
+                duration: 1.5,
+                ease: "power3.inOut",
+                stagger: 0.1
+            }), 1.5)
+                .add(gsap.fromTo(currentSlideContent, {
+                    y: "100%",
+                    autoAlpha: 0,
+                }, {
+                    y: 0,
+                    autoAlpha: 1,
+                    duration: 1.5,
+                    ease: "back.inOut(1.7)",
+                }), 1.5);
+        }
+
+        tl.play();
+    }
+
 
     updateBullets(targetIndex) {
         this.bullets.forEach((bullet, index) => {
@@ -225,38 +336,38 @@ class Slider {
         this.inner.appendChild(this.renderer.domElement)
 
         this.slides.forEach((slide, index) => {
-            if (index === 0) return
 
-            gsap.set(slide.querySelector('.slide__content'), { autoAlpha: 0 })
+            gsap.set(slide.querySelector('.slide__wrapper__content'), { autoAlpha: 0 })
             gsap.set(slide.querySelectorAll('.js-slider__text-line .js-slider__text-line__content'), { y: "-110%", })
 
         })
     }
 
     loadTextures() {
-        const loader = new THREE.TextureLoader()
-        loader.crossOrigin = ''
+        const loader = new THREE.TextureLoader();
+        loader.crossOrigin = '';
+        const texturePromises = this.images.map(image =>
+            new Promise(resolve => {
+                loader.load(image + '?v=' + Date.now(), texture => {
+                    texture.minFilter = THREE.LinearFilter;
+                    texture.generateMipmaps = false;
+                    resolve(texture); // Résoudre avec la texture chargée
+                });
+            })
+        );
 
-        this.textures = []
-        this.images.forEach((image, index) => {
-            const texture = loader.load(image + '?v=' + Date.now(), this.render)
-
-            texture.minFilter = THREE.LinearFilter
-            texture.generateMipmaps = false
-
-            if (index === 0 && this.mat) {
-                this.mat.uniforms.size.value = [
-                    texture.image.naturalWidth,
-                    texture.image.naturalHeight
-                ]
-            }
-
-            this.textures.push(texture)
-        })
-
-        this.disp = loader.load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/rock-_disp.png', this.render)
-        this.disp.magFilter = this.disp.minFilter = THREE.LinearFilter
-        this.disp.wrapS = this.disp.wrapT = THREE.RepeatWrapping
+        Promise.all(texturePromises).then(loadedTextures => {
+            this.textures = loadedTextures;
+            this.disp = loader.load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/rock-_disp.png', () => {
+                this.createMesh(); // Appelé après le chargement complet
+                this.animateFirstTexture();
+                this.render();
+            });
+            this.disp.magFilter = this.disp.minFilter = THREE.LinearFilter;
+            this.disp.wrapS = this.disp.wrapT = THREE.RepeatWrapping;
+        }).catch(error => {
+            console.error("Error loading textures:", error);
+        });
     }
 
     createMesh() {
@@ -264,6 +375,8 @@ class Slider {
             uniforms: {
                 dispPower: { type: 'f', value: 0.0 },
                 intensity: { type: 'f', value: 0.5 },
+                transitionAlpha: { type: 'f', value: 0.0 },
+                isInitialTransition: { value: true },
                 res: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
                 size: { value: new THREE.Vector2(1920, 1020) },
                 texture1: { type: 't', value: this.textures[0] },
@@ -306,10 +419,13 @@ class Slider {
             ease: "expo.inOut",
             onUpdate: this.render,
             onComplete: () => {
-                console.log("Animation Complete");
+
 
                 this.mat.uniforms.dispPower.value = 0.0;
+                this.mat.uniforms.isInitialTransition.value = false;
+
                 this.render.bind(this);
+
                 this.state.animating = false;
                 // Mise à jour des indices de slide après la transition
                 this.data.current = targetIndex;
@@ -319,9 +435,9 @@ class Slider {
             }
         });
 
-        // Animation spécifique à la direction pour slide__content et slider__text-line
-        const currentSlideContent = this.slides[this.data.current].querySelector('.slide__content');
-        const targetSlideContent = this.slides[targetIndex].querySelector('.slide__content');
+        // Animation spécifique à la direction pour slide__wrapper__content et slider__text-line
+        const currentSlideContent = this.slides[this.data.current].querySelector('.slide__wrapper__content');
+        const targetSlideContent = this.slides[targetIndex].querySelector('.slide__wrapper__content');
         const currentTextLines = this.slides[this.data.current].querySelectorAll('.js-slider__text-line .js-slider__text-line__content');
         const targetTextLines = this.slides[targetIndex].querySelectorAll('.js-slider__text-line .js-slider__text-line__content');
 
@@ -351,7 +467,7 @@ class Slider {
 
             // Moins de 992px - Animation pour mobile
             tl.add(gsap.fromTo(targetTextLines, {
-                y: "100%",
+                y: "100%" ,
             }, {
                 y: 0,
                 duration: 1.5,
@@ -375,7 +491,7 @@ class Slider {
                     stagger: 0.1
                 }, 0)
                 .to(currentSlideContent, {
-                    y: "-100%",
+                    y: direction === "next" ? "-100%" : "100%",
                     autoAlpha: 0,
                     duration: 1.5,
                     ease: "back.inOut(1.7)",
@@ -394,7 +510,7 @@ class Slider {
                 stagger: 0.1
             }), "nextSlideStart")
                 .add(gsap.fromTo(targetSlideContent, {
-                    y: '100%',
+                    y: direction === "next" ? "100%" : "-100%",
                     autoAlpha: 0,
                 }, {
                     y: 0,
@@ -530,9 +646,9 @@ class Slider {
         this.setup()
         this.cameraSetup()
         this.loadTextures()
-        this.createMesh()
+        // this.createMesh()
         this.updateBullets(0)
-        this.render()
+        // this.render()
     }
 
     listeners() {

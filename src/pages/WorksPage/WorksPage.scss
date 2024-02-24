@@ -223,121 +223,29 @@
         z-index: 20;
         pointer-events: none;
 
-        @media (max-width: 991.98px) {
-            display: flex;
-            flex-direction: column-reverse;
-            justify-content: center;
-            align-items: center;
-            padding-top: 4rem;
-            padding-bottom: 2rem;
-
-        }
-
-        &__content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            // left: 35vw;
-            top: 6rem;
-            right: 5rem;
-            bottom: 0;
-            
-
-            @media (max-width: 991.98px) {
-                position: relative;
-                left: initial;
-                top: initial;
-                right: initial;
-                bottom: initial;
-                margin-top: var(--xl-sizing);
-            }
-
-            // @media (max-width: 991.98px) {
-            //     left: 0;
-            //     height: 50vh;
-            //     // top: initial;
-            //     // bottom: 7rem;
-            //     top: 40vh;
-
-            // }
-            // @media (max-width: 575.98px) {
-            //     // bottom: 2rem;
-            //     // bottom: 4vh;
-            //     bottom: initial;
-            //     top: 35vh;
-
-            // }
-
-
-        }
-
-        &__img {
+        &__wrapper {
             position: relative;
-            padding: 0;
-            display: block;
-            width: 50vw;
-            /* Largeur définie */
-            height: auto;
-            /* Hauteur initialement définie à 0 */
-
-            margin: 0;
-            min-width: 12.5rem;
-            transform-origin: top;
-
-            // Large devices (desktops, less than 1200px)
+            height: 100svh;
 
             @media (max-width: 991.98px) {
-                width: 70vw;
-
+                display: flex;
+                flex-direction: column-reverse;
+                justify-content: center;
+                align-items: center;
+                padding-top: 4rem;
+                padding-bottom: 2rem;
+    
             }
-
-            @media (max-width: 767.98px) {
-                width: 90vw;
-
-            }
-
-
-
-            @media (hover: hover) {
-                img {
-                    filter: brightness(70%) contrast(110%);
-
-                }
-
-                &:hover {
-
-                    img {
-                        filter: brightness(90%) contrast(110%);
-
-                        transform: translateY(-50%) scale(.98);
-
-                        @media (max-width: 991.98px) {
-                            transform: scale(.98);
-                        }
-                    }
-                }
-            }
-
-            // &:first-child {
-            //     top: -1.5rem;
-            // }
-
-            // &:last-child {
-            //     bottom: -1.5rem;
-            // }
-
-            img {
-                pointer-events: all;
-
-                display: block;
+            &__content {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                transform: translateY(-50%) scale(1);
-                height: auto;
-                transition: all .8s;
+                // left: 35vw;
+                top: 6rem;
+                right: 5rem;
+                bottom: 0;
+
 
                 @media (max-width: 991.98px) {
                     position: relative;
@@ -345,10 +253,107 @@
                     top: initial;
                     right: initial;
                     bottom: initial;
-                    transform: scale(1);
+                    margin-top: var(--xl-sizing);
+                }
+
+                // @media (max-width: 991.98px) {
+                //     left: 0;
+                //     height: 50vh;
+                //     // top: initial;
+                //     // bottom: 7rem;
+                //     top: 40vh;
+
+                // }
+                // @media (max-width: 575.98px) {
+                //     // bottom: 2rem;
+                //     // bottom: 4vh;
+                //     bottom: initial;
+                //     top: 35vh;
+
+                // }
+
+
+            }
+
+            &__img {
+                position: relative;
+                padding: 0;
+                display: block;
+                width: 50vw;
+                max-width: 1000px;
+                /* Largeur définie */
+                height: auto;
+                /* Hauteur initialement définie à 0 */
+
+                margin: 0;
+                min-width: 12.5rem;
+                transform-origin: top;
+
+                // Large devices (desktops, less than 1200px)
+
+                @media (max-width: 991.98px) {
+                    width: 70vw;
 
                 }
 
+                @media (max-width: 767.98px) {
+                    width: 90vw;
+
+                }
+
+
+
+                @media (hover: hover) {
+                    img {
+                        filter: brightness(70%) contrast(110%);
+
+                    }
+
+                    &:hover {
+
+                        img {
+                            filter: brightness(90%) contrast(110%);
+
+                            transform: translateY(-50%) scale(1.02);
+
+                            @media (max-width: 991.98px) {
+                                transform: scale(1.02);
+                            }
+                        }
+                    }
+                }
+
+                // &:first-child {
+                //     top: -1.5rem;
+                // }
+
+                // &:last-child {
+                //     bottom: -1.5rem;
+                // }
+
+                img {
+                    pointer-events: all;
+
+                    display: block;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    transform: translateY(-50%) scale(1);
+                    height: auto;
+                    transition: all .8s;
+
+                    @media (max-width: 991.98px) {
+                        position: relative;
+                        left: initial;
+                        top: initial;
+                        right: initial;
+                        bottom: initial;
+                        transform: scale(1);
+
+                    }
+
+                }
             }
         }
     }

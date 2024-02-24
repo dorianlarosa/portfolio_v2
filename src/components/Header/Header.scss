@@ -31,7 +31,7 @@
         #wrapper-logo {}
 
         #logo {
-            stroke: var(--white-color);
+            stroke: white;
             height: 50px;
             display: block;
 
@@ -58,17 +58,17 @@
 
 
             .nav-link {
-                font-size: 1rem;
+                font-size: 1.05rem;
                 text-transform: uppercase;
                 margin-left: 2rem;
-                color: var(--white-color);
-
-                opacity: .8;
+                color: white;
                 transition: all .1s;
-
+                opacity: 1;
+                font-weight: 500;
+                opacity: .7;
                 &.active {
+                    text-decoration: line-through;
                     opacity: 1;
-
                 }
 
                 @media (hover: hover) {

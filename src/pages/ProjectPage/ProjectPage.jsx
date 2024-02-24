@@ -49,7 +49,6 @@ const ProjectPage = (props) => {
   }, [contentLoaded]); // S'exécute avant la première peinture
 
   useEffect(() => {
-    ScrollTrigger.refresh();
 
     const { slug } = props.params;
     const currentIndex = data.projects.findIndex(project => project.slug === slug);
@@ -66,26 +65,29 @@ const ProjectPage = (props) => {
       setProjectFound(false);
     }
     console.log(project);
-  }, [props.params]);
+  }, [props.params, data, nextProjectBackground.current]);
 
 
   useEffect(() => {
-    gsap.fromTo(nextProjectBackground.current,
-      {
-        y: "-15%", // Commence avec un petit décalage vers le haut pour l'effet parallaxe
-      },
-      {
-        y: "15%", // Déplace l'image vers le bas au fur et à mesure que l'utilisateur fait défiler la page
-        ease: "none",
-        scrollTrigger: {
-          trigger: nextProjectBackground.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true, // Lie l'animation au défilement
+    if (nextProjectBackground.current) {
+      gsap.fromTo(nextProjectBackground.current,
+        {
+          y: "-15%", // Commence avec un petit décalage vers le haut pour l'effet parallaxe
+        },
+        {
+          y: "15%", // Déplace l'image vers le bas au fur et à mesure que l'utilisateur fait défiler la page
+          ease: "none",
+          scrollTrigger: {
+            trigger: nextProjectBackground.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true, // Lie l'animation au défilement
+          }
         }
-      }
-    );
-  }, [contentLoaded]);
+      );
+    }
+
+  }, [contentLoaded, data, nextProjectBackground]);
   useEffect(() => {
     if (nextProjectBackground.current) {
       const image = nextProjectBackground.current;
@@ -104,7 +106,9 @@ const ProjectPage = (props) => {
         image.removeEventListener("mouseleave", handleMouseLeave);
       };
     }
-  }, [contentLoaded]);
+    ScrollTrigger.refresh();
+
+  }, [contentLoaded, data, nextProjectBackground.current]);
 
   if (!projectFound) {
     return <NotFound />;
