@@ -89,10 +89,33 @@
 
                 .intro {
                     margin-bottom: var(--l-sizing);
+                    font-size: 2rem;
+                    line-height: 1.7;
+
+                    @media (max-width: 1199.98px) {
+                        font-size: 1.7rem;
+                    }
+
+                    @media (max-width: 991.98px) {
+                        font-size: 2rem;
+
+                    }
+
+                    @media (max-width: 575.98px) { 
+                        font-size: 1.75rem;
+                     }
                 }
 
                 @media (max-width: 991.98px) {
                     width: 100%;
+                    max-width: initial;
+
+                }
+
+
+
+                .second-text {
+                    margin-top: var(--m-sizing);
                 }
 
                 .button {
@@ -167,7 +190,7 @@
                     top: 24rem;
 
                     @media (max-width: 1999.98px) {
-                        top: 16vw;
+                        top: 21vw;
                     }
 
                     @media (max-width: 1399.98px) {
@@ -302,6 +325,33 @@
 
     #services-section {
 
+        .row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            .left {
+                width: 100%;
+                max-width: 1110px;
+
+                .intro {
+                    font-size: 3.5rem;
+
+                    @media (max-width: 1199.98px) {
+                        font-size: 2.8rem;
+                    }
+
+                    @media (max-width: 991.98px) {
+                        font-size: 2rem;
+                    }
+
+                    @media (max-width: 575.98px) { 
+                        font-size: 1.5rem;
+                     }
+                }
+            }
+        }
+
         .list-services {
             margin-top: var(--xxl-sizing);
 
@@ -323,8 +373,8 @@
 
 
                     .name {
-                        padding: 1rem 0;
-                        margin: .5rem 0;
+                        padding: 1.5rem 0;
+                        margin: 1rem 0;
                         background-color: transparent;
                         color: var(--white-color);
                         cursor: pointer;
@@ -332,8 +382,8 @@
                         border: none;
                         text-align: left;
                         outline: none;
-                        font-size: 1.5rem;
-                        font-weight: 300;
+                        font-size: 1.75rem;
+                        font-weight: 500;
                         transition: 0.4s;
                         display: flex;
                         justify-content: space-between;
@@ -348,7 +398,7 @@
                         @media (max-width: 575.98px) {
                             padding: 1.5rem 0;
                             margin: 0rem 0;
-                            font-size: 1.25rem;
+                            font-size: 1.2rem;
                         }
 
                         @media (hover: hover) {

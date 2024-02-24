@@ -132,14 +132,16 @@ h6 {
 p {
     text-wrap: pretty;
     line-height: 1.8;
+    font-size: 1.1rem;
+
+    @media (max-width: 1199.98px) {
+        font-size: 1.1rem;
+    }
 
     @media (max-width: 991.98px) {
-        line-height: 1.6;
+        font-size: 1rem;
     }
 
-    @media (max-width: 575.98px) {
-        line-height: 1.4;
-    }
 
 
 }

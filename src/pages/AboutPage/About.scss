@@ -159,9 +159,12 @@
                     font-family: var(--font-text);
                     font-size: 3rem;
                     display: flex;
+                    margin-bottom: var(--l-sizing);
+
+            
 
                     @media (max-width: 575.98px) {
-                        font-size: 2rem;
+                        font-size: 2.5rem;
                     }
 
 
@@ -206,6 +209,19 @@
 
                 .intro {
                     position: relative;
+                    font-size: 2.3rem;
+
+                    @media (max-width: 1199.98px) {
+                        font-size: 1.75rem;
+                    }
+
+                    @media (max-width: 991.98px) {
+                        font-size: 2rem;
+                    }
+
+                    @media (max-width: 575.98px) { 
+                        font-size: 1.3rem;
+                     }
 
                     .letter,
                     .word {

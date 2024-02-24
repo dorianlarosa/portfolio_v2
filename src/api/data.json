@@ -157,33 +157,33 @@
     "services": [
         {
           "nom": "Conception de Sites Web",
-          "description": "Je propose un service complet de conception et développement de sites web incluant des sites vitrines, e-commerce, et blogs professionnels, avec une attention particulière portée au responsive design pour garantir une expérience utilisateur optimale sur tous les appareils. En plus, je développe des fonctionnalités spécifiques sur mesure pour répondre à vos besoins uniques, en utilisant les dernières technologies web pour assurer que votre site soit esthétique, fonctionnel et optimisé.",
+          "description": "Je conçois des sites vitrines, e-commerce et blogs, en mettant l'accent sur le responsive design et en intégrant des fonctionnalités sur mesure avec les technologies les plus récentes pour une esthétique et fonctionnalité optimales.",
           "tags": ["Développement HTML/CSS", "JavaScript", "WordPress", "Shopify", "CMS personnalisé", "Design responsive", "Développement personnalisé", "Intégration API"]
         },
         {
           "nom": "Refonte de Sites Web existant",
-          "description": "Améliorez l'impact de votre présence en ligne grâce à une refonte complète de votre site. J'évalue l'architecture, le design et les fonctionnalités existantes pour les mettre à jour selon les standards actuels, améliorant ainsi l'expérience utilisateur et la performance globale de votre site.",
+          "description": "Optimisez votre site avec une refonte axée sur l'amélioration de l'UX/UI, la performance et la mise à jour technologique pour renforcer votre présence en ligne.",
           "tags": ["Refonte UX/UI", "Optimisation responsive", "Mise à jour CMS", "Amélioration SEO"]
         },
         {
-          "nom": "Maintenance et Support",
-          "description": "Offrez à votre site la maintenance et le support technique dont il a besoin pour fonctionner sans interruption. Je propose des services de maintenance régulière, des mises à jour de sécurité et un support technique réactif pour résoudre les problèmes et garantir la performance optimale de votre site web.",
-          "tags": ["Maintenance de site web", "Mises à jour de sécurité", "Support technique", "Sauvegarde et restauration"]
-        },
-        {
           "nom": "UI/UX Design",
-          "description": "Créez une expérience utilisateur mémorable avec un design UI/UX réfléchi. Je conçois des interfaces attrayantes et intuitives, en mettant l'accent sur la facilité d'utilisation et l'engagement des utilisateurs, pour convertir les visiteurs en clients fidèles.",
+          "description": "Je crée des interfaces utilisateur attractives et intuitives, favorisant une expérience utilisateur engageante pour transformer les visiteurs en clients.",
           "tags": ["Design UI/UX", "Wireframing", "Prototypage", "Test utilisateur", "Accessibilité web"]
         },
         {
           "nom": "Identité Visuelle et Branding",
-          "description": "Développez une identité de marque forte et cohérente sur le web. Je vous aide à créer ou à raffiner votre identité visuelle, y compris le logo, la palette de couleurs, et la charte graphique, pour assurer une présence en ligne qui reflète véritablement votre marque et attire votre public cible.",
+          "description": "Je façonne votre identité de marque sur le web avec un design unique incluant logo, palette de couleurs et charte graphique pour une image de marque forte et cohérente.",
           "tags": ["Création de logo", "Branding", "Design graphique", "Palette de couleurs", "Charte graphique"]
         },
         {
           "nom": "Hébergement et Sécurité Web",
-          "description": "Garantissez la sécurité et la disponibilité de votre site avec des solutions d'hébergement fiables et des mesures de sécurité robustes. Je conseille sur les meilleures options d'hébergement et implémente des pratiques de sécurité de pointe pour protéger votre site contre les menaces en ligne.",
+          "description": "Je fournis des solutions d'hébergement fiables et sécurisées, conseillant sur les meilleures options et mettant en place des mesures de sécurité avancées pour votre site.",
           "tags": ["Hébergement web", "Sécurité SSL", "Protection contre le piratage", "Sauvegardes automatisées"]
+        },
+        {
+          "nom": "Maintenance et Support",
+          "description": "Assurez le bon fonctionnement de votre site avec une maintenance régulière, des mises à jour de sécurité et un support technique rapide pour une performance sans faille.",
+          "tags": ["Maintenance de site web", "Mises à jour de sécurité", "Support technique", "Sauvegarde et restauration"]
         }
       ]
 }

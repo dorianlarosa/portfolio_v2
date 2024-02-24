@@ -57,9 +57,7 @@ const About = () => {
         }
       });
     });
-  }, []);
 
-  useEffect(() => {
     const tl = gsap.timeline();
 
 
@@ -69,7 +67,9 @@ const About = () => {
     // Rétracter l'overlay de gauche à droite en changeant le transformOrigin
     tl.to(".overlay", { duration: 1.25, scaleX: 0, transformOrigin: 'right', ease: "sine.inOut" })
       .fromTo(".image", { autoAlpha: 0, scale: 1.2 }, { autoAlpha: 1, scale: 1, duration: 1.25, ease: "power1.easeInOut" }, "<");
-  });
+  }, [image]);
+
+
 
   /* ---------- GSAP timeline --------- */
 
@@ -96,7 +96,6 @@ const About = () => {
 
               <p className='intro intro-about' data-aos="fade" data-aos-delay={1500} >
 
-
                 Forte d'une riche expérience, ma spécialisation s'étend du <b>branding d'entreprises</b> à la <b>création de logos</b> et <b>chartes graphiques</b>, en mettant un accent particulier sur la <b>conception</b> et le <b>développement de sites web</b> innovants.                            </p>
 
               {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nemo libero at natus sint exercitationem totam quidem quas assumenda quos quia quis praesentium eveniet ad ex commodi, illum illo nisi.</p> */}
@@ -107,8 +106,6 @@ const About = () => {
             <div className="container-image">
               <img className="image" src={image} alt="" />
               <div className="overlay"></div>
-
-
             </div>
 
 
@@ -132,7 +129,10 @@ const About = () => {
           <div className="right" data-aos-anchor="#row-philosophie" data-aos="fade-up" data-aos-delay="200">
 
             <p className="intro intro--small" ref={introRef1}>
-              <SplitText splitType="words" str={"Au cœur de ma démarche créative se trouve une attention particulière à l'expérience utilisateur. Je suis convaincu que la réussite d'un site web réside dans son habileté à offrir une navigation intuitive, soutenue par un design attrayant et une attention méticuleuse aux détails. Chaque projet est une opportunité de créer des expériences uniques, qui non seulement répondent aux besoins des utilisateurs mais les dépassent, tout en se démarquant dans le paysage numérique actuel."} />
+              <SplitText splitType="words" str={"Au cœur de ma démarche créative se trouve une attention particulière à l'expérience utilisateur. Je suis convaincu que la réussite d'un site web réside dans son habileté à offrir une navigation intuitive, soutenue par un design attrayant et une attention méticuleuse aux détails."} />
+              <br /><br />
+              <SplitText splitType="words" str={"Chaque projet est une opportunité de créer des expériences uniques, qui non seulement répondent aux besoins des utilisateurs mais les dépassent, tout en se démarquant dans le paysage numérique actuel."} />
+            
             </p>
           </div>
 
@@ -145,7 +145,10 @@ const About = () => {
 
           <div className="right" data-aos-anchor="#row-demarche" data-aos="fade-up" data-aos-delay="200">
             <p className="intro intro--small" ref={introRef2}>
-              <SplitText splitType="words" str={"Ma méthode de travail est fondée sur l'écoute et la collaboration. Je débute chaque projet par une phase de découverte approfondie, visant à comprendre vos objectifs et vos attentes. Cette compréhension me guide tout au long du processus de création, depuis la conception initiale jusqu'à la réalisation finale, en passant par des itérations basées sur vos retours. Mon objectif est de vous fournir une solution personnalisée qui transcende votre vision et favorise l'engagement de votre audience."} />
+              <SplitText splitType="words" str={"Ma méthode de travail est fondée sur l'écoute et la collaboration. Je débute chaque projet par une phase de découverte approfondie, visant à comprendre vos objectifs et vos attentes."} />
+              <br /><br />
+              <SplitText splitType="words" str={"Cette compréhension me guide tout au long du processus de création, depuis la conception initiale jusqu'à la réalisation finale, en passant par des itérations basées sur vos retours. Mon objectif est de vous fournir une solution personnalisée qui transcende votre vision et favorise l'engagement de votre audience."} />
+
             </p>
           </div>
 
@@ -159,7 +162,10 @@ const About = () => {
           <div className="right" data-aos-anchor="#row-confiance" data-aos="fade-up" data-aos-delay="200">
 
             <p className="intro intro--small" ref={introRef3}>
-              <SplitText splitType="words" str={"Au-delà de mes compétences techniques, je m'efforce de construire des relations solides et durables avec mes clients, basées sur la confiance, la transparence et une communication fluide. Je suis convaincu que c'est en travaillant main dans la main que nous pouvons atteindre l'excellence et faire de votre projet un véritable succès."} />
+              <SplitText splitType="words" str={"Au-delà de mes compétences techniques, je m'efforce de construire des relations solides et durables avec mes clients, basées sur la confiance, la transparence et une communication fluide."} />
+              <br /><br />
+              <SplitText splitType="words" str={"Je suis convaincu que c'est en travaillant main dans la main que nous pouvons atteindre l'excellence et faire de votre projet un véritable succès."} />
+
             </p>
 
           </div>

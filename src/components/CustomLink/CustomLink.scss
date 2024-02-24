@@ -1,0 +1,65 @@
+.custom-link {}
+
+.custom-link {
+    position: relative;
+    /* Nécessaire pour positionner le pseudo-élément par rapport à ce lien */
+    pointer-events: all;
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+    /* Empêche le pseudo-élément de déborder du lien */
+    /* Couleur du trait de soulignement */
+    transition: color 400ms ease;
+    margin-bottom: 5px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -5px;
+        /* Ajustez cette valeur pour déplacer le trait vers le bas */
+        height: 2px;
+        /* Épaisseur du trait de soulignement */
+        background: var(--grey-color);
+        /* Couleur du trait de soulignement */
+        transition: transform 400ms ease;
+        transform-origin: bottom right;
+        z-index: 1;
+
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -5px;
+        /* Ajustez cette valeur pour déplacer le trait vers le bas */
+        height: 2px;
+        /* Épaisseur du trait de soulignement */
+        background: var(--white-color);
+        /* Couleur du trait de soulignement */
+        transition: transform 400ms ease;
+        transform: scaleX(1);
+        /* Commencez caché */
+        transform-origin: bottom right;
+        z-index: 2;
+    }
+
+    @media (hover: hover) {
+        &::after {
+            transform: scaleX(0);
+        }
+        &:hover {
+            color: var(--white-color);
+            /* Couleur du trait de soulignement */
+        }
+
+        &:hover::after {
+            transform: scaleX(1);
+            /* Affichez le trait au survol */
+            transform-origin: bottom left;
+        }
+    }
+}

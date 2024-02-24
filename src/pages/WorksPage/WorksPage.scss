@@ -19,7 +19,6 @@
         transform: translateX(-50%);
         color: rgba(#fff, 0.5);
         font-family: 'font-2';
-        font-size: calc(0.5rem + 0.35vw);
         z-index: 1000;
     }
 
@@ -73,16 +72,14 @@
                 top: initial;
                 left: initial;
                 width: 100%;
-                font-size: 7vw;
+                // font-size: 7vw;
                 height: initial;
             }
 
 
             @media (max-width: 767.98px) {
                 max-width: 90vw;
-                font-size: 10vw;
-
-
+                // font-size: 10vw;
             }
 
 
@@ -95,16 +92,27 @@
                 color: #fff;
                 font-size: min(3vw, 3rem);
                 font-weight: 500;
+
+                @media (max-width: 991.98px) {
+                    font-size: 6vw;
+                }
+
+                @media (max-width: 767.98px) {
+                    font-size: 8vw;
+                }
             }
 
             .tags {
                 font-family: var(--font-text);
                 font-size: 1rem;
                 font-weight: 300;
-                opacity: .5;
+                opacity: .7;
                 padding-top: var(--s-sizing);
-                padding-bottom: var(--m-sizing);
 
+            }
+
+            .link {
+                padding-top: var(--l-sizing);
             }
         }
 
@@ -230,10 +238,11 @@
             align-items: center;
             justify-content: center;
             position: absolute;
-            left: 35vw;
+            // left: 35vw;
             top: 6rem;
-            right: 0;
+            right: 5rem;
             bottom: 0;
+            
 
             @media (max-width: 991.98px) {
                 position: relative;
@@ -241,7 +250,7 @@
                 top: initial;
                 right: initial;
                 bottom: initial;
-                margin-top: var(--l-sizing);
+                margin-top: var(--xl-sizing);
             }
 
             // @media (max-width: 991.98px) {
@@ -267,7 +276,7 @@
             position: relative;
             padding: 0;
             display: block;
-            width: 55vw;
+            width: 50vw;
             /* Largeur définie */
             height: auto;
             /* Hauteur initialement définie à 0 */

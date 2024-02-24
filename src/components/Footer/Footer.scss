@@ -47,7 +47,25 @@
             text-align: center;
             padding: 2rem 0;
             font-weight: 400;
-            text-transform: uppercase;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            @media (max-width: 767.98px) {
+                flex-direction: column;
+
+                .custom-link {
+                    margin-top: var(--l-sizing);
+                }
+
+            }
+
+            p {
+            font-size: 1rem;
+
+            }
+
         }
     }
 }

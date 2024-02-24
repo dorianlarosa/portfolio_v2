@@ -22,7 +22,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 const Home = () => {
-  const [openAccordeonId, setOpenAccordeonId] = useState(null);
+  const [openAccordeonId, setOpenAccordeonId] = useState(0);
   const { handleMouseEnter, handleMouseLeave } = useCustomCursor();
   const accordeonRefs = useRef({});
   const refImage1 = useRef(null);
@@ -126,8 +126,8 @@ const Home = () => {
       }
     });
 
-  
-  }, []);
+
+  }, [data]);
 
 
   return (
@@ -152,11 +152,17 @@ const Home = () => {
                 <SplitText splitType="letters" str={"& Web Designer"} />
               </span>
             </h1>
-            <p className="intro" data-aos="fade"
+            {/* <p className="intro" data-aos="fade"
               data-aos-delay="2100"
 
-            >Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des sites web immersifs alliant <b>créativité</b> et <b>fonctionnalité</b>.</p>
+            >Développeur <b>créatif</b> avec une formation en <b>design</b>, créant des sites web immersifs alliant <b>créativité</b> et <b>fonctionnalité</b>.
+            
+            </p> */}
 
+            <p className="intro" data-aos="fade"
+              data-aos-delay="2100"
+            >
+              <b>Création</b> de <b>sites web</b> <b>sur-mesure</b>, je vous accompagne à chaque étape de votre projet. Depuis l'élaboration de votre <b>identité digitale</b> jusqu'à la <b>conception</b> de votre <b>site web</b>,            </p>
           </div>
 
           <div className="divider-gradient" />
@@ -174,8 +180,9 @@ const Home = () => {
           <div className="left">
             <p className="intro">Je suis un créateur de <b>solutions digitales</b>, dédié à transformer chaque <b>site web</b> en une <b>expérience unique</b> et <b>mémorable</b>.</p>
             <p>
-            Mon engagement se caractérise par une écoute attentive et un souci du détail sans faille, essentiels pour comprendre et répondre à vos besoins spécifiques ainsi qu'à vos enjeux stratégiques. Armé d'une expertise approfondie en développement de site web et en design web, je propose des solutions sur mesure qui non seulement répondent à vos attentes mais aspirent à les surpasser.
+              Mon engagement se caractérise par une écoute attentive et un souci du détail sans faille, essentiels pour comprendre et répondre à vos besoins spécifiques ainsi qu'à vos enjeux stratégiques.
             </p>
+
             <Button to={"a-propos"}>Qui suis-je ?</Button>
           </div>
 
@@ -242,10 +249,17 @@ const Home = () => {
       {/* ========== Section Services ========== */}
 
       <Section title="Services" id="services-section">
-        <p className="intro">
 
-          Je vous accompagne à chaque étape de votre <b>projet digital</b>, d'une simple <b>idée</b> en passant par la <b>matérialisation de votre vision</b> jusqu'à la <b>réalisation finale</b> de votre projet.
-        </p>
+        <div className="row">
+          <div className="left">
+            <p className="intro">
+              Je vous accompagne à chaque étape de votre <b>projet digital</b>, d'une simple <b>idée</b> en passant par la <b>matérialisation de votre vision</b> jusqu'à la <b>réalisation finale</b> de votre projet.
+            </p>
+          </div>
+         
+
+        </div>
+
 
         <div className="list-services" id="list-services">
 
@@ -297,7 +311,7 @@ const Home = () => {
 
       {/* ========== Banner Image ========== */}
 
-      <BannerImage/>
+      <BannerImage />
 
       {/* ========== Page Transition Overlay ========== */}
       <PageTransition />

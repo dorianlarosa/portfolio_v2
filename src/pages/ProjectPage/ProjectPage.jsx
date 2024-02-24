@@ -3,7 +3,7 @@ import NotFound from '../NotFound';
 import { Link } from 'react-router-dom';
 
 import {
-  BadgeScroll, Button, PageTransition, ScrollToTop, SplitText
+  BadgeScroll, Button, PageTransition, ScrollToTop, SplitText, CustomLink
 } from "../../components";
 
 import { useCustomCursor } from '../../hooks/useCustomCursor';
@@ -124,12 +124,14 @@ const ProjectPage = (props) => {
                   <SplitText splitType="letters" str={project.name} />
                 </h1>
 
+                <div data-aos="fade" data-aos-delay={1350} >
+                  <p className="description">
+                    {project.description}
+                  </p>
+                </div>
 
-                <p data-aos="fade" data-aos-delay={1350} className="description"
 
-                >{project.description}</p>
-
-                <Button data-aos="fade" data-aos-delay={1400} to={project.url} target="_blank">Voir le site web</Button>
+                <CustomLink data-aos="fade" data-aos-delay={1400} to={project.url} target="_blank">Voir le site web</CustomLink>
                 <div className="list-info" data-aos="fade-up" data-aos-delay={1450}>
                   <div className="info" >
                     <p className="name-info">Role</p>
@@ -145,7 +147,7 @@ const ProjectPage = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="divider-gradient" />
+              {/* <div className="divider-gradient" /> */}
               <BadgeScroll delayReveal={1900}></BadgeScroll>
             </div>
           </section>

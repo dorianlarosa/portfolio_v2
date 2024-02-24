@@ -22,6 +22,7 @@ class Button extends Component {
         return (
             <div {...restProps}>
             <Link className="button" to={to} target={target} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
+                <div className="background"></div>
                 <div className="text">{children}</div>
                 <div className="icon">
                     <svg

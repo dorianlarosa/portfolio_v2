@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import "./WorksPage.scss";
 import data from '../../api/data.json';
-import { PageTransition, Button } from "../../components";
+import { PageTransition, CustomLink } from "../../components";
 import { useCustomCursor } from '../../hooks/useCustomCursor';
 import { useLenis } from '@studio-freight/react-lenis'; // Assurez-vous que cette importation est correcte
 import { Link } from 'react-router-dom';
@@ -56,8 +56,8 @@ const WorksPage = () => {
                                     <div className='js-slider__text-line__content tags'>{project.tags}</div>
                                 </div>
                                 <div className="slider__text-line js-slider__text-line">
-                                    <div className='js-slider__text-line__content'>
-                                        <Button to={`${project.slug}`}>Voir le projet</Button>
+                                    <div className='js-slider__text-line__content link'>
+                                        <CustomLink to={`${project.slug}`}>Voir le projet</CustomLink>
                                     </div>
                                 </div>
 
@@ -191,11 +191,11 @@ class Slider {
             const line = bullet.querySelector('.js-slider-bullet__line');
 
             if (index === targetIndex) {
-                gsap.to(txt, { alpha: 1, duration: 1 });
-                gsap.to(line, { scaleX: 1, duration: 1, transformOrigin: 'left', ease: "none" });
+                gsap.to(txt, { alpha: 1, duration: .75 });
+                gsap.to(line, { scaleX: 1, duration: .75, transformOrigin: 'left', ease: "none" });
             } else {
-                gsap.to(txt, { alpha: 0.25, duration: 1 });
-                gsap.to(line, { scaleX: 0, duration: 1, transformOrigin: 'left', ease: "none" });
+                gsap.to(txt, { alpha: 0.25, duration: .75 });
+                gsap.to(line, { scaleX: 0, duration: .75, transformOrigin: 'left', ease: "none" });
             }
         });
     }
@@ -228,7 +228,7 @@ class Slider {
             if (index === 0) return
 
             gsap.set(slide.querySelector('.slide__content'), { autoAlpha: 0 })
-            gsap.set(slide.querySelectorAll('.js-slider__text-line .js-slider__text-line__content'), { y: -100, })
+            gsap.set(slide.querySelectorAll('.js-slider__text-line .js-slider__text-line__content'), { y: "-110%", })
 
         })
     }

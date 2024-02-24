@@ -9,7 +9,7 @@ import {
     SvgFlower
 } from "..";
 
-const Section = ({ title, children, id }) => {
+const Section = ({ title, children, id}) => {
     const titleRef = useRef(null); // Création de la référence
     const flowerRef = useRef(null); // Nouvelle référence pour la fleur
 

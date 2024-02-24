@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SvgFlower } from "..";
+import { SvgFlower, CustomLink } from "..";
 import { useCustomCursor } from '../../hooks/useCustomCursor'; // Assurez-vous que le chemin d'import est correct
 import "./Footer.scss";
 
@@ -27,7 +27,11 @@ const Footer = () => {
             </div>
 
             <div className="credits">
-              <p>Made with 🤍 from France</p>
+              <p>Réalisé avec 🤍 - © Dorian LA ROSA </p>
+
+              <CustomLink to="mailto:hello@dorianlarosa.fr" onMouseEnter={handleMouseEnter('arrow-mix-blend-mode')} onMouseLeave={handleMouseLeave}>
+                Mentions Légales
+              </CustomLink>
             </div>
           </div>
       
