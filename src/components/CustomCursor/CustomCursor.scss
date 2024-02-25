@@ -21,7 +21,7 @@
     z-index: 100000;
     mix-blend-mode: difference;
 
-
+   
     .main-cursor-background {
         width: 80px;
         height: 80px;
@@ -50,7 +50,21 @@
     width: 40px;
     height: 40px;
     mix-blend-mode: difference;
-    z-index: 10000;
+    z-index: 100000;
+    &::before {
+        content: "";
+        position: absolute;
+        text-transform: uppercase;
+        font-size: .7rem;
+        font-weight: 700;
+        color: white;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -25px;
+        opacity: 0;
+        transition: opacity .75s cubic-bezier(.19, 1, .22, 1);
+        
+    }
 
     .cursor-border {
         width: 100%;
@@ -152,7 +166,30 @@
     }
 }
 
+.scroll {
+    .secondary-cursor {
+        &::before {
+            content: "scroll";
+            opacity: 1;
+            background: linear-gradient(90deg, var(--white-color), #fff, var(--white-color));
+            background-size: 40% 100%;
+            background-repeat: no-repeat;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: rgb(218, 218, 218);
+            animation: shineText 1.75s linear infinite;
+        }
+}
+}
 
+@keyframes shineText {
+  0%{
+    background-position-x: -200%;
+  }
+  100%{
+    background-position-x: 200%;
+  }
+}
 @keyframes fadeIn {
     0% {
         opacity: 0;

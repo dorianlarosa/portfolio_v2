@@ -162,6 +162,7 @@ const Home = () => {
             <p className="intro" data-aos="fade"
               data-aos-delay="2100"
             >
+
               <b>Création</b> de <b>sites web</b> <b>sur-mesure</b>, je vous accompagne à chaque étape de votre projet. Depuis l'élaboration de votre <b>identité digitale</b> jusqu'à la <b>conception</b> de votre <b>site web</b>,            </p>
           </div>
 
@@ -178,7 +179,9 @@ const Home = () => {
         <div className="row" >
 
           <div className="left">
-            <p className="intro">Je suis un créateur de <b>solutions digitales</b>, dédié à transformer chaque <b>site web</b> en une <b>expérience unique</b> et <b>mémorable</b>.</p>
+            <p className="intro">
+              Je crée des <b>sites web</b> qui font la <b>différence</b>, transformant chaque <b>interaction</b> en une <b>expérience inoubliable</b>.
+            </p>
             <p>
               Mon engagement se caractérise par une écoute attentive et un souci du détail sans faille, essentiels pour comprendre et répondre à vos besoins spécifiques ainsi qu'à vos enjeux stratégiques.
             </p>

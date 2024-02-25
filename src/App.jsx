@@ -34,7 +34,7 @@ ScrollTrigger.config({ ignoreMobileResize: true });
 
 function App() {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const lenis = useLenis(); // Utilisez le hook pour obtenir l'instance de Lenis
   const [progress, setProgress] = useState(0); // Nouvel état pour le pourcentage de chargement
 
@@ -43,6 +43,7 @@ function App() {
     ScrollTrigger.refresh();
   };
   useEffect(() => {
+    const progressLoad = { value: 0 };
     // Ici, vous pouvez vérifier si toutes les données initiales sont chargées
     // ou simplement simuler un délai pour le loader
     document.body.style.overflow = 'hidden';
@@ -60,13 +61,13 @@ function App() {
       }
     });
 
-    tl.to({}, {
-      duration: 3, // Durée totale de la simulation de chargement
-      ease: "power3.easeInOut", // Utilisez la fonction d'ease ici
-
+    tl.to(progressLoad, {
+      value: 100,
+      duration: 3, // Durée totale de l'animation
+      ease: "expo.out", // Effet d'easing appliqué à la progression
       onUpdate: function () {
-        const progress = this.progress() * 100;
-        setProgress(progress); // Mise à jour du pourcentage de chargement
+        // Utilisez la valeur animée pour mettre à jour le pourcentage de chargement
+        setProgress(progressLoad.value);
       }
     });
 

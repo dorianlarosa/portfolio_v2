@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import "./WorksPage.scss";
@@ -8,13 +8,16 @@ import { useCustomCursor } from '../../hooks/useCustomCursor';
 import { useLenis } from '@studio-freight/react-lenis'; // Assurez-vous que cette importation est correcte
 import { Link } from 'react-router-dom';
 
+import CustomCursorContext from '../../components/CustomCursor/context/CustomCursorContext';
 
 
 const WorksPage = () => {
     const { handleMouseEnter, handleMouseLeave } = useCustomCursor();
     const sliderRef = useRef(null); // Utilisé pour stocker la référence à l'élément du slider
+    const { setType } = useContext(CustomCursorContext);
 
     useEffect(() => {
+        setType("scroll");
         // Assurez-vous que la classe Slider est définie à l'extérieur du composant WorksPage
         const slider = new Slider(sliderRef.current); // Passer la référence actuelle à l'instance de Slider
         slider.init();
@@ -25,12 +28,14 @@ const WorksPage = () => {
             // Ici, vous pouvez nettoyer les ressources, les listeners, etc.
             // window.removeEventListener('wheel', slider.nextSlide); // Exemple de nettoyage
             slider.removeListeners();
+            setType("default");
         };
     }, []); // Le tableau vide assure que l'effet ne s'exécute qu'au montage
 
     return (
         <>
-            <section id="section-slide-works">
+            <section id="section-slide-works" onMouseEnter={handleMouseEnter("scroll")}
+                onMouseLeave={handleMouseLeave}>
                 <div className="slider js-slider" ref={sliderRef}>
                     <div className="slider__inner js-slider__inner">
                         <div className="overlay">
@@ -73,7 +78,8 @@ const WorksPage = () => {
                     <nav className="slider__nav js-slider__nav">
 
                         {data.projects.map((project, index) => (
-                            <div key={project.id} className="slider-bullet js-slider-bullet">
+                            <div key={project.id} className="slider-bullet js-slider-bullet" onMouseEnter={handleMouseEnter("link")}
+                            onMouseLeave={handleMouseLeave}>
                                 <span className="slider-bullet__text js-slider-bullet__text">{index + 1}</span>
                                 <div className="slider-bullet__container-line">
                                     <span className="slider-bullet__container-line__line js-slider-bullet__line"></span>
@@ -220,7 +226,7 @@ class Slider {
             },
             onUpdate: () => this.render(),
             onComplete: () => {
-              
+
                 // Ici, vous pouvez initialiser l'état pour les transitions de slide si nécessaire.
 
             }
@@ -311,6 +317,17 @@ class Slider {
         });
     }
 
+    bulletClick( targetIndexBullet) {
+        if (this.state.animating || targetIndexBullet === this.data.current) return;
+        let direction;
+        if (targetIndexBullet > this.data.current) {
+            direction = "next";
+        } else {
+            direction = "prev";
+        }
+        this.transitionSlide(direction,targetIndexBullet);
+    }
+
     cameraSetup() {
         this.camera = new THREE.OrthographicCamera(
             this.el.offsetWidth / -2,
@@ -399,14 +416,13 @@ class Slider {
         this.scene.add(this.mesh);
     }
 
-    transitionSlide(direction) {
+    transitionSlide(direction, targetIndexBullet = null) {
         if (this.state.animating) return;
         this.state.animating = true;
 
-        // Déterminer l'index de la slide cible en fonction de la direction
-        let targetIndex = direction === "next"
-            ? (this.data.current + 1 >= this.images.length ? 0 : this.data.current + 1)
-            : (this.data.current - 1 < 0 ? this.images.length - 1 : this.data.current - 1);
+        let targetIndex = targetIndexBullet !== null ? targetIndexBullet :
+        direction === "next" ? (this.data.current + 1) % this.images.length :
+        this.data.current - 1 < 0 ? this.images.length - 1 : this.data.current - 1;
 
         // Mise à jour des textures pour la transition
         this.updateTextures(this.data.current, targetIndex);
@@ -429,9 +445,6 @@ class Slider {
                 this.state.animating = false;
                 // Mise à jour des indices de slide après la transition
                 this.data.current = targetIndex;
-                this.data.next = direction === "next"
-                    ? (targetIndex + 1 >= this.images.length ? 0 : targetIndex + 1)
-                    : (targetIndex - 1 < 0 ? this.images.length - 1 : targetIndex - 1);
             }
         });
 
@@ -467,7 +480,7 @@ class Slider {
 
             // Moins de 992px - Animation pour mobile
             tl.add(gsap.fromTo(targetTextLines, {
-                y: "100%" ,
+                y: "100%",
             }, {
                 y: 0,
                 duration: 1.5,
@@ -667,6 +680,12 @@ class Slider {
 
         document.body.addEventListener('touchmove', this.handleTouchMove, { passive: false });
 
+        // Ajouter des écouteurs pour les bullet clicks
+        this.bullets.forEach((bullet, index) => {
+            bullet.addEventListener('click', () => this.bulletClick(index));
+            console.log(index);
+        });
+
     }
 
     // Méthode pour supprimer les écouteurs d'événements
@@ -676,6 +695,11 @@ class Slider {
         this.el.removeEventListener('touchstart', this.touchStart);
         this.el.removeEventListener('touchend', this.touchEnd);
         document.body.removeEventListener('touchmove', this.handleTouchMove);
+
+        // Supprimer les écouteurs pour les bullet clicks
+        this.bullets.forEach(bullet => {
+            bullet.removeEventListener('click', this.bulletClick);
+        });
     }
 }
 

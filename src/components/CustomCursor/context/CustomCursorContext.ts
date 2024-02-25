@@ -4,6 +4,7 @@ export type CursorLookType =
   | "arrow"
   | "link"
   | "arrow-mix-blend-mode"
+  | "scroll"
   | "default";
 export type CustomCursorType = {
   type: CursorLookType;

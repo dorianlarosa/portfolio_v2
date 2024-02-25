@@ -160,6 +160,7 @@
             display: flex;
             align-items: center;
             padding: 1rem 0;
+            cursor: pointer;
 
             @media (max-width: 991.98px) {
                 flex-direction: column;
@@ -167,17 +168,27 @@
 
             }
 
+            @media (hover: hover) {
+                &:hover {
+                    .slider-bullet__text {
+                        opacity: 1 !important;
+                    }
+                }
+            }
+
             &__text {
                 color: #fff;
                 font-size: 0.65rem;
                 margin-right: 1rem;
                 opacity: .25;
-
+                transition: opacity .3s;
 
                 @media (max-width: 991.98px) {
                     margin-right: 0;
                     margin-bottom: 1rem;
                 }
+
+               
             }
 
             &__container-line {
