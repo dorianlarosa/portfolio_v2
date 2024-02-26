@@ -29,7 +29,7 @@ const Footer = () => {
             <div className="credits">
               <p>Réalisé avec 🤍 - © Dorian LA ROSA </p>
 
-              <CustomLink to="mailto:hello@dorianlarosa.fr" onMouseEnter={handleMouseEnter('arrow-mix-blend-mode')} onMouseLeave={handleMouseLeave}>
+              <CustomLink to="/mentions-legales" onMouseEnter={handleMouseEnter('arrow-mix-blend-mode')} onMouseLeave={handleMouseLeave}>
                 Mentions Légales
               </CustomLink>
             </div>

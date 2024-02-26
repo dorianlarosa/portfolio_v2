@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { PageTransition, Button, BadgeScroll, Section, SvgFlower, SplitText, BannerImage } from "../../components";
+import { PageTransition, Button, BadgeScroll, Section, SvgFlower, SplitText, BannerImage, CustomLink } from "../../components";
 import image from './dorian_la_rosa.jpg';
 
 import "./About.scss";
@@ -67,6 +67,12 @@ const About = () => {
     // Rétracter l'overlay de gauche à droite en changeant le transformOrigin
     tl.to(".overlay", { duration: 1.25, scaleX: 0, transformOrigin: 'right', ease: "sine.inOut" })
       .fromTo(".image", { autoAlpha: 0, scale: 1.2 }, { autoAlpha: 1, scale: 1, duration: 1.25, ease: "power1.easeInOut" }, "<");
+
+    // Rafraîchir ScrollTrigger après un bref délai pour le contenu dynamique
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1000);
+
   }, [image]);
 
 
@@ -101,6 +107,8 @@ const About = () => {
               {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nemo libero at natus sint exercitationem totam quidem quas assumenda quos quia quis praesentium eveniet ad ex commodi, illum illo nisi.</p> */}
 
               {/* <Button data-aos="fade-up" data-aos-delay={1850} link="">Télécharger mon CV</Button> */}
+
+              <CustomLink to="/CV - Dorian LA ROSA.pdf" target="_blank" data-aos="fade" data-aos-delay={1750}>Télécharger mon CV</CustomLink>
             </div>
 
             <div className="container-image">
@@ -132,7 +140,7 @@ const About = () => {
               <SplitText splitType="words" str={"Au cœur de ma démarche créative se trouve une attention particulière à l'expérience utilisateur. Je suis convaincu que la réussite d'un site web réside dans son habileté à offrir une navigation intuitive, soutenue par un design attrayant et une attention méticuleuse aux détails."} />
               <br /><br />
               <SplitText splitType="words" str={"Chaque projet est une opportunité de créer des expériences uniques, qui non seulement répondent aux besoins des utilisateurs mais les dépassent, tout en se démarquant dans le paysage numérique actuel."} />
-            
+
             </p>
           </div>
 

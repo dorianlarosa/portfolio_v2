@@ -9,14 +9,14 @@ import {
     SvgFlower
 } from "..";
 
-const Section = ({ title, children, id}) => {
+const Section = ({ title, children, id }) => {
     const titleRef = useRef(null); // Création de la référence
     const flowerRef = useRef(null); // Nouvelle référence pour la fleur
 
 
     useEffect(() => {
         if (titleRef.current) {
-            gsap.set(titleRef.current, {force3D: true});
+            gsap.set(titleRef.current, { force3D: true });
             gsap.fromTo(titleRef.current,
                 { x: "25vw" }, // Position de départ à 400px à droite
                 {
@@ -32,8 +32,8 @@ const Section = ({ title, children, id}) => {
                 }
             );
 
-             // Animation pour la fleur
-             gsap.fromTo(flowerRef.current,
+            // Animation pour la fleur
+            gsap.fromTo(flowerRef.current,
                 { rotation: 0 }, // Départ rotation à 0 degrés
                 {
                     rotation: 90, // Fin rotation à 360 degrés (un tour complet)
@@ -48,6 +48,11 @@ const Section = ({ title, children, id}) => {
                 }
             );
         }
+
+        // Rafraîchir ScrollTrigger après un bref délai pour le contenu dynamique
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 1000);
     }, []);
 
 
@@ -64,7 +69,7 @@ const Section = ({ title, children, id}) => {
 
                 <div className="wrapper-h2">
 
-                <h2 ref={titleRef} data-text={title} className="my-element">
+                    <h2 ref={titleRef} data-text={title} className="my-element">
                         <span aria-hidden="true" className="text-grey">{title}</span>
 
                         <span aria-hidden="true" className="text-grey">{title}</span>

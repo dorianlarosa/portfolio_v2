@@ -64,7 +64,6 @@ const ProjectPage = (props) => {
     } else {
       setProjectFound(false);
     }
-    console.log(project);
   }, [props.params, data, nextProjectBackground.current]);
 
 
@@ -106,7 +105,10 @@ const ProjectPage = (props) => {
         image.removeEventListener("mouseleave", handleMouseLeave);
       };
     }
-    ScrollTrigger.refresh();
+    // Rafraîchir ScrollTrigger après un bref délai pour le contenu dynamique
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1000);
 
   }, [contentLoaded, data, nextProjectBackground.current]);
 

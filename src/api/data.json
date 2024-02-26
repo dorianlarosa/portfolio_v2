@@ -42,7 +42,7 @@
         {
             "id": 2,
             "name": "Vous C'est Nous",
-            "description": "Vous C'est Nous propose des services de service à la personne et d'aide à domicile à Besançon, offrant un accompagnement personnalisé aux personnes âgées, handicapées, ou en sortie d'hospitalisation.",
+            "description": "Vous C'est Nous propose des services d'aide à la personne et d'accompagnement à domicile à Besançon, offrant un suivi personnalisé pour les personnes âgées, handicapées, ou en sortie d'hospitalisation.",
             "url": "https://vouscestnous.com/",
             "slug": "vous-cest-nous",
             "technos": "WordPress, ACF, JavaScript",
@@ -60,11 +60,11 @@
         {
             "id": 3,
             "name": "EGS Sécurité",
-            "description": "EGS Sécurité se spécialise dans l'installation et la maintenance de systèmes de sécurité pour particuliers et professionnels dans le Grand Est et en Bourgogne-Franche-Comté. Avec plus de 30 ans d'expérience, ils offrent des solutions sur-mesure comprenant alarmes, vidéo protection, contrôle d'accès, et plus, assurant une sécurité optimale 24/7. Pour plus d'informations, visitez leur site.",
+            "description": "EGS Sécurité se spécialise dans l'installation et la maintenance de systèmes de sécurité pour particuliers et professionnels dans le Grand Est et en Bourgogne-Franche-Comté, avec plus de 30 ans d'expérience.",
             "url": "https://egs-securite.fr",
             "slug": "egs-securite",
             "technos": "WordPress, Thème Astra, Elementor",
-            "tags": "Charte graphique, WebDesign, Selection de thème et conseil, Intégration Elementor",
+            "tags": "Charte graphique, WebDesign, Sélection de thème et conseil, Intégration Elementor",
             "background": "/images-projects/egs-securite/background-min.jpeg",
             "year": "2022",
             "image": "",
@@ -109,10 +109,10 @@
             "id": 4,
             "name": "Parizoo",
             "description": "Parizoo, un designer graphique et web basé à Besançon, se concentre sur la transformation des idées en réalités visuelles captivantes. Spécialisé dans l'UI/UX, l'approche créative, le branding et la graphique imprimée",
-            "url": "https://parizoo.com/",
+            "url": "https://parizoo.fr/",
             "slug": "parizoo",
             "technos": "WordPress, Thème Tank, JavaScript",
-            "tags": "WebDesign, Selection de thème et conseil, Intégration thème enfant",
+            "tags": "WebDesign, Sélection de thème et conseil, Intégration thème enfant",
             "background": "/images-projects/parizoo/background.jpg",
             "year": "2023",
             "image": "",
@@ -161,7 +161,7 @@
           "tags": ["Développement HTML/CSS", "JavaScript", "WordPress", "Shopify", "CMS personnalisé", "Design responsive", "Développement personnalisé", "Intégration API"]
         },
         {
-          "nom": "Refonte de Sites Web existant",
+          "nom": "Refonte de Sites Web existants",
           "description": "Optimisez votre site avec une refonte axée sur l'amélioration de l'UX/UI, la performance et la mise à jour technologique pour renforcer votre présence en ligne.",
           "tags": ["Refonte UX/UI", "Optimisation responsive", "Mise à jour CMS", "Amélioration SEO"]
         },

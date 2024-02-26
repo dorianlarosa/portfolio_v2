@@ -2,6 +2,7 @@ import React, { useMemo, useRef, useState, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import gsap from 'gsap';
+import { useLocation } from 'react-router-dom'; // Assurez-vous d'importer useLocation si vous utilisez react-router
 
 
 const globalU_time = { value: 0 };
@@ -54,6 +55,8 @@ export const BlobSphere = ({ isLoading }) => {
 
 // ========================================================
 const InnerGeometry = ({geometry, isLoading}) => {
+    const location = useLocation();
+
     const scale = 2.2;
     const lastUpdateTime = useRef(performance.now());
     const updateInterval = 1000 / 80; // 1000ms / 60 fps = ~16.67ms par frame
@@ -61,19 +64,21 @@ const InnerGeometry = ({geometry, isLoading}) => {
 
 
     // Initialiser la position en fonction de isLoading
-    const initialPosition = isLoading ? [1.6,1.2, 0] : [0.8, 0.4, 0];
+    const initialPosition = isLoading || location.pathname !== '/' ? [1.6,1.2, 0] : [0.8, 0.4, 0];
     const position = useRef(initialPosition).current;
 
     useEffect(() => {
         // Condition pour animer la position lors du changement de isLoading
         if (meshRef.current) {
-            const newPosition = isLoading ? [1.6,1.3, 0] : [0.8, 0.4, 0];
+            const newPosition = isLoading || location.pathname !== '/' ? [1.6,1.2, 0] : [0.8, 0.4, 0];
+
             gsap.to(meshRef.current.position, {
                 x: newPosition[0],
                 y: newPosition[1],
                 z: newPosition[2],
-                duration: 2.5, // Durée de l'animation en secondes
-                ease: "power3.out", // Type d'accélération, pour un effet plus doux
+                duration: 3, // Durée de l'animation en secondes
+                ease: "power3.InOut", // Type d'accélération, pour un effet plus doux
+
             });
         }
 
@@ -82,7 +87,7 @@ const InnerGeometry = ({geometry, isLoading}) => {
         //     duration: 2,
         //     ease: "power3.out",
         // });
-    }, [isLoading]); // Dépendance à isLoading pour réagir à ses changements
+    }, [isLoading, location.pathname]); // Dépendance à isLoading pour réagir à ses changements
 
     const { cubeRenderTarget, cubeCamera } = useMemo(() => {
         // create cube render target

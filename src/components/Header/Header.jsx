@@ -55,8 +55,6 @@ const Header = () => {
                 );
             });
 
-            console.log(navItemsRefs);
-
         } else {
             if (navRef.current) {
                 gsap.to(navRef.current, {

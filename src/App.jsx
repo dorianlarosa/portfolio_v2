@@ -5,6 +5,7 @@ import { Header, Footer, SvgFlower, ScrollToTop, LoaderSite } from './components
 import { useCustomCursor } from './hooks/useCustomCursor';
 import Home from './Home';
 import About from './pages/AboutPage/About';
+import LegalsPage from './pages/LegalsPage/LegalsPage';
 import WorksPage from './pages/WorksPage/WorksPage';
 
 import { useLenis } from '@studio-freight/react-lenis'; // Assurez-vous que cette importation est correcte
@@ -113,7 +114,7 @@ function App() {
 
   return (
     <CustomCursorManager>
-      <FixedHeightCanvas isLoading={isLoading} />
+      <FixedHeightCanvas isLoading={isLoading} location={location} />
       <CustomCursor />
       <LoaderSite isLoading={isLoading} progress={Math.round(progress)} currentPath={location.pathname} />
       {isLoading ? (
@@ -130,7 +131,10 @@ function App() {
               <Route path="/" exact element={<Home />} />
               <Route path="/a-propos" element={<About />} />
               <Route path="/projets" element={<WorksPage />} />
+              
               <Route path="/projets/:slug" element={<WrapperProjectPage />} />
+              <Route path="/mentions-legales" element={<LegalsPage />} />
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AnimatePresence>

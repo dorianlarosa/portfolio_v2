@@ -9,8 +9,6 @@ const BadgeScroll = ({ delayReveal = 0 }) => {
 
     const scrollbadgeRef = useRef(null);
     useEffect(() => {
-
-        console.log(delayReveal);
         gsap.fromTo(scrollbadgeRef.current,
             {
                 autoAlpha: 1,

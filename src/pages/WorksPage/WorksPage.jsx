@@ -98,9 +98,14 @@ const WorksPage = () => {
 
 class Slider {
     constructor() {
+        this.isSwiping = false;
+
         this.startY = 0;
         this.endY = 0;
-        // this.bindAll()
+
+        this.startX = 0;
+        this.endX = 0;
+
         this.onWindowResize = this.onWindowResize.bind(this);
         this.transitionSlide = this.transitionSlide.bind(this);
         this.touchStart = this.touchStart.bind(this);
@@ -166,7 +171,7 @@ class Slider {
             vec4 finalColor = isInitialTransition ? textureColor1 : mix(textureColor1, textureColor2, dispPower);
             
             // Application de transitionAlpha uniquement lors de la transition initiale
-            gl_FragColor = isInitialTransition ? mix(vec4(0.0, 0.0, 0.0, 1.0), finalColor, transitionAlpha) : finalColor;
+            gl_FragColor = isInitialTransition ? mix(vec4(12.0/255.0, 12.0/255.0, 12.0/255.0, 1.0), finalColor, transitionAlpha) : finalColor;
         }
         
         `
@@ -208,7 +213,6 @@ class Slider {
 
     animateFirstTexture() {
         if (!this.mat || !this.mat.uniforms) {
-            console.error('Material is not initialized.');
             return;
         }
 
@@ -222,13 +226,9 @@ class Slider {
             duration: 2.5,
             ease: "expo.inOut",
             onStart: () => {
-                // Assurez-vous que texture1 est correctement définie si nécessaire.
             },
             onUpdate: () => this.render(),
             onComplete: () => {
-
-                // Ici, vous pouvez initialiser l'état pour les transitions de slide si nécessaire.
-
             }
         });
 
@@ -238,7 +238,6 @@ class Slider {
             duration: 2.5,
             ease: "expo.inOut",
             onStart: () => {
-                // Assurez-vous que texture1 est correctement définie si nécessaire.
             },
             onUpdate: () => this.render(),
             onComplete: () => {
@@ -626,24 +625,36 @@ class Slider {
     }
 
     touchStart(e) {
-        e.preventDefault();
-
+        // e.preventDefault();
         this.startY = e.touches[0].clientY;
+        this.startX = e.touches[0].clientX;
+        this.isSwiping = false; // Initialiser un indicateur de swipe
+
+
     }
 
     touchEnd(e) {
         this.endY = e.changedTouches[0].clientY;
+        this.endX = e.changedTouches[0].clientX;
+
         this.handleSwipeGesture();
+        if (this.isSwiping) {
+            e.preventDefault(); // Annuler le comportement par défaut uniquement si un swipe a été détecté
+        }
     }
 
     handleSwipeGesture() {
         const threshold = 50; // Seuil minimal de déplacement en pixels pour considérer le geste comme un swipe
-        const swipeDistance = this.startY - this.endY;
+        const swipeDistanceY = this.startY - this.endY;
+        const swipeDistanceX = this.startX - this.endX;
 
-        if (swipeDistance > threshold) {
+
+        if (swipeDistanceX > threshold || swipeDistanceY > threshold) {
+            this.isSwiping = true;
             // Swipe vers le haut
             this.transitionSlide("next");
-        } else if (swipeDistance < -threshold) {
+        } else if (swipeDistanceX < -threshold || swipeDistanceY < -threshold) {
+            this.isSwiping = true;
             // Swipe vers le bas
             this.transitionSlide("prev");
         }
@@ -675,15 +686,13 @@ class Slider {
             }
         }, { passive: true });
 
-        this.el.addEventListener('touchstart', this.touchStart, { passive: true });
-        this.el.addEventListener('touchend', this.touchEnd, { passive: true });
-
+        this.el.addEventListener('touchstart', this.touchStart, { passive: false });
+        this.el.addEventListener('touchend', this.touchEnd, { passive: false });
         document.body.addEventListener('touchmove', this.handleTouchMove, { passive: false });
 
         // Ajouter des écouteurs pour les bullet clicks
         this.bullets.forEach((bullet, index) => {
             bullet.addEventListener('click', () => this.bulletClick(index));
-            console.log(index);
         });
 
     }

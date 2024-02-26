@@ -8,8 +8,6 @@ function LoaderSite({isLoading, progress, currentPath}) {
   const progressRef = useRef(null);
 
   useEffect(() => {
-
-    console.log(currentPath);
     // Si isLoading est false, animez l'opacité à 0
     if (!isLoading) {
       gsap.to(loaderRef.current, { autoAlpha: 0, duration: 1 });

@@ -205,7 +205,7 @@
         .name {
             font-family: var(--font-title);
             color: var(--white-color);
-            font-size: 10vw;
+            font-size: min(10vw, 10rem);
         }
 
         .text {

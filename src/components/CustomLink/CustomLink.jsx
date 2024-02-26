@@ -8,7 +8,7 @@ const CustomLink = ({ to, children, target = "_self", ...restProps }) => {
   const { handleMouseEnter, handleMouseLeave } = useCustomCursor();
 
   return (
-    <div {...restProps}>
+    <div className="container-custom-link" {...restProps}>
       <Link 
         className="custom-link" 
         to={to} 

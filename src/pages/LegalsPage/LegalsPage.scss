@@ -1,0 +1,45 @@
+#section-legals {
+    background-color: var(--black-color);
+    padding-top: var(--xxxl-sizing);
+    padding-bottom: var(--xxl-sizing);
+
+    h2 {
+        font-size: 4rem;
+
+        &:not(:first-of-type) {
+            margin-top: var(--xxl-sizing);
+        }
+    }
+
+    p {
+        margin-top: var(--l-sizing);
+    }
+
+    .container-custom-link {
+        display: inline;
+
+        .custom-link {
+            display: inline;
+
+            &::before,
+            &::after {
+                bottom: -1px;
+            }
+        }
+    }
+
+    h3 {
+        font-size: 2rem;
+        margin-top: var(--xl-sizing);       
+    }
+
+    ul {
+        margin-top: var(--l-sizing);
+        padding-left: 1.25rem;
+        li {
+            &:not(:first-of-type) {
+                margin-top: var(--xs-sizing);
+            }
+        }
+    }
+}

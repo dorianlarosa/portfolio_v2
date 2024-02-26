@@ -54,14 +54,11 @@ const Home = () => {
   });
 
   const togglePanel = (id) => {
-    console.log("Current ID:", id);
-    console.log("Currently Open:", openAccordeonId);
     setOpenAccordeonId(openAccordeonId === id ? null : id);
   };
 
 
   useEffect(() => {
-    ScrollTrigger.refresh();
 
     gsap.fromTo(refImage1.current,
       { y: '5%' },
@@ -125,6 +122,7 @@ const Home = () => {
         );
       }
     });
+    ScrollTrigger.refresh();
 
 
   }, [data]);
@@ -214,7 +212,7 @@ const Home = () => {
 
 
 
-            <div key={"project" + project.id}
+            <div key={"project-" + project.id}
               className={`project project-${project.id}`}
               ref={el => projectRefs.current[project.id] = { current: el }}
 
@@ -259,7 +257,7 @@ const Home = () => {
               Je vous accompagne à chaque étape de votre <b>projet digital</b>, d'une simple <b>idée</b> en passant par la <b>matérialisation de votre vision</b> jusqu'à la <b>réalisation finale</b> de votre projet.
             </p>
           </div>
-         
+
 
         </div>
 
@@ -267,10 +265,11 @@ const Home = () => {
         <div className="list-services" id="list-services">
 
           {data.services.map((service, index) => (
-            <div className="container-service-item" data-aos-anchor="#list-services" data-aos="fade-up" data-aos-delay={`${150 * index}`}>
+            <div   key={`service-${index}`}  className="container-service-item" data-aos-anchor="#list-services" data-aos="fade-up" data-aos-delay={`${150 * index}`}>
 
               <div
-                key={index}
+             
+
                 className={`service-item ${openAccordeonId === index ? 'open' : 'closed'}`}
 
               >
@@ -298,7 +297,7 @@ const Home = () => {
                   <div className="content-panel">
                     <p className="description">{service.description}</p>
                     <ListTag tags={service.tags}></ListTag>
-                    <Button>Prendre contact</Button>
+                    <Button to="mailto:hello@dorianlarosa.fr?subject=Demande de collaboration">Prendre contact</Button>
                   </div>
 
                 </div>
