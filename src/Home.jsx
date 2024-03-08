@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Section, BadgeScroll, Button, ListTag, PageTransition, SplitText, BannerImage } from "./components";
 import { useCustomCursor } from './hooks/useCustomCursor';
 import { useGsapTitleAnimation } from './hooks/useGsapTitleAnimation';
+import AOS from 'aos';
 
 
 import imageConstruction1 from './assets/images/construction-1.jpeg';
@@ -75,9 +76,9 @@ const Home = () => {
     );
 
     gsap.fromTo(refImage2.current,
-      { y: '10%' },
+      { y: '12%' },
       {
-        y: '-10%',
+        y: '-12%',
         ease: "none",
         scrollTrigger: {
           trigger: refImage2.current,
@@ -89,9 +90,9 @@ const Home = () => {
     );
 
     gsap.fromTo(refImage3.current,
-      { y: '15%' },
+      { y: '19%' },
       {
-        y: '-15%',
+        y: '-19%',
         ease: "none",
         scrollTrigger: {
           trigger: refImage3.current,
@@ -122,8 +123,16 @@ const Home = () => {
         );
       }
     });
-    ScrollTrigger.refresh();
 
+
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+      AOS.refresh();
+    }, 1000);
+    return () => {
+      // Nettoyage : tuez toutes les instances de ScrollTrigger pour éviter les fuites de mémoire
+      ScrollTrigger.getAll().forEach(instance => instance.kill());
+    };
 
   }, [data]);
 
@@ -161,7 +170,7 @@ const Home = () => {
               data-aos-delay="2100"
             >
 
-              <b>Création</b> de <b>sites web</b> <b>sur-mesure</b>, je vous accompagne à chaque étape de votre projet. Depuis l'élaboration de votre <b>identité digitale</b> jusqu'à la <b>conception</b> de votre <b>site web</b>,            </p>
+              <b>Création</b> de <b>sites web</b> <b>sur-mesure</b>, je vous accompagne à chaque étape de votre projet. Depuis l'élaboration de votre <b>identité digitale</b> jusqu'à la <b>conception</b> de votre <b>site web</b>.</p>
           </div>
 
           <div className="divider-gradient" />
@@ -265,10 +274,10 @@ const Home = () => {
         <div className="list-services" id="list-services">
 
           {data.services.map((service, index) => (
-            <div   key={`service-${index}`}  className="container-service-item" data-aos-anchor="#list-services" data-aos="fade-up" data-aos-delay={`${150 * index}`}>
+            <div key={`service-${index}`} className="container-service-item" data-aos-anchor="#list-services" data-aos="fade-up" data-aos-delay={`${150 * index}`}>
 
               <div
-             
+
 
                 className={`service-item ${openAccordeonId === index ? 'open' : 'closed'}`}
 

@@ -58,7 +58,6 @@ function App() {
         document.body.style.overflow = '';
         if (lenis) lenis.start(); // Reprend le défilement géré par Lenis
         setIsLoading(false);
-
       }
     });
 
@@ -131,7 +130,7 @@ function App() {
               <Route path="/" exact element={<Home />} />
               <Route path="/a-propos" element={<About />} />
               <Route path="/projets" element={<WorksPage />} />
-              
+
               <Route path="/projets/:slug" element={<WrapperProjectPage />} />
               <Route path="/mentions-legales" element={<LegalsPage />} />
 

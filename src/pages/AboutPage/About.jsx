@@ -3,6 +3,7 @@ import { PageTransition, Button, BadgeScroll, Section, SvgFlower, SplitText, Ban
 import image from './dorian_la_rosa.jpg';
 
 import "./About.scss";
+import AOS from 'aos';
 
 import { useGsapTitleAnimation } from '../../hooks/useGsapTitleAnimation';
 
@@ -68,10 +69,19 @@ const About = () => {
     tl.to(".overlay", { duration: 1.25, scaleX: 0, transformOrigin: 'right', ease: "sine.inOut" })
       .fromTo(".image", { autoAlpha: 0, scale: 1.2 }, { autoAlpha: 1, scale: 1, duration: 1.25, ease: "power1.easeInOut" }, "<");
 
-    // Rafraîchir ScrollTrigger après un bref délai pour le contenu dynamique
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 1000);
+    
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+        AOS.refresh();
+      }, 1000);
+      return () => {
+        // Nettoyage : tuez toutes les instances de ScrollTrigger pour éviter les fuites de mémoire
+        tl.kill();
+
+        ScrollTrigger.getAll().forEach(instance => instance.kill());
+
+      };
+  
 
   }, [image]);
 
@@ -101,9 +111,9 @@ const About = () => {
               </h1>
 
               <p className='intro intro-about' data-aos="fade" data-aos-delay={1500} >
-
-                Forte d'une riche expérience, ma spécialisation s'étend du <b>branding d'entreprises</b> à la <b>création de logos</b> et <b>chartes graphiques</b>, en mettant un accent particulier sur la <b>conception</b> et le <b>développement de sites web</b> innovants.                            </p>
-
+                Fort d'une expérience significative, ma spécialisation couvre principalement le <b>développement de sites web innovants</b>, avec une expertise complémentaire en <b>branding d'entreprises</b>, <b>création de logos</b>, et <b>élaboration de chartes graphiques</b>.
+              </p>
+              
               {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nemo libero at natus sint exercitationem totam quidem quas assumenda quos quia quis praesentium eveniet ad ex commodi, illum illo nisi.</p> */}
 
               {/* <Button data-aos="fade-up" data-aos-delay={1850} link="">Télécharger mon CV</Button> */}

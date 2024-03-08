@@ -40,8 +40,14 @@
                         font-size: 1rem;
                         font-weight: 400;
                         margin-bottom: 2rem;
+                        will-change: transform, opacity;
+
                     }
 
+                    .letter {
+                        will-change: transform, opacity;
+
+                    }
 
                 }
             }
@@ -49,6 +55,7 @@
             .intro {
                 font-size: 1.75rem;
                 margin-top: var(--l-sizing);
+                will-change: transform, opacity;
 
                 @media (max-width: 991.98px) {
                     font-size: 1.5rem;
@@ -101,9 +108,9 @@
 
                     }
 
-                    @media (max-width: 575.98px) { 
+                    @media (max-width: 575.98px) {
                         font-size: 1.75rem;
-                     }
+                    }
                 }
 
                 @media (max-width: 991.98px) {
@@ -153,6 +160,7 @@
                     width: 53%;
                     border-radius: var(--border-radius-image);
                     height: 53%;
+                    will-change: transform, opacity;
 
                     img {
                         border-radius: var(--border-radius-image);
@@ -160,6 +168,8 @@
                         min-height: 100%;
                         min-width: 100%;
                         object-position: center;
+                        will-change: transform, opacity;
+
                     }
                 }
 
@@ -217,11 +227,20 @@
             .project {
                 display: block;
                 transition: all 2s cubic-bezier(.19, 1, .22, 1);
+                will-change: transform, opacity;
+                /* Example of <custom-ident> */
 
                 // Disable parallax mobile
                 @media (max-width: 991.98px) {
                     transform: none !important;
                     width: 100% !important;
+                }
+
+
+                &>div {
+                    will-change: transform, opacity;
+                    /* Example of <custom-ident> */
+
                 }
 
                 .container-image {
@@ -345,9 +364,9 @@
                         font-size: 2rem;
                     }
 
-                    @media (max-width: 575.98px) { 
+                    @media (max-width: 575.98px) {
                         font-size: 1.5rem;
-                     }
+                    }
                 }
             }
         }
@@ -359,7 +378,13 @@
                 margin-top: var(--xl-sizing);
             }
 
+            &>div {
+                will-change: transform, opacity;
+
+            }
+
             .container-service-item {
+                will-change: transform, opacity;
 
 
                 &:first-of-type {

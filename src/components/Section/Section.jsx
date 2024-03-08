@@ -16,7 +16,6 @@ const Section = ({ title, children, id }) => {
 
     useEffect(() => {
         if (titleRef.current) {
-            gsap.set(titleRef.current, { force3D: true });
             gsap.fromTo(titleRef.current,
                 { x: "25vw" }, // Position de départ à 400px à droite
                 {

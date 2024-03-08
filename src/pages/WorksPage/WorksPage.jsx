@@ -5,10 +5,13 @@ import "./WorksPage.scss";
 import data from '../../api/data.json';
 import { PageTransition, CustomLink } from "../../components";
 import { useCustomCursor } from '../../hooks/useCustomCursor';
-import { useLenis } from '@studio-freight/react-lenis'; // Assurez-vous que cette importation est correcte
 import { Link } from 'react-router-dom';
+import AOS from 'aos';
 
 import CustomCursorContext from '../../components/CustomCursor/context/CustomCursorContext';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 const WorksPage = () => {
@@ -21,13 +24,21 @@ const WorksPage = () => {
         // Assurez-vous que la classe Slider est définie à l'extérieur du composant WorksPage
         const slider = new Slider(sliderRef.current); // Passer la référence actuelle à l'instance de Slider
         slider.init();
-        slider.listeners()
+
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+            AOS.refresh();
+        }, 1000);
+
 
         // Retourne une fonction de nettoyage qui sera appelée au démontage du composant
         return () => {
             // Ici, vous pouvez nettoyer les ressources, les listeners, etc.
             // window.removeEventListener('wheel', slider.nextSlide); // Exemple de nettoyage
+            // slider.removeListeners();
+            slider.destroy(); // Méthode de nettoyage ajoutée dans la classe Slider
             slider.removeListeners();
+
             setType("default");
         };
     }, []); // Le tableau vide assure que l'effet ne s'exécute qu'au montage
@@ -79,7 +90,7 @@ const WorksPage = () => {
 
                         {data.projects.map((project, index) => (
                             <div key={project.id} className="slider-bullet js-slider-bullet" onMouseEnter={handleMouseEnter("link")}
-                            onMouseLeave={handleMouseLeave}>
+                                onMouseLeave={handleMouseLeave}>
                                 <span className="slider-bullet__text js-slider-bullet__text">{index + 1}</span>
                                 <div className="slider-bullet__container-line">
                                     <span className="slider-bullet__container-line__line js-slider-bullet__line"></span>
@@ -97,7 +108,7 @@ const WorksPage = () => {
 };
 
 class Slider {
-    constructor() {
+    constructor(element) {
         this.isSwiping = false;
 
         this.startY = 0;
@@ -107,11 +118,16 @@ class Slider {
         this.endX = 0;
 
         this.onWindowResize = this.onWindowResize.bind(this);
+        this.handleWheel = this.handleWheel.bind(this);
         this.transitionSlide = this.transitionSlide.bind(this);
         this.touchStart = this.touchStart.bind(this);
         this.touchEnd = this.touchEnd.bind(this);
         this.handleTouchMove = (e) => e.preventDefault(); // Empêche le comportement par défaut
         this.render = this.render.bind(this);
+
+        this.element = element;
+        this.init = this.init.bind(this);
+        this.destroy = this.destroy.bind(this);
 
         this.textures = [];
         // Initialisation de l'objet state
@@ -244,6 +260,7 @@ class Slider {
                 // Ici, vous pouvez initialiser l'état pour les transitions de slide si nécessaire.
                 this.mat.uniforms.isInitialTransition.value = false; // Ou assurez-vous que cela correspond à votre logique initiale souhaitée.
 
+
             }
         });
 
@@ -272,6 +289,10 @@ class Slider {
                     autoAlpha: 1,
                     duration: 1.5,
                     ease: "power3.inOut",
+                    onComplete: () => {
+                        this.listeners();
+
+                    }
                 }), 1.5);
         } else {
 
@@ -294,6 +315,9 @@ class Slider {
                     autoAlpha: 1,
                     duration: 1.5,
                     ease: "back.inOut(1.7)",
+                    onComplete: () => {
+                        this.listeners();
+                    }
                 }), 1.5);
         }
 
@@ -316,7 +340,7 @@ class Slider {
         });
     }
 
-    bulletClick( targetIndexBullet) {
+    bulletClick(targetIndexBullet) {
         if (this.state.animating || targetIndexBullet === this.data.current) return;
         let direction;
         if (targetIndexBullet > this.data.current) {
@@ -324,7 +348,7 @@ class Slider {
         } else {
             direction = "prev";
         }
-        this.transitionSlide(direction,targetIndexBullet);
+        this.transitionSlide(direction, targetIndexBullet);
     }
 
     cameraSetup() {
@@ -420,8 +444,8 @@ class Slider {
         this.state.animating = true;
 
         let targetIndex = targetIndexBullet !== null ? targetIndexBullet :
-        direction === "next" ? (this.data.current + 1) % this.images.length :
-        this.data.current - 1 < 0 ? this.images.length - 1 : this.data.current - 1;
+            direction === "next" ? (this.data.current + 1) % this.images.length :
+                this.data.current - 1 < 0 ? this.images.length - 1 : this.data.current - 1;
 
         // Mise à jour des textures pour la transition
         this.updateTextures(this.data.current, targetIndex);
@@ -667,6 +691,11 @@ class Slider {
     }
 
     init() {
+        this.setupThreeJS();
+    }
+
+    setupThreeJS() {
+        // Setup de THREE.js (création de la scène, du renderer, etc.)
         this.setup()
         this.cameraSetup()
         this.loadTextures()
@@ -675,17 +704,18 @@ class Slider {
         // this.render()
     }
 
+    handleWheel(e) {
+        if (e.deltaY > 0) {
+            this.transitionSlide("next");
+        } else if (e.deltaY < 0) {
+            this.transitionSlide("prev");
+        }
+    }
+
+
     listeners() {
         window.addEventListener('resize', this.onWindowResize, false);
-
-        window.addEventListener('wheel', (e) => {
-            if (e.deltaY > 0) {
-                this.transitionSlide("next");
-            } else if (e.deltaY < 0) {
-                this.transitionSlide("prev");
-            }
-        }, { passive: true });
-
+        window.addEventListener('wheel', this.handleWheel, { passive: true });
         this.el.addEventListener('touchstart', this.touchStart, { passive: false });
         this.el.addEventListener('touchend', this.touchEnd, { passive: false });
         document.body.addEventListener('touchmove', this.handleTouchMove, { passive: false });
@@ -699,7 +729,7 @@ class Slider {
 
     // Méthode pour supprimer les écouteurs d'événements
     removeListeners() {
-        window.removeEventListener('resize', this.handleResize);
+        window.removeEventListener('resize', this.onWindowResize);
         window.removeEventListener('wheel', this.handleWheel);
         this.el.removeEventListener('touchstart', this.touchStart);
         this.el.removeEventListener('touchend', this.touchEnd);
@@ -708,6 +738,43 @@ class Slider {
         // Supprimer les écouteurs pour les bullet clicks
         this.bullets.forEach(bullet => {
             bullet.removeEventListener('click', this.bulletClick);
+        });
+    }
+
+    destroy() {
+        // Nettoyage spécifique de THREE.js (dispose des géométries, textures, matériaux...)
+        if (this.renderer) {
+            this.renderer.dispose();
+
+        }
+
+        if (this.textures) {
+            this.textures.forEach(texture => texture.dispose());
+        }
+        if (this.mesh) {
+            if (this.mesh.geometry) {
+                this.mesh.geometry.dispose();
+            }
+
+            if (this.mesh.material) {
+                this.mesh.material.dispose();
+            }
+        }
+
+        if (this.scene) {
+            while (this.scene.children.length > 0) {
+                this.scene.remove(this.scene.children[0]);
+            }
+        }
+
+        // Assurez-vous de nettoyer toutes les animations GSAP en cours
+        // gsap.killTweensOf("*");
+
+        // Nettoyer spécifiquement les instances de ScrollTrigger liées à ce Slider
+        ScrollTrigger.getAll().forEach(st => {
+            if (st.vars.trigger && this.el.contains(st.vars.trigger)) {
+                st.kill();
+            }
         });
     }
 }

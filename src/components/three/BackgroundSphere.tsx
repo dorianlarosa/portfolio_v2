@@ -1,28 +1,28 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import * as THREE from 'three';
 import { Icosahedron } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 
 const globalU_time = { value: 0 };
 export const BackgroundSphere = () => {
-  const parentRef = useRef<THREE.Group | null>(null);
+  // const parentRef = useRef<THREE.Group | null>(null);
 
-  const shader = {
+  const shader = useMemo(() => ({
     uniforms: {
       u_time: globalU_time,
       u_patternScale: { value: .18 },
       u_patternBias1: { value: .5 },
       u_patternBias2: { value: .1 },
-      u_firstColor: { value: new THREE.Color("#3d3f40") },
-      u_secondColor: { value: new THREE.Color("#1c1c1c") },
+      u_firstColor: { value: new THREE.Color("#8B8B8B") },
+      u_secondColor: { value: new THREE.Color("#6B6B6B") },
       u_accentColor: { value: new THREE.Color("#0a0a0a") }
     },
-    vertexShader: vertexShader,
-    fragmentShader: fragmentShader
-  }
+    vertexShader,
+    fragmentShader
+  }), []);
 
   const lastUpdateTime = useRef(performance.now());
-  const updateInterval = 1000 / 80; // 1000ms / 60 fps = ~16.67ms par frame
+  const updateInterval = 1000 / 60; // 1000ms / 60 fps = ~16.67ms par frame
 
   useFrame(() => {
     const now = performance.now();
@@ -35,7 +35,7 @@ export const BackgroundSphere = () => {
   });
 
   return (
-    <Icosahedron args={[2, 20]}>
+    <Icosahedron args={[2, 0]}>
       <shaderMaterial args={[shader]} side={THREE.DoubleSide} />
     </Icosahedron>
   );

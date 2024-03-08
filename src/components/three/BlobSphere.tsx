@@ -31,9 +31,8 @@ export const BlobSphere = ({ isLoading }) => {
     }, []);
 
     // Adapter la taille de la géométrie en fonction de la taille de la fenêtre
-    const sphereGeometry = useMemo(() => {
-        return new THREE.IcosahedronGeometry(.4, 20);
-    }, [windowSize.width]);
+    const sphereGeometry = new THREE.IcosahedronGeometry(.4, 10);
+
 
 
     // frame loop
@@ -59,7 +58,7 @@ const InnerGeometry = ({geometry, isLoading}) => {
 
     const scale = 2.2;
     const lastUpdateTime = useRef(performance.now());
-    const updateInterval = 1000 / 80; // 1000ms / 60 fps = ~16.67ms par frame
+    const updateInterval = 1000 / 60; // 1000ms / 60 fps = ~16.67ms par frame
     const meshRef = useRef<THREE.Mesh>(null);
 
 
@@ -87,18 +86,20 @@ const InnerGeometry = ({geometry, isLoading}) => {
         //     duration: 2,
         //     ease: "power3.out",
         // });
+
+        
     }, [isLoading, location.pathname]); // Dépendance à isLoading pour réagir à ses changements
 
     const { cubeRenderTarget, cubeCamera } = useMemo(() => {
         // create cube render target
-        const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256, {
+        const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(64, {
             format: THREE.RGBAFormat,
             generateMipmaps: true,
             minFilter: THREE.LinearMipMapLinearFilter,
             colorSpace: 'srgb'
         });
         // create cube camera
-        const cubeCamera = new THREE.CubeCamera(0.1, 10, cubeRenderTarget);
+        const cubeCamera = new THREE.CubeCamera(0.1, 2, cubeRenderTarget);
         return { cubeRenderTarget, cubeCamera };
     }, []);
 

@@ -8,6 +8,7 @@
 
 .main-cursor,
 .secondary-cursor {
+    will-change: transform, opacity;
 
     transition: opacity .75s cubic-bezier(.19, 1, .22, 1);
     pointer-events: none;
@@ -21,7 +22,7 @@
     z-index: 100000;
     mix-blend-mode: difference;
 
-   
+
     .main-cursor-background {
         width: 80px;
         height: 80px;
@@ -29,6 +30,7 @@
         border-radius: 50%;
         transform: scale(.1);
         transition: all 0.75s cubic-bezier(.19, 1, .22, 1) 0s;
+        will-change: transform, opacity, border;
 
 
         .icon-arrow {
@@ -38,9 +40,12 @@
             align-items: center;
             display: flex;
             opacity: 0;
+            will-change: transform, opacity;
 
             svg {
                 stroke: black;
+                will-change: transform, opacity;
+
             }
         }
     }
@@ -51,6 +56,7 @@
     height: 40px;
     mix-blend-mode: difference;
     z-index: 100000;
+
     &::before {
         content: "";
         position: absolute;
@@ -63,7 +69,7 @@
         bottom: -25px;
         opacity: 0;
         transition: opacity .75s cubic-bezier(.19, 1, .22, 1);
-        
+
     }
 
     .cursor-border {
@@ -76,6 +82,7 @@
         justify-content: center;
         align-items: center;
         display: flex;
+        will-change: transform, opacity, border;
 
         .cursor-background {
             background-color: rgb(231, 231, 231);
@@ -85,6 +92,8 @@
             border-radius: 50%;
             transition: all 0.75s cubic-bezier(.19, 1, .22, 1) 0s;
             transform: scale(0);
+            will-change: transform, opacity;
+
         }
     }
 }
@@ -179,17 +188,19 @@
             -webkit-text-fill-color: rgb(218, 218, 218);
             animation: shineText 1.75s linear infinite;
         }
-}
+    }
 }
 
 @keyframes shineText {
-  0%{
-    background-position-x: -200%;
-  }
-  100%{
-    background-position-x: 200%;
-  }
+    0% {
+        background-position-x: -200%;
+    }
+
+    100% {
+        background-position-x: 200%;
+    }
 }
+
 @keyframes fadeIn {
     0% {
         opacity: 0;

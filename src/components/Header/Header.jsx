@@ -5,8 +5,8 @@ import "./Header.scss";
 import gsap from 'gsap';
 import backgroundNav from '../../assets/images/background-nav.jpg';
 import { useLenis } from '@studio-freight/react-lenis'; // Assurez-vous que cette importation est correcte
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // Importez le CSS d'AOS
+// import AOS from 'aos';
+// import 'aos/dist/aos.css'; // Importez le CSS d'AOS
 
 const Header = () => {
     const [headerVisible, setHeaderVisible] = useState(true);
